@@ -1,4 +1,7 @@
 *.pyc
 *.bak
 *.swp
-
+include/
+local/
+bin/
+lib/
