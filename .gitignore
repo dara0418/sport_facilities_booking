@@ -1,6 +1,8 @@
 *.pyc
 *.bak
 *.swp
+*.swo
+.DS_Store
 include/
 local/
 bin/
