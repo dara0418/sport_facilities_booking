@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.models import *
+
+admin.site.register(Address)
+admin.site.register(SubscriptionPlan)
