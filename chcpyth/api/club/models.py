@@ -144,6 +144,30 @@ class SportRule(BaseModel):
     sport_type = models.CharField(max_length=3, choices=SPORT_CHOICES)
 
 
+class FacilityRule(BaseModel):
+    """ This is the a booking rule of a particular facility.
+
+    This rule has the highest priority, it will override both ClubRule and SportRule.
+
+    Attributes:
+      id (AutoField): The auto increment ID field.
+
+      facility (ForeignKey): This field references the facility model, indicating to which facility
+        the rule belongs.
+
+      name (CharField): The name of rule.
+      value (CharField): The content of the booking rule. This field is optional.
+      sport_type (CharField): The sport type of the rule. Possible values are (but not limited):
+        T - tennis, G - ping pong, D - paddle, B - badminton, S - squash, F5 - football-5 ...
+    """
+    id = models.AutoField(primary_key=True)
+
+    facility = models.ForeignKey('Facility')
+
+    name = models.CharField(max_length=10)
+    value = models.CharField(max_length=20, blank=True)
+
+
 class Event(BaseModel):
     """ This is a club event.
 
@@ -238,6 +262,7 @@ class ClubRate(BaseModel):
         T - tennis, G - ping pong, D - paddle, B - badminton, S - squash, F5 - football-5 ...
       time_unit (CharField): The time unit. Possible values are: M - Minute, H - Hour, D - Day,
         N - Month, Y - Year.
+      rate (DecimalField): The price.
       currency: This is the ISO code of currency.
     """
     id = models.AutoField(primary_key=True)
@@ -245,6 +270,30 @@ class ClubRate(BaseModel):
     club = models.ForeignKey('Club')
 
     sport_type = models.CharField(max_length=3, choices=SPORT_CHOICES)
+    time_unit = models.CharField(max_length=1, choices=TIME_UNIT_CHOICES)
+    rate = models.DecimalField(max_digits=5, decimal_places=0)
+    currency = models.CharField(max_length=3)
+
+
+class FacilityRate(BaseModel):
+    """ This is the particular rate of a facility.
+
+    This rate will overrides the general rates of a club.
+
+    Attributes:
+      id (AutoField): The auto generated ID.
+
+      facility (ForeignKey): This field references the Facility model.
+
+      time_unit (CharField): The time unit. Possible values are: M - Minute, H - Hour, D - Day,
+        N - Month, Y - Year.
+      rate (DecimalField): The price.
+      currency: This is the ISO code of currency.
+    """
+    id = models.AutoField(primary_key=True)
+
+    facility = models.ForeignKey('Facility')
+
     time_unit = models.CharField(max_length=1, choices=TIME_UNIT_CHOICES)
     rate = models.DecimalField(max_digits=5, decimal_places=0)
     currency = models.CharField(max_length=3)
