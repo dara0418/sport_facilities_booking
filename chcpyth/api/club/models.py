@@ -20,7 +20,7 @@ class Club(BaseModel):
       description (CharField): This field describes the club.
       url (CharField): A customized URL pointing to the profile page of club. This is optional.
       status (CharField): Indicates the status of club. Possible values are:
-        'active' and 'inactive'.
+        A - Active, I - Inactive.
 
       email (EmailField): The email address.
       primary_phone_number (CharField): The primary phone number to contact.
@@ -35,7 +35,7 @@ class Club(BaseModel):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=2048)
     url = models.CharField(max_length=255, blank=True, unique=True)
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
     email = models.EmailField(max_length=255)
     primary_phone = models.CharField(max_length=20)
@@ -58,7 +58,7 @@ class Subscription(BaseModel):
 
       expire_date (DateField): The termination date of current subscription.
       status (CharField): The status of subscription. Possible values are:
-        'active' and 'inactive'.
+        A - Active, I - Inactive.
     """
     id = models.AutoField(primary_key=True)
 
@@ -66,7 +66,7 @@ class Subscription(BaseModel):
     plan = models.ForeignKey('core.SubscriptionPlan')
 
     expire_date = models.DateField()
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
 
 class Facility(BaseModel):
@@ -83,7 +83,7 @@ class Facility(BaseModel):
       description (CharField): The description of facility. This could be optional.
       sport_type (CharField): The sport type of facility. Possible values are:
         T - tennis, G - ping pong, D - paddle, B - badminton, S - squash, F5 - football-5 ...
-      status (CharField): The status of facility. Possible values are: 'active', 'inactive'.
+      status (CharField): The status of facility. Possible values are: A - Active, I - Inactive.
     """
     id = models.AutoField(primary_key=True)
     ref = UUIDField(version=4)
@@ -93,7 +93,7 @@ class Facility(BaseModel):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=1024, blank=True)
     sport_type = models.CharField(max_length=3, choices=SPORT_CHOICES)
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
 
 class GeneralRule(BaseModel):

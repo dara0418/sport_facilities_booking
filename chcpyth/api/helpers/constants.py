@@ -30,10 +30,10 @@ TIME_UNIT_CHOICES = (
 )
 
 # Level choices.
-BRONZE = 'bronze'
-SILVER = 'silver'
-GOLD = 'gold'
-PLATINUM = 'platinum'
+BRONZE = 'B'
+SILVER = 'S'
+GOLD = 'G'
+PLATINUM = 'P'
 
 LEVEL_CHOICES = (
     (BRONZE, 'Bronze'),
@@ -43,8 +43,8 @@ LEVEL_CHOICES = (
 )
 
 # General status.
-ACTIVE = 'active'
-INACTIVE = 'inactive'
+ACTIVE = 'A'
+INACTIVE = 'I'
 
 STATUS_CHOICES = (
     (ACTIVE, 'Active'),

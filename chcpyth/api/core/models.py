@@ -68,8 +68,8 @@ class SubscriptionPlan(BaseModel):
         time frame type: DY - Daily, MY - Monthly, QY - Quarterly, YY - Yearly.
       rate (DecimalField): Price rate based on time frame.
       currency (CharField): The ISO code of currency.
-      level (CharField): The privilege of plan. Possible values are: 'bronze', 'silver', 'gold',
-        'platinum'.
+      level (CharField): The privilege of plan. Possible values are: B - Bronze, S - Silver,
+        G - Gold, P - Platinum.
     """
     id = models.AutoField(primary_key=True)
 
@@ -77,4 +77,4 @@ class SubscriptionPlan(BaseModel):
     frequency = models.CharField(max_length=2,choices=FREQUENCY_CHOICES)
     rate = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3)
-    level = models.CharField(max_length=10, choices=LEVEL_CHOICES)
+    level = models.CharField(max_length=1, choices=LEVEL_CHOICES)
