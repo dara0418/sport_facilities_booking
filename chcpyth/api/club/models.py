@@ -5,7 +5,7 @@ from django_extensions.db.fields import UUIDField
 
 from core.models import BaseModel
 from helpers.constants import (
-    STATUS_CHOICES, SPORT_CHOICES, PAYMENT_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOIES,
+    STATUS_CHOICES, SPORT_CHOICES, BILLING_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOIES,
     MEMBERSHIP_REQUEST_STATUS_CHOICES, MEMBERSHIP_REQUEST_TYPE_CHOICES
 )
 
@@ -198,20 +198,20 @@ class Event(BaseModel):
     content = models.TextField()
 
 
-class Payment(BaseModel):
-    """ This is a payment of a club for its subscription.
+class Bill(BaseModel):
+    """ This is a bill of a club for its subscription.
 
     Attributes:
-      id (AutoField): The auto increment ID of payment.
+      id (AutoField): The auto increment ID of bill.
 
       club (ForeignKey): This field references the Club model, indicating which club should make
-        the payment.
+        the bill.
 
       amount (DecimalField): The amount paid.
       currency (CharField): The ISO code of currency.
-      status (CharField): Payment status. Possible values are: P - pending, S - submitted,
+      status (CharField): Billing status. Possible values are: P - pending, S - submitted,
         C - confirmed, A - canceled.
-      message (CharField): The attached message with payment. This could be optional.
+      message (CharField): The attached message with bill. This could be optional.
     """
     id = models.AutoField(primary_key=True)
 
@@ -219,7 +219,7 @@ class Payment(BaseModel):
 
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3)
-    status = models.CharField(max_length=1, choices=PAYMENT_STATUS_CHOICES)
+    status = models.CharField(max_length=1, choices=BILLING_STATUS_CHOICES)
     message = models.CharField(max_length=128, blank=True)
 
 

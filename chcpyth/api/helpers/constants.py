@@ -79,17 +79,17 @@ PRIVACY_CHOIES = (
     (RESTRICTED, 'Restricted')
 )
 
-# Payment status.
-PAYMENT_PENDING = 'P'
-PAYMENT_SUBMITTED = 'S'
-PAYMENT_CONFIRMED = 'C'
-PAYMENT_CANCELED = 'A'
+# Billing status.
+BILLING_PENDING = 'P'
+BILLING_SUBMITTED = 'S'
+BILLING_CONFIRMED = 'C'
+BILLING_CANCELED = 'A'
 
-PAYMENT_STATUS_CHOICES = (
-    (PAYMENT_PENDING, 'Pending'),
-    (PAYMENT_SUBMITTED, 'Submitted'),
-    (PAYMENT_CONFIRMED, 'Confirmed'),
-    (PAYMENT_CANCELED, 'Canceled')
+BILLING_STATUS_CHOICES = (
+    (BILLING_PENDING, 'Pending'),
+    (BILLING_SUBMITTED, 'Submitted'),
+    (BILLING_CONFIRMED, 'Confirmed'),
+    (BILLING_CANCELED, 'Canceled')
 )
 
 # Titles.
