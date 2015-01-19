@@ -1,5 +1,5 @@
 """
-Django settings for api project.
+Django settings for sports booking project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -55,9 +55,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'api.urls'
+ROOT_URLCONF = 'settings.urls'
 
-WSGI_APPLICATION = 'api.wsgi.application'
+WSGI_APPLICATION = 'settings.wsgi.application'
 
 
 # Database
