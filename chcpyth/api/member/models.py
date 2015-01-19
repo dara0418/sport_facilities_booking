@@ -89,6 +89,11 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
     cellphone = models.CharField(max_length=16, blank=True)
     address = models.ForeignKey('core.Address', null=True, blank=True)
 
+    # PermissionsMixin required fields.
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+
     USERNAME_FIELD = 'email'
     objects = MemberManager()
 
@@ -96,6 +101,13 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
         """ This function returns user's full name.
         """
         return (self.first_name + ' ' + self.last_name).strip()
+
+    def get_short_name(self):
+        """ This function returns user's identity (email).
+
+        This function is required to customize a Django User.
+        """
+        return self.email
 
 
 class Membership(BaseModel):
