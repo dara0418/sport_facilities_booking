@@ -23,6 +23,10 @@ class BaseModel(models.Model):
     def get_last_modified_datetime(self):
         return self.last_modified_datetime
 
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(BaseModel, self).save(*args, **kwargs);
+
     class Meta:
         abstract = True
 
@@ -51,7 +55,7 @@ class Address(BaseModel):
     city = models.CharField(max_length=50)
     province = models.CharField(max_length=50)
     country = models.CharField(max_length=2)
-    zip_code = models.CharField(max_length=10, null=True)
+    zip_code = models.CharField(max_length=10, blank=True)
 
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
