@@ -1,9 +1,12 @@
+from copy import copy
+
+from django.test import TestCase
+from django.db import transaction
+from django.core.exceptions import ValidationError
+
 from core.models import Address
 
-from data_provider import DataProvider
-from test_base import BaseTestCase
-
-class AddressDataProvider(DataProvider):
+class AddressDataProvider:
     """ This class provides data for testing Address model.
     """
     def get_entity1(self):
@@ -29,16 +32,74 @@ class AddressDataProvider(DataProvider):
 
         return address
 
-class AddressTestCase(BaseTestCase):
+
+class AddressTestCase(TestCase):
     """ This is the unit test case for Address model.
     """
-    def get_data_prov(self):
-        return AddressDataProvider()
+    data_prov = AddressDataProvider()
+    entity1 = data_prov.get_entity1()
+    entity2 = data_prov.get_entity2()
 
-    def test_address_creation(self):
-        """ Tests the creation of address.
+    def test_CRUD(self):
+        """ Tests the CRUD operations of Address.
         """
-        self.entity1.save()
+        entity1 = self.entity1
 
-        saved = Address.objects.get(id=self.entity1.id)
-        self.assertIsNotNone(saved)
+        entity1.save()
+        self.assertIsNotNone(entity1.id)
+
+        savedEntity = Address.objects.get(pk=entity1.id)
+        self.assertIsNotNone(savedEntity)
+
+        entity1.zip_code = "N/A"
+        entity1.save()
+        updatedEntity = Address.objects.get(pk=entity1.id)
+        self.assertEqual(entity1.zip_code, "N/A")
+
+        entity1.delete()
+        with self.assertRaises(Address.DoesNotExist):
+            Address.objects.get(pk=entity1.id)
+
+        transaction.rollback()
+
+    # NOT NULL constraints.
+
+    def test_line1_not_null(self):
+        """ Tests NOT NULL constraint of line1.
+        """
+        buffer = copy(self.entity1)
+        buffer.line1 = None
+        with self.assertRaises(ValidationError):
+            buffer.save()
+
+        transaction.rollback()
+
+    def test_city_not_null(self):
+        """ Tests NOT NULL constraint of city.
+        """
+        buffer = copy(self.entity1)
+        buffer.city = None
+        with self.assertRaises(ValidationError):
+            buffer.save()
+
+        transaction.rollback()
+
+    def test_province_not_null(self):
+        """ Tests NOT NULL constraint of province.
+        """
+        buffer = copy(self.entity1)
+        buffer.province = None
+        with self.assertRaises(ValidationError):
+            buffer.save()
+
+        transaction.rollback()
+
+    def test_country_not_null(self):
+        """ Tests NOT NULL constraint of country.
+        """
+        buffer = copy(self.entity1)
+        buffer.country = None
+        with self.assertRaises(ValidationError):
+            buffer.save()
+
+        transaction.rollback()
