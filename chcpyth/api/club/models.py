@@ -5,7 +5,7 @@ from django_extensions.db.fields import UUIDField
 
 from core.models import BaseModel
 from helpers.constants import (
-    STATUS_CHOICES, SPORT_CHOICES, BILLING_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOIES,
+    STATUS_CHOICES, SPORT_CHOICES, BILLING_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOICES,
     MEMBERSHIP_REQUEST_STATUS_CHOICES, MEMBERSHIP_REQUEST_TYPE_CHOICES
 )
 
@@ -194,7 +194,7 @@ class Event(BaseModel):
 
     name = models.CharField(max_length=50)
     event_type = models.CharField(max_length=10)
-    privacy = models.CharField(max_length=1, choices=PRIVACY_CHOIES)
+    privacy = models.CharField(max_length=1, choices=PRIVACY_CHOICES)
     content = models.TextField()
 
 

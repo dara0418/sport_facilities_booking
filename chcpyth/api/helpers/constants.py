@@ -73,7 +73,7 @@ PUBLIC = 'U'
 PRIVATE = 'P'
 RESTRICTED = 'R'
 
-PRIVACY_CHOIES = (
+PRIVACY_CHOICES = (
     (PUBLIC, 'Public'),
     (PRIVATE, 'Private'),
     (RESTRICTED, 'Restricted')
@@ -83,13 +83,13 @@ PRIVACY_CHOIES = (
 BILLING_PENDING = 'P'
 BILLING_SUBMITTED = 'S'
 BILLING_CONFIRMED = 'C'
-BILLING_CANCELED = 'A'
+BILLING_CANCELLED = 'A'
 
 BILLING_STATUS_CHOICES = (
     (BILLING_PENDING, 'Pending'),
     (BILLING_SUBMITTED, 'Submitted'),
     (BILLING_CONFIRMED, 'Confirmed'),
-    (BILLING_CANCELED, 'Canceled')
+    (BILLING_CANCELLED, 'Cancelled')
 )
 
 # Titles.
