@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 from django_extensions.db.fields import UUIDField
 
-from core.models import BaseModel
+from core.models import BaseModel, Address
 from helpers.constants import (
     STATUS_CHOICES, SPORT_CHOICES, BILLING_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOICES,
     MEMBERSHIP_REQUEST_STATUS_CHOICES, MEMBERSHIP_REQUEST_TYPE_CHOICES
@@ -34,7 +34,7 @@ class Club(BaseModel):
 
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=2048)
-    url = models.CharField(max_length=255, blank=True, unique=True)
+    url = models.CharField(max_length=255, unique=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
     email = models.EmailField(max_length=255)
@@ -42,7 +42,17 @@ class Club(BaseModel):
     secondary_phone = models.CharField(max_length=20, blank=True)
     fax_number = models.CharField(max_length=20, blank=True)
 
-    address = models.ForeignKey('core.Address')
+    address = models.ForeignKey("core.Address")
+
+    def save(self, *args, **kwargs):
+        # Save address before saving club.
+        if not self.address:
+            raise ValidationError("Club address is missing.")
+
+        self.address.save()
+        self.address_id = self.address.id
+
+        super(Club, self).save(*args, **kwargs)
 
 
 class Subscription(BaseModel):
@@ -62,8 +72,8 @@ class Subscription(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    club = models.ForeignKey('Club')
-    plan = models.ForeignKey('core.SubscriptionPlan')
+    club = models.ForeignKey("Club")
+    plan = models.ForeignKey("core.SubscriptionPlan")
 
     expire_date = models.DateField()
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
@@ -88,7 +98,7 @@ class Facility(BaseModel):
     id = models.AutoField(primary_key=True)
     ref = UUIDField(version=4)
 
-    club = models.ForeignKey('Club')
+    club = models.ForeignKey("Club")
 
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=1024, blank=True)
@@ -112,7 +122,7 @@ class GeneralRule(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    club = models.ForeignKey('Club')
+    club = models.ForeignKey("Club")
 
     name = models.CharField(max_length=10)
     value = models.CharField(max_length=20, blank=True)
@@ -137,7 +147,7 @@ class SportRule(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    club = models.ForeignKey('Club')
+    club = models.ForeignKey("Club")
 
     name = models.CharField(max_length=10)
     value = models.CharField(max_length=20, blank=True)
@@ -162,7 +172,7 @@ class FacilityRule(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    facility = models.ForeignKey('Facility')
+    facility = models.ForeignKey("Facility")
 
     name = models.CharField(max_length=10)
     value = models.CharField(max_length=20, blank=True)
@@ -187,7 +197,7 @@ class Event(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    club = models.ForeignKey('Club')
+    club = models.ForeignKey("Club")
 
     start = models.DateTimeField()
     end = models.DateTimeField()
@@ -215,7 +225,7 @@ class Bill(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    club = models.ForeignKey('Club')
+    club = models.ForeignKey("Club")
 
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3)
@@ -242,8 +252,8 @@ class MembershipRequest(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    member = models.ForeignKey('member.Member')
-    club = models.ForeignKey('Club')
+    member = models.ForeignKey("member.Member")
+    club = models.ForeignKey("Club")
 
     request_type = models.CharField(max_length=2, choices=MEMBERSHIP_REQUEST_TYPE_CHOICES)
     status = models.CharField(max_length=1, choices=MEMBERSHIP_REQUEST_STATUS_CHOICES)
@@ -267,7 +277,7 @@ class ClubRate(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    club = models.ForeignKey('Club')
+    club = models.ForeignKey("Club")
 
     sport_type = models.CharField(max_length=3, choices=SPORT_CHOICES)
     time_unit = models.CharField(max_length=1, choices=TIME_UNIT_CHOICES)
@@ -292,7 +302,7 @@ class FacilityRate(BaseModel):
     """
     id = models.AutoField(primary_key=True)
 
-    facility = models.ForeignKey('Facility')
+    facility = models.ForeignKey("Facility")
 
     time_unit = models.CharField(max_length=1, choices=TIME_UNIT_CHOICES)
     rate = models.DecimalField(max_digits=5, decimal_places=0)
