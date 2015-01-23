@@ -77,8 +77,8 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
     id = models.AutoField(primary_key=True)
     ref = UUIDField(version=4)
 
-    title = models.CharField(max_length=3, blank=True)      # Do we need more titles, such as Doctor...?
-    gender = models.CharField(max_length=1, blank=True)
+    title = models.CharField(max_length=3, blank=True, choices=TITLE_CHOICES)      # Do we need more titles, such as Doctor...?
+    gender = models.CharField(max_length=1, blank=True, choices=GENDER_CHOICES)
     first_name = models.CharField(max_length=35, blank=True)
     last_name = models.CharField(max_length=35, blank=True)
     dob = models.DateField(null=True, blank=True)
