@@ -25,7 +25,7 @@ class BaseModel(models.Model):
 
     def save(self, *args, **kwargs):
         self.full_clean()
-        super(BaseModel, self).save(*args, **kwargs);
+        super(BaseModel, self).save(*args, **kwargs)
 
     class Meta:
         abstract = True

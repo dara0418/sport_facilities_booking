@@ -5,40 +5,17 @@ from django.db import transaction
 from django.core.exceptions import ValidationError
 
 from core.models import Address
-
-class AddressDataProvider:
-    """ This class provides data for testing Address model.
-    """
-    def get_entity1(self):
-        address = Address()
-        address.line1 = "17, The Pines, Diamond Valley"
-        address.line2 = "Upper Dargle Road"
-        address.city = "Bray"
-        address.province = "Wicklow"
-        address.country = "IE"
-        address.zip_code = "Wicklow"
-
-        return address
-
-    def get_entity2(self):
-        address = Address()
-        address.line1 = "32, Lower O'Connell Street"
-        address.city = "Dublin"
-        address.province = "Dublin"
-        address.country = "IE"
-        address.zip_code = "Dublin1"
-        address.longtitude = 53.349559
-        address.latitude = -6.259747
-
-        return address
-
+from test_data.address_data import AddressDataProvider
 
 class AddressTestCase(TestCase):
     """ This is the unit test case for Address model.
     """
-    data_prov = AddressDataProvider()
-    entity1 = data_prov.get_entity1()
-    entity2 = data_prov.get_entity2()
+    def __init__(self, *args, **kwargs):
+        super(AddressTestCase, self).__init__(*args, **kwargs)
+
+        data_prov = AddressDataProvider()
+        self.entity1 = data_prov.get_entity1()
+        self.entity2 = data_prov.get_entity2()
 
     def test_CRUD(self):
         """ Tests the CRUD operations of Address.

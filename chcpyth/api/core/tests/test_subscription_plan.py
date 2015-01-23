@@ -5,37 +5,17 @@ from django.db import transaction
 from django.core.exceptions import ValidationError
 
 from core.models import SubscriptionPlan
-
-class SubscriptionPlanDataProvider:
-    """ This class provides data for testing SubscriptionPlan model.
-    """
-    def get_entity1(self):
-        plan = SubscriptionPlan()
-        plan.name = "Bronze"
-        plan.frequency = "MY"
-        plan.rate = 100
-        plan.currency = "USD"
-        plan.level = "B"
-
-        return plan
-
-    def get_entity2(self):
-        plan = SubscriptionPlan()
-        plan.name = "Silver"
-        plan.frequency = "MY"
-        plan.rate = 150
-        plan.currency = "USD"
-        plan.level = "S"
-
-        return plan
-
+from test_data.subscription_plan_data import SubscriptionPlanDataProvider
 
 class SubscriptionPlanTestCase(TestCase):
     """ This is the unit test case for SubscriptionPlanDataProvider model.
     """
-    data_prov = SubscriptionPlanDataProvider()
-    entity1 = data_prov.get_entity1()
-    entity2 = data_prov.get_entity2()
+    def __init__(self, *args, **kwargs):
+        super(SubscriptionPlanTestCase, self).__init__(*args, **kwargs)
+
+        data_prov = SubscriptionPlanDataProvider()
+        self.entity1 = data_prov.get_entity1()
+        self.entity2 = data_prov.get_entity2()
 
     def test_CRUD(self):
         """ Tests the CRUD operations of SubscriptionPlan.
@@ -113,7 +93,7 @@ class SubscriptionPlanTestCase(TestCase):
 
     # CHECK constraints.
 
-    def test_frequancy_choices(self):
+    def test_frequancy_value(self):
         """ Tests CHECK constraint of frequency.
         """
         buffer = copy(self.entity1)
@@ -123,7 +103,7 @@ class SubscriptionPlanTestCase(TestCase):
 
         transaction.rollback()
 
-    def test_level_choices(self):
+    def test_level_value(self):
         """ Test CHECK constraint of level.
         """
         buffer = copy(self.entity1)
