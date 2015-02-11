@@ -131,6 +131,9 @@ class Membership(BaseModel):
 
     role = models.CharField(max_length=1, choices=CLUB_ROLE_CHOICES)
 
+    class Meta:
+        unique_together = (("member", "club"),)
+
 
 class ClubEventRegistration(BaseModel):
     """ This is the user registration of club events.
@@ -145,3 +148,7 @@ class ClubEventRegistration(BaseModel):
 
     member = models.ForeignKey('Member')
     event = models.ForeignKey('club.Event')
+
+    class Meta:
+        unique_together = (("member", "event"),)
+

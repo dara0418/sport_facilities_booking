@@ -92,6 +92,11 @@ BILLING_STATUS_CHOICES = (
     (BILLING_CANCELLED, 'Cancelled')
 )
 
+BILLING_TIME_UNITS_CHOICES = (
+    (MONTH, 'Month'),
+    (YEAR, 'Year')
+)
+
 # Titles.
 MR = 'MR'
 MS = 'MS'

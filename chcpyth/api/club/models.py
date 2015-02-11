@@ -6,7 +6,7 @@ from django_extensions.db.fields import UUIDField
 from core.models import BaseModel, Address
 from helpers.constants import (
     STATUS_CHOICES, SPORT_CHOICES, BILLING_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOICES,
-    MEMBERSHIP_REQUEST_STATUS_CHOICES, MEMBERSHIP_REQUEST_TYPE_CHOICES
+    MEMBERSHIP_REQUEST_STATUS_CHOICES, MEMBERSHIP_REQUEST_TYPE_CHOICES, BILLING_TIME_UNITS_CHOICES
 )
 
 class Club(BaseModel):
@@ -33,7 +33,6 @@ class Club(BaseModel):
     ref = UUIDField(version=4)
 
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=2048)
     url = models.CharField(max_length=255, unique=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
@@ -43,6 +42,7 @@ class Club(BaseModel):
     fax_number = models.CharField(max_length=20, blank=True)
 
     address = models.ForeignKey("core.Address")
+    description = models.TextField(help_text='This can store rich text for a completed description of the club')
 
     def save(self, *args, **kwargs):
         # Save address before saving club.
@@ -78,6 +78,9 @@ class Subscription(BaseModel):
     expire_date = models.DateField()
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
+    class Meta:
+        unique_together = (("club", "plan", "expire_date"),)
+
 
 class Facility(BaseModel):
     """ This is a club facility.
@@ -101,9 +104,12 @@ class Facility(BaseModel):
     club = models.ForeignKey("Club")
 
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=1024, blank=True)
     sport_type = models.CharField(max_length=3, choices=SPORT_CHOICES)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        unique_together = (("club", "name"),)
 
 
 class GeneralRule(BaseModel):
@@ -126,6 +132,9 @@ class GeneralRule(BaseModel):
 
     name = models.CharField(max_length=10)
     value = models.CharField(max_length=20, blank=True)
+
+    class Meta:
+        unique_together = (("club", "name"),)
 
 
 class SportRule(BaseModel):
@@ -153,6 +162,9 @@ class SportRule(BaseModel):
     value = models.CharField(max_length=20, blank=True)
     sport_type = models.CharField(max_length=3, choices=SPORT_CHOICES)
 
+    class Meta:
+        unique_together = (("club", "sport_type", "name"),)
+
 
 class FacilityRule(BaseModel):
     """ This is the a booking rule of a particular facility.
@@ -176,6 +188,9 @@ class FacilityRule(BaseModel):
 
     name = models.CharField(max_length=10)
     value = models.CharField(max_length=20, blank=True)
+
+    class Meta:
+        unique_together = (("facility", "name"),)
 
 
 class Event(BaseModel):
@@ -224,9 +239,10 @@ class Bill(BaseModel):
       message (CharField): The attached message with bill. This could be optional.
     """
     id = models.AutoField(primary_key=True)
-
+    ref = UUIDField(version=4)
     club = models.ForeignKey("Club")
-
+    period = models.CharField(max_length=6, help_text="Period corresponding to this bill, can be a year like 2015 or a month + year like 201504")
+    time_unit = models.CharField(max_length=1, choices=BILLING_TIME_UNITS_CHOICES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3)
     status = models.CharField(max_length=1, choices=BILLING_STATUS_CHOICES)

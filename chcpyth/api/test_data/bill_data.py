@@ -9,6 +9,8 @@ class BillDataProvider:
         entity1.currency = "USD"
         entity1.status = "P"
         entity1.message = "Payment for subscription."
+        entity1.period = "2015"
+        entity1.time_unit = "Y"
 
         return entity1
 
@@ -17,5 +19,7 @@ class BillDataProvider:
         entity2.amount = 500
         entity2.currency = "USD"
         entity2.status = "S"
+        entity2.period = "201504"
+        entity2.time_unit = "M"
 
         return entity2
