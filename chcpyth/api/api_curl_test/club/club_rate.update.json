@@ -1,0 +1,7 @@
+{
+    "sport_type": "B",
+    "time_unit": "D",
+    "rate": "200",
+    "currency": "USD",
+    "club": "/api/v1/club/1/"
+}

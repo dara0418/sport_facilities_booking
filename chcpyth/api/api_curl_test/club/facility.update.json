@@ -1,0 +1,7 @@
+{
+    "name": "Pingpong court",
+    "description": "Good court for playing pingpong.",
+    "sport_type": "G",
+    "status": "I",
+    "club": "/api/v1/club/1/"
+}

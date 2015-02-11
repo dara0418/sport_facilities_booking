@@ -1,0 +1,7 @@
+{
+    "amount": 2000,
+    "currency": "USD",
+    "status": "S",
+    "message": "",
+    "club": "/api/v1/club/1/"
+}

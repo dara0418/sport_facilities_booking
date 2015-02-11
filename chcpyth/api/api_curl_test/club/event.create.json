@@ -1,0 +1,9 @@
+{
+    "start": "2015-02-18 23:59:59",
+    "end": "2015-02-19 23:59:59",
+    "name": "Chinese New Year",
+    "event_type": "Festival",
+    "privacy": "U",
+    "content": "Happy Chinese New Year of 2015! Checkout the bulk of special offers!",
+    "club": "/api/v1/club/1/"
+}

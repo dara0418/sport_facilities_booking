@@ -1,0 +1,7 @@
+{
+    "name": "Tennis court",
+    "description": "This is a luxury tennis court.",
+    "sport_type": "T",
+    "status": "A",
+    "club": "/api/v1/club/1/"
+}

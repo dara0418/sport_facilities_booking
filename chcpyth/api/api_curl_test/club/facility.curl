@@ -1,0 +1,17 @@
+This file defines the curl commands and JSON templates of CRUD operations of Facility model.
+
+1. Create single
+   Note: you have to add a Club before running this command.
+   curl --user username:password --dump-header - -X POST -H "Content-Type: application/json" -d @facility.create.json http://127.0.0.1:8000/api/v1/facility/
+
+2. View single
+   curl --user username:password --dump-header - http://127.0.0.1:8000/api/v1/facility/1/
+
+3. View list
+   curl --user username:password --dump-header - http://127.0.0.1:8000/api/v1/facility/
+
+4. Update single
+   curl --user username:password --dump-header - -X PUT -H "Content-Type: application/json" -d @facility.update.json http://127.0.0.1:8000/api/v1/facility/1/
+
+5. Delete single
+   curl --user username:password --dump-header - -X DELETE http://127.0.0.1:8000/api/v1/facility/1/

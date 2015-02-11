@@ -1,0 +1,6 @@
+{
+    "time_unit": "D",
+    "rate": "200",
+    "currency": "USD",
+    "facility": "/api/v1/facility/1/"
+}

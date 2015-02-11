@@ -1,0 +1,9 @@
+{
+    "start": "2015-03-01",
+    "end": "2015-03-31",
+    "name": "10th Anniversary",
+    "event_type": "Event",
+    "privacy": "U",
+    "content": "Please join us for our 10th anniversary!",
+    "club": "/api/v1/club/1/"
+}

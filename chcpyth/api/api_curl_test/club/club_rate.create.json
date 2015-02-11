@@ -1,0 +1,7 @@
+{
+    "sport_type": "T",
+    "time_unit": "H",
+    "rate": "50",
+    "currency": "EUR",
+    "club": "/api/v1/club/1/"
+}

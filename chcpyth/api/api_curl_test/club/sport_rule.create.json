@@ -1,0 +1,6 @@
+{
+    "name": "MAXPLAYER",
+    "value": "4",
+    "sport_type": "T",
+    "club": "/api/v1/club/1/"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "Tennis club",
+    "description": "This is a tennis club",
+    "status": "A",
+    "url": "tennis_club",
+    "email": "tennis.club@gmail.com",
+    "primary_phone": "650000000",
+    "secondary_phone": "651111111",
+    "fax_number": "652222222",
+    "address": "/api/v1/address/1/"
+}

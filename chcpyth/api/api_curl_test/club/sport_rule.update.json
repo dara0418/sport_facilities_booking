@@ -1,0 +1,6 @@
+{
+    "name": "MAXDUR",
+    "value": "4 hours",
+    "sport_type": "G",
+    "club": "/api/v1/club/1/"
+}

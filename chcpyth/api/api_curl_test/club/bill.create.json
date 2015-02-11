@@ -1,0 +1,7 @@
+{
+    "amount": 1000,
+    "currency": "USD",
+    "status": "P",
+    "message": "Payment for subscription.",
+    "club": "/api/v1/club/1/"
+}

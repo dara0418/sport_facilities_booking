@@ -1,0 +1,9 @@
+{
+    "name": "Pingpong club",
+    "description": "This is a pingpong club",
+    "status": "I",
+    "url": "pingpong_club",
+    "email": "pingpong.club@gmail.com",
+    "primary_phone": "653333333",
+    "address": "/api/v1/address/1/"
+}
