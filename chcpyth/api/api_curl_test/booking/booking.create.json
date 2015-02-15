@@ -1,0 +1,11 @@
+{
+    "booking_date": "2015-02-01",
+    "booking_timeslot": "0900",
+    "time_unit": "H",
+    "duration": 2,
+    "notes": "Please prepare Tennis rackets for us.",
+    "num_of_booking": 2,
+    "rate": 100,
+    "currency": "USD",
+    "facility": "/api/v1/facility/1/"
+}

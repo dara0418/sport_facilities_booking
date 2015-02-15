@@ -1,0 +1,5 @@
+{
+    "booking": "/api/v1/booking/1/",
+    "member": "/api/v1/member/1/",
+    "is_booker": false
+}
