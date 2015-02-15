@@ -34,6 +34,7 @@ api.register(FacilityRateResource())
 # Member API.
 api.register(MemberResource())
 api.register(MembershipResource())
+api.register(ClubEventRegistrationResource())
 
 # Booking API.
 api.register(BookingResource())
