@@ -1,0 +1,7 @@
+{
+    "member": "/api/v1/member/1/",
+    "club": "/api/v1/club/1/",
+    "request_type": "MR",
+    "status": "P",
+    "content": "comments"
+}
