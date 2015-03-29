@@ -1,17 +1,19 @@
 This file defines the curl commands and JSON templates of CRUD operations of Member model.
 
 1. Create single
-   curl --user username:password --dump-header - -X POST -H "Content-Type: application/json" -d @member.create.json http://127.0.0.1:8000/api/v1/member/
+   curl --user username:password --dump-header - -X POST -H "Content-Type: application/json" -d @member.create.json http://127.0.0.1:8000/api/v1/member/register/
 
 2. View single
-   curl --user username:password --dump-header - http://127.0.0.1:8000/api/v1/member/1/
+   curl --user username:password --dump-header - http://127.0.0.1:8000/api/v1/member/{uuid}/
 
 3. View list
    curl --user username:password --dump-header - http://127.0.0.1:8000/api/v1/member/
 
 4. Update single
-   curl --user username:password --dump-header - -X PUT -H "Content-Type: application/json" -d @member.update.json http://127.0.0.1:8000/api/v1/member/2/
+   curl --user username:password --dump-header - -X PUT -H "Content-Type: application/json" -d @member.update.json http://127.0.0.1:8000/api/v1/member/{uuid}/
 
 5. Delete single
    Currently this operation doesn't work.
-   curl --user username:password --dump-header - -X DELETE http://127.0.0.1:8000/api/v1/member/2/
+   curl --user username:password --dump-header - -X DELETE http://127.0.0.1:8000/api/v1/member/{uuid}/
+
+6. Change password

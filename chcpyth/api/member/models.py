@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
-from django_extensions.db.fields import UUIDField
-
 from core.models import BaseModel
 from helpers.constants import TITLE_CHOICES, GENDER_CHOICES, CLUB_ROLE_CHOICES
 
@@ -57,7 +55,6 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     Attributes:
       id (AutoField): The auto increment ID of member.
-      ref (UUIDField): The UUID of member.
 
       title (CharField): Possible values are: MR, MS, MRS.
       gender (CharField): Possible values are: M - Male, F - Female.
@@ -75,7 +72,6 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
         In our model, it should be user's email.
     """
     id = models.AutoField(primary_key=True)
-    ref = UUIDField(version=4)
 
     title = models.CharField(max_length=3, blank=True, choices=TITLE_CHOICES)      # Do we need more titles, such as Doctor...?
     gender = models.CharField(max_length=1, blank=True, choices=GENDER_CHOICES)

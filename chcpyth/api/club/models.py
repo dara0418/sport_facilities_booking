@@ -1,8 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
-from django_extensions.db.fields import UUIDField
-
 from core.models import BaseModel, Address
 from helpers.constants import (
     STATUS_CHOICES, SPORT_CHOICES, BILLING_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOICES,
@@ -14,7 +12,6 @@ class Club(BaseModel):
 
     Attributes:
       id (AutoField): The auto increment ID of club.
-      ref (UUIDField): The auto generated UUID.
 
       name (CharField): Name of club.
       description (CharField): This field describes the club.
@@ -30,7 +27,6 @@ class Club(BaseModel):
       address (ForeignKey): This is a foreign key field, it references the 'core.Address' model.
     """
     id = models.AutoField(primary_key=True)
-    ref = UUIDField(version=4)
 
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=255, unique=True)
@@ -163,7 +159,6 @@ class Facility(BaseModel):
 
     Attributes:
       id (AutoField): The auto increment ID of facility.
-      ref (UUIDField): The UUID of facility.
 
       club (ForeignKey): This field references the Club model, indicating to which club the
         facility belongs.
@@ -175,7 +170,6 @@ class Facility(BaseModel):
       status (CharField): The status of facility. Possible values are: A - Active, I - Inactive.
     """
     id = models.AutoField(primary_key=True)
-    ref = UUIDField(version=4)
 
     club = models.ForeignKey("Club")
 
@@ -265,8 +259,6 @@ class FacilityRule(BaseModel):
 
       name (CharField): The name of rule.
       value (CharField): The content of the booking rule. This field is optional.
-      sport_type (CharField): The sport type of the rule. Possible values are (but not limited):
-        T - tennis, G - ping pong, D - paddle, B - badminton, S - squash, F5 - football-5 ...
     """
     id = models.AutoField(primary_key=True)
 
@@ -274,9 +266,6 @@ class FacilityRule(BaseModel):
 
     name = models.CharField(max_length=10)
     value = models.CharField(max_length=20, blank=True)
-
-    class Meta:
-        unique_together = (("facility", "name"),)
 
 
 class Event(BaseModel):
@@ -325,7 +314,6 @@ class Bill(BaseModel):
       message (CharField): The attached message with bill. This could be optional.
     """
     id = models.AutoField(primary_key=True)
-    ref = UUIDField(version=4)
     club = models.ForeignKey("Club")
     period = models.CharField(max_length=6, help_text="Period corresponding to this bill, can be a year like 2015 or a month + year like 201504")
     time_unit = models.CharField(max_length=1, choices=BILLING_TIME_UNITS_CHOICES)

@@ -2,7 +2,7 @@ from tastypie.resources import ModelResource
 from tastypie.authentication import BasicAuthentication
 from tastypie.authorization import Authorization
 from tastypie.cache import SimpleCache
-from tastypie.serializers import Serializer
+from tastypie.throttle import BaseThrottle
 
 from .models import Address, SubscriptionPlan
 
@@ -20,6 +20,10 @@ class BaseResource(ModelResource):
 
         # Null authorization by default.
         authorization = Authorization()
+        throttle = BaseThrottle(throttle_at=100)
+
+        # Query things by UUID rather than ID.
+        detail_uri_name = 'ref'
 
 class AddressResource(BaseResource):
     class Meta(BaseResource.Meta):

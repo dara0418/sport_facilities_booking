@@ -1,5 +1,7 @@
 from django.db import models
 
+from django_extensions.db.fields import UUIDField
+
 from helpers.constants import LEVEL_CHOICES, FREQUENCY_CHOICES
 
 class BaseModel(models.Model):
@@ -13,9 +15,12 @@ class BaseModel(models.Model):
 
       last_modified_datetime (DateTimeField): Date and time of when the model was last
         modified. The value will be attached automatically each time the object is saved.
+
+      ref (UUIDField): The auto generated UUID.
     """
     creation_datetime = models.DateTimeField(auto_now_add=True)
     last_modified_datetime = models.DateTimeField(auto_now_add=True, auto_now=True)
+    ref = UUIDField(version=4)
 
     def get_creation_datetime(self):
         return self.creation_datetime
@@ -60,6 +65,9 @@ class Address(BaseModel):
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
 
+    def __unicode__(self):
+        return self.line1
+
 
 class SubscriptionPlan(BaseModel):
     """ This is the subscription plan for clubs to subscribe.
@@ -82,3 +90,6 @@ class SubscriptionPlan(BaseModel):
     rate = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3)
     level = models.CharField(max_length=1, choices=LEVEL_CHOICES)
+
+    def __unicode__(self):
+        return self.name
