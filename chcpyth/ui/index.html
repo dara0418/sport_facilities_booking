@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="bower_components/toastr/toastr.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet/less" type="text/css" href="less/index.less" />
+
+    <!-- Referenced javascript libs. -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/less/dist/less.min.js"></script>
+    <script src="bower_components/toastr/toastr.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+
+    <script src="app/app.js"></script>
+    <script src="app/app.core.js"></script>
+    <script src="app/app.config.js"></script>
+    <script src="app/app.routes.js"></script>
+
+    <script src="app/components/components.js"></script>
+    <script src="app/components/constants.js"></script>
+    <script src="app/components/notification.js"></script>
+    <script src="app/components/storage.js"></script>
+    <script src="app/components/helpers.js"></script>
+    <script src="app/components/exception_handler.js"></script>
+    <script src="app/components/shared_properties.js"></script>
+    <script src="app/components/i18n/i18n.js"></script>
+    <script src="app/components/i18n/en.js"></script>
+    <script src="app/components/i18n/fr.js"></script>
+
+    <script src="app/member/member.js"></script>
+    <script src="app/member/member.resource.js"></script>
+    <script src="app/member/register/register.js"></script>
+    <script src="app/member/register/register.controller.js"></script>
+    <script src="app/member/login/login.js"></script>
+    <script src="app/member/login/login.controller.js"></script>
+    <script src="app/member/profile/profile.js"></script>
+    <script src="app/member/profile/profile.controller.js"></script>
+    <script src="app/member/password/password.js"></script>
+    <script src="app/member/password/password.controller.js"></script>
+
+    <script src="app/club/club.js"></script>
+    <script src="app/club/club.resource.js"></script>
+    <script src="app/club/bill/bill.js"></script>
+    <script src="app/club/bill/bill.resource.js"></script>
+    <script src="app/club/bill/bill.controller.js"></script>
+    <script src="app/club/profile/profile.js"></script>
+    <script src="app/club/profile/profile.controller.js"></script>
+    <script src="app/club/dashboard/dashboard.js"></script>
+    <script src="app/club/dashboard/dashboard.controller.js"></script>
+
+    <script src="app/facility/facility.js"></script>
+    <script src="app/facility/facility.resource.js"></script>
+    <script src="app/facility/dashboard/dashboard.js"></script>
+    <script src="app/facility/dashboard/dashboard.controller.js"></script>
+    <script src="app/facility/profile/profile.js"></script>
+    <script src="app/facility/profile/profile.controller.js"></script>
+
+    <script src="app/general_rule/general_rule.js"></script>
+    <script src="app/general_rule/general_rule.resource.js"></script>
+    <script src="app/general_rule/dashboard/dashboard.js"></script>
+    <script src="app/general_rule/dashboard/dashboard.controller.js"></script>
+    <script src="app/general_rule/profile/profile.js"></script>
+    <script src="app/general_rule/profile/profile.controller.js"></script>
+
+    <script src="app/sport_rule/sport_rule.js"></script>
+    <script src="app/sport_rule/sport_rule.resource.js"></script>
+    <script src="app/sport_rule/dashboard/dashboard.js"></script>
+    <script src="app/sport_rule/dashboard/dashboard.controller.js"></script>
+    <script src="app/sport_rule/profile/profile.js"></script>
+    <script src="app/sport_rule/profile/profile.controller.js"></script>
+
+    <script src="app/facility_rule/facility_rule.js"></script>
+    <script src="app/facility_rule/facility_rule.resource.js"></script>
+    <script src="app/facility_rule/dashboard/dashboard.js"></script>
+    <script src="app/facility_rule/dashboard/dashboard.controller.js"></script>
+    <script src="app/facility_rule/profile/profile.js"></script>
+    <script src="app/facility_rule/profile/profile.controller.js"></script>
+
+    <script src="app/club_rate/club_rate.js"></script>
+    <script src="app/club_rate/club_rate.resource.js"></script>
+    <script src="app/club_rate/dashboard/dashboard.js"></script>
+    <script src="app/club_rate/dashboard/dashboard.controller.js"></script>
+    <script src="app/club_rate/profile/profile.js"></script>
+    <script src="app/club_rate/profile/profile.controller.js"></script>
+
+    <script src="app/facility_rate/facility_rate.js"></script>
+    <script src="app/facility_rate/facility_rate.resource.js"></script>
+    <script src="app/facility_rate/dashboard/dashboard.js"></script>
+    <script src="app/facility_rate/dashboard/dashboard.controller.js"></script>
+    <script src="app/facility_rate/profile/profile.js"></script>
+    <script src="app/facility_rate/profile/profile.controller.js"></script>
+
+    <script src="app/event/event.js"></script>
+    <script src="app/event/event.resource.js"></script>
+    <script src="app/event/event_reg.resource.js"></script>
+    <script src="app/event/club_dashboard/club_dashboard.js"></script>
+    <script src="app/event/club_dashboard/club_dashboard.controller.js"></script>
+    <script src="app/event/member_dashboard/member_dashboard.js"></script>
+    <script src="app/event/member_dashboard/member_dashboard.controller.js"></script>
+    <script src="app/event/profile/profile.js"></script>
+    <script src="app/event/profile/profile.controller.js"></script>
+
+    <script src="app/booking/booking.js"></script>
+    <script src="app/booking/booking.resource.js"></script>
+    <script src="app/booking/booking_member.resource.js"></script>
+    <script src="app/booking/club_dashboard/club_dashboard.js"></script>
+    <script src="app/booking/club_dashboard/club_dashboard.controller.js"></script>
+    <script src="app/booking/member_dashboard/member_dashboard.js"></script>
+    <script src="app/booking/member_dashboard/member_dashboard.controller.js"></script>
+    <script src="app/booking/profile/profile.js"></script>
+    <script src="app/booking/profile/profile.controller.js"></script>
+
+    <script src="app/membership/membership.js"></script>
+    <script src="app/membership/membership.resource.js"></script>
+    <script src="app/membership/dashboard/dashboard.js"></script>
+    <script src="app/membership/dashboard/dashboard.controller.js"></script>
+
+    <script src="app/membership_request/membership_request.js"></script>
+    <script src="app/membership_request/membership_request.resource.js"></script>
+    <script src="app/membership_request/club_dashboard/club_dashboard.js"></script>
+    <script src="app/membership_request/club_dashboard/club_dashboard.controller.js"></script>
+    <script src="app/membership_request/member_dashboard/member_dashboard.js"></script>
+    <script src="app/membership_request/member_dashboard/member_dashboard.controller.js"></script>
+
+    <script src="app/booking/booking.js"></script>
+    <script src="app/booking/booking.resource.js"></script>
+
+    <script src="app/address/address.js"></script>
+    <script src="app/address/address.resource.js"></script>
+
+    <script src="app/subscription_plan/subscription_plan.js"></script>
+    <script src="app/subscription_plan/subscription_plan.resource.js"></script>
+    <script src="app/subscription_plan/dashboard/dashboard.js"></script>
+    <script src="app/subscription_plan/dashboard/dashboard.controller.js"></script>
+
+    <title>Sports Booking</title>
+  </head>
+  <body>
+    <div ng-view></div>
+  </body>
+</html>

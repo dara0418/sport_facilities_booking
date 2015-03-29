@@ -1,0 +1,28 @@
+<div>
+  <h2>Facility Rule Profile</h2>
+  <p>Use pre-defined rules.</p>
+
+  <form>
+    <div class="form-group">
+      <label>{{ 'NAME' | translate }}</label>
+      <input class="form-control"
+        id="name"
+        name="name"
+        ng-model="vm.rule.name" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'VALUE' | translate }}</label>
+      <input class="form-control"
+        id="value"
+        name="value"
+        ng-model="vm.rule.value" />
+    </div>
+  </form>
+
+  <p>Split update/create new functions into two pages, containing the same form.</p>
+  <button ng-click="vm.update()">Update</button>
+  <button ng-click="vm.create()">Create New</button>
+  <button ng-click="vm.remove()">Delete</button>
+</div>
+

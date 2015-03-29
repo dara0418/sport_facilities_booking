@@ -1,0 +1,28 @@
+<div>
+  <div>
+    <form>
+      Club name may not identify a club because it's not unique. We will use a dynamic search function in the future.
+      <div class="form-group">
+        <label>{{ 'APPLY_MEMBERSHIP' | translate }}</label>
+        <input class="form-control" id="clubName" name="clubName" ng-model="vm.clubName" />
+      </div>
+
+      <div class="form-group">
+        <label>{{ 'CONTENT' | translate }}</label>
+        <input class="form-control" id="content" name="content" ng-model="vm.content" />
+      </div>
+    </form>
+    <button ng-click="vm.sendMembershipRequest()">Apply</button>
+  </div>
+  <div ng-repeat="mq in vm.mqs">
+    {{ mq.club.name }}<br/>
+    {{ mq.member.email }}<br/>
+    {{ mq.request_type }}<br/>
+    {{ mq.status }}<br/>
+    {{ mq.content }}<br/>
+    <button ng-if="mq.request_type == vm.mqType.CLUB_INVITATION && mq.status == vm.mqStatus.PENDING"
+      ng-click="vm.acceptRequest(mq)">
+      Accept
+    </button>
+  </div>
+</div>

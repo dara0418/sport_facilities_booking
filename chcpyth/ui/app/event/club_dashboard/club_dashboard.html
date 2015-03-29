@@ -1,0 +1,26 @@
+<div>
+  <h2>Events of Club {{ vm.selectedClub.name }}</h2>
+
+  <div>
+    <button ng-if="vm.role == vm.mRole.ADMIN"
+      ng-click="vm.createEvent()">
+      New Event
+    </button>
+  </div>
+
+  <div ng-repeat="event in vm.events">
+    {{ event.name }}<br/>
+    {{ event.start }}<br/>
+    {{ event.end }}<br/>
+    {{ event.event_type }}<br/>
+    {{ event.privacy }}<br/>
+    {{ event.content }}<br/>
+
+    <p>TODO - Checks the privacy.</p>
+    <button ng-click="vm.editEvent(event)"
+      ng-if="vm.role == vm.mRole.ADMIN">
+      Edit
+    </button>
+    <hr/>
+  </div>
+</div>

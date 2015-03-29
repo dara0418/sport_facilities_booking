@@ -1,0 +1,26 @@
+<div>
+  <h2>My Clubs</h2>
+
+  <div ng-repeat="club in vm.clubs">
+    {{ club.ref }}<br/>
+    {{ club.name }}<br/>
+    {{ club.description }}<br/>
+    {{ club.url }}<br/>
+    {{ club.status }}<br/>
+    {{ club.email }}<br/>
+    {{ club.primary_phone }}<br/>
+    {{ club.secondary_phone }}<br/>
+    {{ club.fax_number }}<br/>
+    <button type="button" ng-click="vm.selectClub(club)">Edit Profile</button><br/>
+    <button type="button" ng-click="vm.goToMembershipRequest(club)">Membership Requests</button><br/>
+    <button type="button" ng-click="vm.goToMembershipDashboard(club)">View Members</button><br/>
+    <button type="button" ng-click="vm.goToFacilityDashboard(club)">Club Facilities</button><br/>
+    <button type="button" ng-click="vm.goToGeneralRule(club)">Club Rules</button><br/>
+    <button type="button" ng-click="vm.goToSportRule(club)">Sport Rules</button><br/>
+    <button type="button" ng-click="vm.goToClubRate(club)">Club Rates</button><br/>
+    <button type="button" ng-click="vm.goToEvent(club)">Events</button><br/>
+    <button type="button" ng-click="vm.goToBooking(club)">Bookings</button><br/>
+    <button type="button" ng-click="vm.quitClub(club)">Quit Club</button><br/>
+    <hr/>
+  </div>
+</div>

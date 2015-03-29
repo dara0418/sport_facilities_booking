@@ -1,0 +1,23 @@
+<div>
+  <h2>Rates of Club {{ vm.selectedClub.name }}</h2>
+
+  <div>
+    <button ng-if="vm.role == vm.mRole.ADMIN"
+      ng-click="vm.createRate()">
+      New Rate
+    </button>
+  </div>
+
+  <div ng-repeat="rate in vm.rates">
+    {{ rate.sport_type }}<br/>
+    {{ rate.time_unit }}<br/>
+    {{ rate.rate }}<br/>
+    {{ rate.currency }}<br/>
+
+    <button ng-click="vm.editRate(rate)"
+      ng-if="vm.role == vm.mRole.ADMIN">
+      Edit
+    </button>
+    <hr/>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div>
+  <h2>General Rules of Club {{ vm.selectedClub.name }}</h2>
+
+  <div>
+    <button ng-if="vm.role == vm.mRole.ADMIN"
+      ng-click="vm.createRule()">
+      New General Rule
+    </button>
+  </div>
+
+  <div ng-repeat="rule in vm.rules">
+    {{ rule.name }}<br/>
+    {{ rule.value }}<br/>
+
+    <button ng-click="vm.editRule(rule)"
+      ng-if="vm.role == vm.mRole.ADMIN">
+      Edit
+    </button>
+    <hr/>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div>
+  <h2>Booking Profile</h2>
+  <p>Use pre-defined rules.</p>
+
+  <form>
+    <div class="form-group">
+      <label>{{ 'BOOKING_DATE' | translate }}</label>
+      <input class="form-control"
+        id="bookingDate"
+        name="bookingDate"
+        ng-model="vm.booking.booking_date"
+        bs-datepicker />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'BOOKING_TIMESLOT' | translate }}</label>
+      <input class="form-control"
+        id="bookingTimeslot"
+        name="bookingTimeslot"
+        ng-model="vm.booking.booking_timeslot" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'TIME_UNIT' | translate }}</label>
+      <select class="form-control"
+        ng-model="vm.booking.time_unit">
+        <option value="" selected>Please select</option>
+        <!-- TODO - Remove hard coding. -->
+        <option value="M">{{ 'MINUTE' | translate }}</option>
+        <option value="H">{{ 'HOUR' | translate }}</option>
+        <option value="D">{{ 'DAY' | translate }}</option>
+        <option value="N">{{ 'MONTH' | translate }}</option>
+        <option value="Y">{{ 'YEAR' | translate }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'DURATION' | translate }}</label>
+      <input class="form-control"
+        id="duration"
+        name="duration"
+        ng-model="vm.booking.duration" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'NOTES' | translate }}</label>
+      <input class="form-control"
+        id="notes"
+        name="notes"
+        ng-model="vm.booking.notes" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'NUM_OF_BOOKING' | translate }}</label>
+      <input class="form-control"
+        id="numOfBooking"
+        name="numOfBooking"
+        ng-model="vm.booking.num_of_booking" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'RATE' | translate }}</label>
+      <input class="form-control"
+        id="rate"
+        name="rate"
+        ng-model="vm.booking.rate" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'CURRENCY' | translate }}</label>
+      <input class="form-control"
+        id="currency"
+        name="currency"
+        ng-model="vm.booking.currency" />
+    </div>
+  </form>
+
+  <button ng-click="vm.update()">Update</button>
+  <button ng-click="vm.remove()">Delete</button>
+</div>

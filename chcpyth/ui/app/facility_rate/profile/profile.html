@@ -1,0 +1,42 @@
+<div>
+  <h2>Facility Rate Profile</h2>
+  <p>Use pre-defined rules.</p>
+
+  <form>
+    <div class="form-group">
+      <label>{{ 'TIME_UNIT' | translate }}</label>
+      <select class="form-control"
+        ng-model="vm.rate.time_unit">
+        <option value="" selected>Please select</option>
+        <!-- TODO - Remove hard coding. -->
+        <option value="M">{{ 'MINUTE' | translate }}</option>
+        <option value="H">{{ 'HOUR' | translate }}</option>
+        <option value="D">{{ 'DAY' | translate }}</option>
+        <option value="N">{{ 'MONTH' | translate }}</option>
+        <option value="Y">{{ 'YEAR' | translate }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'RATE' | translate }}</label>
+      <input class="form-control"
+        id="rate"
+        name="rate"
+        ng-model="vm.rate.rate" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'CURRENCY' | translate }}</label>
+      <input class="form-control"
+        id="currency"
+        name="currency"
+        ng-model="vm.rate.currency" />
+    </div>
+  </form>
+
+  <p>Split update/create new functions into two pages, containing the same form.</p>
+  <button ng-click="vm.update()">Update</button>
+  <button ng-click="vm.create()">Create New</button>
+  <button ng-click="vm.remove()">Delete</button>
+</div>
+

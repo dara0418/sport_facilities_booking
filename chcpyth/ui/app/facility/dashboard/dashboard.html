@@ -1,0 +1,31 @@
+<div>
+  <h2>Facilities of Club {{ vm.selectedClub.name }}</h2>
+
+  <div>
+    <button ng-if="vm.role == vm.mRole.ADMIN"
+      ng-click="vm.createFacility()">
+      New Facility
+    </button>
+  </div>
+
+  <div ng-repeat="facility in vm.facilities">
+    {{ facility.name }}<br/>
+    {{ facility.sport_type }}<br/>
+    {{ facility.status }}<br/>
+    {{ facility.description }}<br/>
+
+    <button ng-click="vm.editFacility(facility)"
+      ng-if="vm.role == vm.mRole.ADMIN">
+      Edit
+    </button><br/>
+
+    <button ng-click="vm.goToFacilityRule(facility)">
+      Facility Rules
+    </button><br/>
+
+    <button ng-click="vm.goToFacilityRate(facility)">
+      Facility Rate
+    </button><br/>
+    <hr/>
+  </div>
+</div>

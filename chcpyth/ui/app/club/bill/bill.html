@@ -1,0 +1,14 @@
+<div>
+  <h2>My Bills</h2>
+
+  <div ng-repeat="bill in vm.bills">
+    {{ bill.period }}<br/>
+    {{ bill.time_unit }}<br/>
+    {{ bill.amount }}<br/>
+    {{ bill.currency }}<br/>
+    {{ bill.status }}<br/>
+    {{ bill.message }}<br/>
+    <button>Pay (dummy button, should handle by paypal API)</button>
+    <hr/>
+  </div>
+</div>

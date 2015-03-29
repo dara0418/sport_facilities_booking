@@ -1,0 +1,21 @@
+<div>
+  <h2>Facility Rules of Facility {{ vm.selectedFacility.name }}</h2>
+
+  <div>
+    <button ng-if="vm.role == vm.mRole.ADMIN"
+      ng-click="vm.createRule()">
+      New Facility Rule
+    </button>
+  </div>
+
+  <div ng-repeat="rule in vm.rules">
+    {{ rule.name }}<br/>
+    {{ rule.value }}<br/>
+
+    <button ng-click="vm.editRule(rule)"
+      ng-if="vm.role == vm.mRole.ADMIN">
+      Edit
+    </button>
+    <hr/>
+  </div>
+</div>

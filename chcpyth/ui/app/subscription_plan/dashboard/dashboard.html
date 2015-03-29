@@ -1,0 +1,15 @@
+<div>
+  <h2>Subscription Plans</h2>
+
+  <div ng-repeat="plan in vm.plans">
+    {{ plan.ref }}<br/>
+    {{ plan.name }}<br/>
+    {{ plan.frequency }}<br/>
+    {{ plan.rate }}<br/>
+    {{ plan.currency }}<br/>
+    {{ plan.level }}<br/>
+
+    <button type="button" ng-click="vm.subscribe(plan)">Subscribe</button><br/>
+    <hr/>
+  </div>
+</div>
