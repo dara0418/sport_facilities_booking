@@ -6,11 +6,11 @@
   .controller('BookingProfileController', profileController);
 
   profileController.$inject = ['$scope', 'Notification', '$translate', 'Club',
-    'Helpers', 'SharedProperties', 'Membership', '$location', 'ExceptionHandler',
+    'Helpers', 'Storage', 'Membership', '$location', 'ExceptionHandler',
     'Booking', 'MembershipRole'];
 
   function profileController($scope, Notification, $translate, Club,
-    Helpers, SharedProperties, Membership, $location, ExceptionHandler,
+    Helpers, Storage, Membership, $location, ExceptionHandler,
     Booking, MembershipRole) {
     var vm = this;
 
@@ -21,7 +21,7 @@
     vm.update = update;
     vm.remove = remove;
     vm.unselectBooking = unselectBooking;
-    vm.sharedProperties = SharedProperties;
+    vm.s = Storage;
 
     vm.activate();
 
@@ -31,7 +31,7 @@
     }
 
     function update() {
-      var booking = SharedProperties.selectedBooking;
+      var booking = Storage.getBooking();
 
       if ($.isEmptyObject(booking.ref)) {
         // No ref, quit.
@@ -49,7 +49,7 @@
     }
 
     function create() {
-      var booking = SharedProperties.selectedBooking;
+      var booking = Storage.getBooking();
 
       if (!$.isEmptyObject(booking.ref)) {
         // The booking has a ref, it may be an existing booking.
@@ -62,7 +62,7 @@
     }
 
     function remove() {
-      var booking = SharedProperties.selectedBooking;
+      var booking = Storage.getBooking();
 
       if ($.isEmptyObject(booking.ref)) {
         // No ref, quit.
@@ -75,7 +75,7 @@
     }
 
     function unselectBooking() {
-      SharedProperties.selectedBooking = undefined;
+      Storage.clearBooking();
     }
   }
 })();

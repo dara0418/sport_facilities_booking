@@ -3,22 +3,18 @@
 
   angular.module('app.club.booking')
 
-  .controller('ClubBookingController', bookingController);
+  .controller('ClubBookingController', controller);
 
-  bookingController.$inject = ['$scope', 'Notification', '$translate', 'Club',
-    'Helpers', 'SharedProperties', 'Membership', '$location', 'ExceptionHandler',
-    'Booking', 'MembershipRole'];
+  controller.$inject = ['$scope', '$translate', 'Helpers', '$location',
+    'ExceptionHandler', 'Booking', 'BookingMember', '$q'];
 
-  function bookingController($scope, Notification, $translate, Club,
-    Helpers, SharedProperties, Membership, $location, ExceptionHandler,
-    Booking, MembershipRole) {
+  function controller($scope, $translate, Helpers, $location,
+    ExceptionHandler, Booking, BookingMember, $q) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
     vm.club = $scope.club;
-    vm.mRole = MembershipRole;
-    vm.editBooking = editBooking;
     vm.activate = activate;
 
     vm.bookings = [];
@@ -29,41 +25,54 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
-      vm.selectedClub = angular.copy(SharedProperties.selectedClub);
-
       // Pull bookings of the current selected club.
-      if (!$.isEmptyObject(vm.selectedClub)) {
-        Booking.get({ facility__club__ref: vm.selectedClub.ref }).$promise
+      if (!$.isEmptyObject(vm.club)) {
+        Booking.get({ facility__club__ref: vm.club.ref }).$promise
+        .then(attachBookingMembers)
         .then(setBookings)
         .catch(handler.generalHandler);
-
-        Helpers.getMembershipsByClubAndMember(vm.member.ref, vm.selectedClub.ref)
-        .then(setClubRole)
-        .catch(handler.generalHandler);
       }
-    }
-
-    function editBooking(booking) {
-      if ($.isEmptyObject(booking)) {
-        // No booking selected, quit.
-        return;
-      }
-
-      SharedProperties.selectedBooking = booking;
-
-      $location.path('/booking/profile');
     }
 
     // Private functions.
 
-    function setBookings(bookingResource) {
-      vm.bookings = bookingResource.objects;
+    // This function attaches booking members to the booking objects.
+    // Two attribute will be attached for display purpose: booker and members.
+    // "booker" is the booker of reservation.
+    // "members" is a string display all members in the reservation.
+    function attachBookingMembers(bookingResource) {
+      var bookingDeferred = $q.defer();
+
+      // Look up all members of the booking by BookingMember resource,
+      // and map them into a deferred promise that can be resolved
+      // after all AJAX calls done.
+      var bookings = $.map(bookingResource.objects, function(booking, index) {
+        return BookingMember.get({ booking__ref: booking.ref }).$promise
+        .then(function(bookingMemberResource) {
+          booking.members = '';
+
+          $.each(bookingMemberResource.objects, function(index, bMember) {
+            if (bMember.is_booker) {
+              booking.booker = bMember.member.email;
+            }
+
+            booking.members += bMember.member.email + ' ';
+          });
+
+          return booking;
+        });
+      });
+
+      // Resolve the promise after all AJAX calls done.
+      $q.all(bookings).then(function(data) {
+        bookingDeferred.resolve(data);
+      });
+
+      return bookingDeferred.promise;
     }
 
-    function setClubRole(memberships) {
-      if (memberships.length == 1) {
-        vm.role = memberships[0].role;
-      }
+    function setBookings(bookings) {
+      vm.bookings = bookings;
     }
   }
 })();

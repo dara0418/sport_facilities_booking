@@ -6,10 +6,10 @@
   .controller('MemberClubController', memberClubController);
 
   memberClubController.$inject = ['$scope', 'ExceptionHandler', 'MembershipRole',
-    'Helpers', '$location', 'SharedProperties'];
+    'Helpers', '$location', 'Storage'];
 
   function memberClubController($scope, ExceptionHandler, MembershipRole,
-    Helpers, $location, SharedProperties) {
+    Helpers, $location, Storage) {
     var vm = this;
     var handler = ExceptionHandler;
 
@@ -31,7 +31,7 @@
     }
 
     function goToClubDashboard(club) {
-      SharedProperties.selectedClub = club;
+      Storage.setClub(club);
       $location.path('/club/dashboard');
     }
 

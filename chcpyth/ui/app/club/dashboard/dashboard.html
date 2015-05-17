@@ -28,8 +28,8 @@
           </div>
 
           <div role="tabpanel" class="tab-pane" id="booking">
-            <club-booking ng-show="vm.sharedProperties.selectedBooking === undefined"></club-booking>
-            <booking-profile ng-show="vm.sharedProperties.selectedBooking !== undefined"></booking-profile>
+            <club-booking club="vm.club" ng-show="vm.s.getBooking() === undefined"></club-booking>
+            <booking-profile ng-show="vm.s.getBooking() !== undefined"></booking-profile>
           </div>
 
           <div role="tabpanel" class="tab-pane" id="events">

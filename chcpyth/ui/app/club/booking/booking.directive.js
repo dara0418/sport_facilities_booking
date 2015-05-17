@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('app.club.profile')
+  angular.module('app.club.booking')
 
   .directive('clubBooking', clubBooking);
 

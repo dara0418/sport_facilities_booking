@@ -1,24 +1,6 @@
 <div>
   <h4>Current reservations</h4>
   <div ng-repeat="booking in vm.bookings">
-    <member-booking-item booking="booking"></member-booking-item>
-  </div>
-
-  <div ng-repeat="booking in vm.bookings">
-    {{ booking.facility.name }}<br/>
-    {{ booking.booking_date }}<br/>
-    {{ booking.booking_timeslot }}<br/>
-    {{ booking.time_unit }}<br/>
-    {{ booking.duration }}<br/>
-    {{ booking.notes }}<br/>
-    {{ booking.num_of_booking }}<br/>
-    {{ booking.rate }}<br/>
-    {{ booking.currency }}<br/>
-
-    <button ng-click="vm.editBooking(booking)"
-      ng-if="vm.role == vm.mRole.ADMIN">
-      Edit
-    </button>
-    <hr/>
+    <club-booking-item booking="booking"></club-booking-item>
   </div>
 </div>

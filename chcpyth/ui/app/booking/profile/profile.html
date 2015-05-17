@@ -13,7 +13,7 @@
       <input class="form-control"
         id="bookingDate"
         name="bookingDate"
-        ng-model="vm.sharedProperties.selectedBooking.booking_date"
+        ng-model="vm.s.getBooking().booking_date"
         bs-datepicker />
     </div>
 
@@ -22,13 +22,13 @@
       <input class="form-control"
         id="bookingTimeslot"
         name="bookingTimeslot"
-        ng-model="vm.sharedProperties.selectedBooking.booking_timeslot" />
+        ng-model="vm.s.getBooking().booking_timeslot" />
     </div>
 
     <div class="form-group">
       <label>{{ 'TIME_UNIT' | translate }}</label>
       <select class="form-control"
-        ng-model="vm.sharedProperties.selectedBooking.time_unit">
+        ng-model="vm.s.getBooking().time_unit">
         <option value="" selected>Please select</option>
         <!-- TODO - Remove hard coding. -->
         <option value="M">{{ 'MINUTE' | translate }}</option>
@@ -44,7 +44,7 @@
       <input class="form-control"
         id="duration"
         name="duration"
-        ng-model="vm.sharedProperties.selectedBooking.duration" />
+        ng-model="vm.s.getBooking().duration" />
     </div>
 
     <div class="form-group">
@@ -52,7 +52,7 @@
       <input class="form-control"
         id="notes"
         name="notes"
-        ng-model="vm.sharedProperties.selectedBooking.notes" />
+        ng-model="vm.s.getBooking().notes" />
     </div>
 
     <div class="form-group">
@@ -60,7 +60,7 @@
       <input class="form-control"
         id="numOfBooking"
         name="numOfBooking"
-        ng-model="vm.sharedProperties.selectedBooking.num_of_booking" />
+        ng-model="vm.s.getBooking().num_of_booking" />
     </div>
 
     <div class="form-group">
@@ -68,7 +68,7 @@
       <input class="form-control"
         id="rate"
         name="rate"
-        ng-model="vm.sharedProperties.selectedBooking.rate" />
+        ng-model="vm.s.getBooking().rate" />
     </div>
 
     <div class="form-group">
@@ -76,7 +76,7 @@
       <input class="form-control"
         id="currency"
         name="currency"
-        ng-model="vm.sharedProperties.selectedBooking.currency" />
+        ng-model="vm.s.getbooking().currency" />
     </div>
   </form>
 
