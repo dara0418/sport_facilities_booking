@@ -1,0 +1,11 @@
+<div>
+  <h4>Calendar view</h4>
+  <div ui-calendar ng-model="vm.eventSources"></div>
+
+  <h4>Current reservations</h4>
+  <div ng-repeat="booking in vm.bookings">
+    <member-booking-item booking="booking"></member-booking-item>
+  </div>
+
+  <h4>History of reservations</h4>
+</div>

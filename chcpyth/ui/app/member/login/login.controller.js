@@ -6,13 +6,29 @@
   .controller('MemberLoginController', loginController);
 
   loginController.$inject = ['$scope', '$location', 'Notification', '$translate', 'Member',
-    'Storage'];
+    'Storage', 'Helpers', 'ExceptionHandler'];
 
   function loginController($scope, $location, Notification, $translate, Member,
-    Storage) {
+    Storage, Helpers, ExceptionHandler) {
     var vm = this;
 
     vm.login = login;
+    vm.logout = logout;
+    vm.goToMyAccount = goToMyAccount;
+    vm.activate = activate;
+
+    vm.activate();
+
+    var handler = ExceptionHandler;
+
+    function activate() {
+      // Check if user already signed in.
+      Helpers.safeGetLoginMember(vm);
+
+      if (!$.isEmptyObject(vm.member)) {
+        vm.hasLogin = true;
+      }
+    }
 
     function login() {
       if ($.isEmptyObject(vm.email) || $.isEmptyObject(vm.password)) {
@@ -32,10 +48,23 @@
           Storage.setLoginMember(result);
         }
 
-        $location.path('/member/profile');
+        $location.path('/member/dashboard');
       })
-      .catch(function(error) {
-      });
+      .catch(handler.generalHandler);
+    }
+
+    function logout() {
+      member.$login()
+      .then(function(result) {
+        Storage.clearLoginMember();
+
+        $location.path('/landing');
+      })
+      .catch(handler.generalHandler);
+    }
+
+    function goToMyAccount() {
+      $location.path('/member/dashboard');
     }
   }
 })();

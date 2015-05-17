@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('app.membership', [
-    'app.membership.resource',
-    'app.membership.dashboard'
+    'app.membership.resource'
   ]);
 })();

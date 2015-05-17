@@ -1,82 +1,105 @@
 <div>
-  <form>
-    <div class="form-group">
-      <label>{{ 'EMAIL' | translate }}</label>
-      <input class="form-control"
-        id="email"
-        name="email"
-        ng-model="vm.member.email"
-        readonly />
-    </div>
-
-    <div class="form-group">
-      <label>{{ 'TITLE' | translate }}</label>
-      <select class="form-control"
-        ng-model="vm.member.title">
-        <option value="" selected>Please select</option>
-        <option value="MR">{{ 'MR' | translate }}</option>
-        <option value="MRS">{{ 'MRS' | translate }}</option>
-        <option value="MS">{{ 'MS' | translate }}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>{{ 'GENDER' | translate }}</label>
-      <select class="form-control"
-        ng-model="vm.member.gender">
-        <option value="" selected>Please select</option>
-        <option value="M">{{ 'MALE' | translate }}</option>
-        <option value="F">{{ 'FEMALE' | translate }}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>{{ 'NAME' | translate }}</label>
-      <div class="row">
-        <div class="col-md-6">
+  <h4>Edit Profile</h4>
+  <div class="profile">
+    <form>
+      <ul>
+        <li>
+          <span>{{ 'EMAIL' | translate }}</span>
           <input class="form-control"
-            id="firseName"
-            name="firseName"
-            ng-model="vm.member.first_name" />
-        </div>
+            id="email"
+            name="email"
+            ng-model="vm.member.email"
+            readonly />
+        </li>
 
-        <div class="col-md-6">
+        <li class="li-3">
+          <span>{{ 'TITLE' | translate }}</span>
+          <label>
+            <select class="form-control"
+              ng-model="vm.member.title">
+              <option value="" selected>Please select</option>
+              <option value="MR">{{ 'MR' | translate }}</option>
+              <option value="MRS">{{ 'MRS' | translate }}</option>
+              <option value="MS">{{ 'MS' | translate }}</option>
+            </select>
+          </label>
+        </li>
+
+        <li>
+          <span>{{ 'FIRST_NAME' | translate }}</span>
+          <input class="form-control"
+            id="firstName"
+            name="firstname"
+            type="text"
+            ng-model="vm.member.first_name" />
+        </li>
+
+        <li>
+          <span>{{ 'LAST_NAME' | translate }}</span>
           <input class="form-control"
             id="lastName"
             name="lastName"
+            type="text"
             ng-model="vm.member.last_name" />
-        </div>
-      </div>
-    </div>
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'DOB' | translate }}</label>
-      <input class="form-control"
-        id="dob"
-        name="dob"
-        ng-model="vm.member.dob"
-        bs-datepicker />
-    </div>
+        <li class="li-3">
+          <span>{{ 'GENDER' | translate }}</span>
+          <label>
+            <select class="form-control"
+              id="gender"
+              name="gender"
+              ng-model="vm.member.gender">
+              <option value="" selected>Please select</option>
+              <option value="M">{{ 'MALE' | translate }}</option>
+              <option value="F">{{ 'FEMALE' | translate }}</option>
+            </select>
+          </label>
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'PHONE' | translate }}</label>
-      <input class="form-control"
-        id="landline"
-        name="landline"
-        ng-model="vm.member.landline" />
-    </div>
+        <li>
+          <span>{{ 'DOB' | translate }}</span>
+          <input class="form-control"
+            id="dob"
+            name="dob"
+            ng-model="vm.member.dob"
+            bs-datepicker />
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'CELLPHONE' | translate }}</label>
-      <input class="form-control"
-        id="cellphone"
-        name="cellphone"
-        ng-model="vm.member.cellphone" />
-    </div>
-  </form>
+        <li>
+          <span>{{ 'PHONE' | translate }}</span>
+          <input class="form-control"
+            id="landline"
+            name="landline"
+            ng-model="vm.member.landline" />
+        </li>
 
-  <button class="btn btn-primary"
-    ng-click="vm.updateProfile()">
-    {{ 'UPDATE' | translate }}
-  </button>
+        <li>
+          <span>{{ 'CELLPHONE' | translate }}</span>
+          <input class="form-control"
+            id="cellphone"
+            name="cellphone"
+            ng-model="vm.member.cellphone" />
+        </li>
+
+        <div class="hr"></div>
+        <li>
+          <input type="button"
+            class="btn btn-success"
+            value="Save"
+            ng-click="vm.updateProfile()" />
+
+          <!-- Reset changes. -->
+          <a class="cancel-btn" href="#">Cancel</a>
+        </li>
+      </ul>
+
+      <div class="float-r"><img src="images/profile-img.jpg"><div class="flr"> <label><select class="form-control">
+        <option>Change photo</option>
+        <option>One</option>
+        <option>Two</option>
+        </select></label></div> </div>
+      <div class="profile-links flr"> <a class="de-active" href="#">Deactivate</a> <a class="my-account" href="#">my account</a></div>
+    </form>
+  </div>
 </div>

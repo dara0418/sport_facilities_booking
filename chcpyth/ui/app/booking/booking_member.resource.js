@@ -1,5 +1,5 @@
 (function() {
-  angular.module('app.booking.resource')
+  angular.module('app.booking.member_resource', [])
 
   .factory('BookingMember', bookingResource);
 

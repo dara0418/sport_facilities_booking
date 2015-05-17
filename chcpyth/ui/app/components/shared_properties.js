@@ -23,5 +23,7 @@
     service.selectedGeneralRule = undefined;
     service.selectedSportRule = undefined;
     service.selectedFacilityRule = undefined;
+
+    service.selectedBooking = undefined;
   }
 })();

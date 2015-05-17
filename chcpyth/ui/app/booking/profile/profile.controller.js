@@ -20,23 +20,20 @@
     vm.activate = activate;
     vm.update = update;
     vm.remove = remove;
+    vm.unselectBooking = unselectBooking;
+    vm.sharedProperties = SharedProperties;
 
     vm.activate();
 
     // The startup function.
     function activate() {
       Helpers.safeGetLoginMember(vm);
-
-      if (!$.isEmptyObject(SharedProperties.selectedBooking)) {
-        vm.booking = angular.copy(SharedProperties.selectedBooking);
-
-        // Clear selectedBooking.
-        SharedProperties.selectedBooking = undefined;
-      }
     }
 
     function update() {
-      if ($.isEmptyObject(vm.booking.ref)) {
+      var booking = SharedProperties.selectedBooking;
+
+      if ($.isEmptyObject(booking.ref)) {
         // No ref, quit.
         return;
       }
@@ -44,33 +41,41 @@
       // TODO - Research the underlying actions of creating a resource with foreign key
       // relationship in Tastypie. Passing facility object directly will toggle an 'UNIQUE'
       // constraint, which is not we want.
-      vm.booking.facility = vm.booking.facility.resource_uri;
+      booking.facility = booking.facility.resource_uri;
 
-      new Booking(vm.booking).$update()
+      new Booking(booking).$update()
       .then(Helpers.updateSuccess)
       .catch(handler.generalHandler);
     }
 
     function create() {
-      if (!$.isEmptyObject(vm.booking.ref)) {
+      var booking = SharedProperties.selectedBooking;
+
+      if (!$.isEmptyObject(booking.ref)) {
         // The booking has a ref, it may be an existing booking.
         return;
       }
 
-      new Booking(vm.booking).$save()
+      new Booking(booking).$save()
       .then(Helpers.saveSuccess)
       .catch(handler.generalHandler);
     }
 
     function remove() {
-      if ($.isEmptyObject(vm.booking.ref)) {
+      var booking = SharedProperties.selectedBooking;
+
+      if ($.isEmptyObject(booking.ref)) {
         // No ref, quit.
         return;
       }
 
-      new Booking(vm.booking).$delete()
+      new Booking(booking).$delete()
       .then(Helpers.deleteSuccess)
       .catch(handler.generalHandler);
+    }
+
+    function unselectBooking() {
+      SharedProperties.selectedBooking = undefined;
     }
   }
 })();

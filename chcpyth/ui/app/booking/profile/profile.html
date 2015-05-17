@@ -1,5 +1,10 @@
 <div>
-  <h2>Booking Profile</h2>
+  <h2>
+    <a class="btn btn-default" ng-click="vm.unselectBooking()">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    Booking Profile
+  </h2>
   <p>Use pre-defined rules.</p>
 
   <form>
@@ -8,7 +13,7 @@
       <input class="form-control"
         id="bookingDate"
         name="bookingDate"
-        ng-model="vm.booking.booking_date"
+        ng-model="vm.sharedProperties.selectedBooking.booking_date"
         bs-datepicker />
     </div>
 
@@ -17,13 +22,13 @@
       <input class="form-control"
         id="bookingTimeslot"
         name="bookingTimeslot"
-        ng-model="vm.booking.booking_timeslot" />
+        ng-model="vm.sharedProperties.selectedBooking.booking_timeslot" />
     </div>
 
     <div class="form-group">
       <label>{{ 'TIME_UNIT' | translate }}</label>
       <select class="form-control"
-        ng-model="vm.booking.time_unit">
+        ng-model="vm.sharedProperties.selectedBooking.time_unit">
         <option value="" selected>Please select</option>
         <!-- TODO - Remove hard coding. -->
         <option value="M">{{ 'MINUTE' | translate }}</option>
@@ -39,7 +44,7 @@
       <input class="form-control"
         id="duration"
         name="duration"
-        ng-model="vm.booking.duration" />
+        ng-model="vm.sharedProperties.selectedBooking.duration" />
     </div>
 
     <div class="form-group">
@@ -47,7 +52,7 @@
       <input class="form-control"
         id="notes"
         name="notes"
-        ng-model="vm.booking.notes" />
+        ng-model="vm.sharedProperties.selectedBooking.notes" />
     </div>
 
     <div class="form-group">
@@ -55,7 +60,7 @@
       <input class="form-control"
         id="numOfBooking"
         name="numOfBooking"
-        ng-model="vm.booking.num_of_booking" />
+        ng-model="vm.sharedProperties.selectedBooking.num_of_booking" />
     </div>
 
     <div class="form-group">
@@ -63,7 +68,7 @@
       <input class="form-control"
         id="rate"
         name="rate"
-        ng-model="vm.booking.rate" />
+        ng-model="vm.sharedProperties.selectedBooking.rate" />
     </div>
 
     <div class="form-group">
@@ -71,10 +76,19 @@
       <input class="form-control"
         id="currency"
         name="currency"
-        ng-model="vm.booking.currency" />
+        ng-model="vm.sharedProperties.selectedBooking.currency" />
     </div>
   </form>
 
-  <button ng-click="vm.update()">Update</button>
-  <button ng-click="vm.remove()">Delete</button>
+  <button class="btn btn-primary"
+    ng-click="vm.update()">
+    <i class="fa fa-gw fa-refresh"></i>
+    &nbsp;Update
+  </button>
+  &nbsp; &nbsp;
+  <button class="btn btn-danger"
+    ng-click="vm.remove()">
+    <i class="fa fa-gw fa-trash"></i>
+    &nbsp;Cancel
+  </button>
 </div>

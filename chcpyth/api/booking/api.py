@@ -17,7 +17,7 @@ class BookingResource(BaseResource):
 
         filtering = {
             "ref": ALL,
-            "facility": ALL_WITH_RELATIONS,
+            "facility": ALL_WITH_RELATIONS
         }
 
 
@@ -32,5 +32,5 @@ class BookingMemberResource(BaseResource):
         filtering = {
             "ref": ALL,
             "member": ALL_WITH_RELATIONS,
-            "booking": ALL_WITH_RELATIONS,
+            "booking": ALL_WITH_RELATIONS
         }

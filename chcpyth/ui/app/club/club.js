@@ -3,8 +3,12 @@
 
   angular.module('app.club', [
     'app.club.resource',
+    'app.club.dashboard',
     'app.club.bill',
     'app.club.profile',
-    'app.club.dashboard'
+    'app.club.booking',
+    'app.club.event',
+    'app.club.facility',
+    'app.club.member'
   ]);
 })();

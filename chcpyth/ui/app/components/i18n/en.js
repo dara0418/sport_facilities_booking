@@ -12,6 +12,8 @@
       INFO: 'Information',
 
       NAME: 'Name',
+      FIRST_NAME: 'First Name',
+      LAST_NAME: 'Last Name',
       DOB: 'Date of Birth',
       EMAIL: 'Email',
       PHONE: 'Phone',
@@ -20,6 +22,7 @@
       RE_ENTER: 'Re-enter',
       REGISTER: 'Register',
       LOGIN: 'Sign In',
+      LOGOUT: 'Sign Out',
       UPDATE: 'Update',
       NEW: 'New',
       OLD: 'Old',
@@ -35,6 +38,7 @@
       CHANGE_ROLE: 'Change Role',
       RATE: 'Rate',
       CURRENCY: 'Currency',
+      MY_ACCOUNT: 'My Account',
 
       TITLE: 'Title',
       MR: 'Mr.',

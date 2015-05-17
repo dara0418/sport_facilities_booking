@@ -1,0 +1,95 @@
+<div>
+  <page-header></page-header>
+
+  <div class="container">
+    <div class="row">
+      <div class="dashboard-inner">
+        <div class="col-lg-9 col-md-9 col-sm-8">
+          <div class="leftbar">
+            <ul class="nav nav-tabs" role="tablist" id="myTab">
+              <li role="presentation" class="active">
+                <a data-target="#profile" aria-controls="home" role="tab" data-toggle="tab">Profile</a>
+              </li>
+              <li role="presentation">
+                <a data-target="#booking" aria-controls="profile" role="tab" data-toggle="tab">Booking</a>
+              </li>
+              <li role="presentation">
+                <a data-target="#events" aria-controls="messages" role="tab" data-toggle="tab">Events</a>
+              </li>
+              <li role="presentation">
+                <a data-target="#clubs" aria-controls="messages" role="tab" data-toggle="tab">Clubs</a>
+              </li>
+              <li role="presentation">
+                <a data-target="#notifications" aria-controls="settings" role="tab" data-toggle="tab">Notifications</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="profile">
+                <member-profile></member-profile>
+                <member-password></member-password>
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="booking">
+                <member-booking ng-show="vm.sharedProperties.selectedBooking === undefined"></member-booking>
+                <booking-profile ng-show="vm.sharedProperties.selectedBooking !== undefined"></booking-profile>
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="events">
+                <member-event></member-event>
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="clubs">
+                <member-club></member-club>
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="notifications">
+                <member-notification></member-notification>
+              </div>
+          </div><!-- End of left-bar -->
+        </div><!-- End of left container of dashboard. -->
+      </div><!-- End of dashboard-inner. -->
+
+      <!-- TODO - Put the following stuff into a directive. -->
+      <div class="right-bg col-lg-3 col-md-3 col-sm-4">
+        <div class="rightbar">
+          <div class="guider">
+            <h3>Your Well Guide</h3>
+            <div class="reader"><h3>78% <br>Complete</h3></div>
+          </div>
+
+          <div class="rightbar-menu">
+            <div class="accordion">
+              <div class="accordion-head">
+                <div class="tick down"></div> <h5>Lorem ipsum dolor sit</h5><div class="arrow down"></div>
+              </div>
+
+              <div class="accordion-body">
+                <p>Lorem Ipsum is sfnti nting and typesetting industry dummy text o g and typesetting industry.</p>
+              </div>
+ 
+              <div class="accordion-head">
+                <div class="tick down"></div><h5>Lorem ipsum dolor sit</h5><div class="arrow down"></div>
+              </div>
+
+              <div class="accordion-body">
+                <p>Lorem Ipsum is sfnti nting and typesetting industry dummy text o g and typesetting industry.</p>
+              </div>
+  
+              <div class="accordion-head">
+                <div class="tick down"></div><h5>Lorem ipsum dolor sit</h5><div class="arrow down"></div>
+              </div>
+
+              <div class="accordion-body">
+                <p>Lorem Ipsum is sfnti nting and typesetting industry dummy text o g and typesetting industry.</p>
+              </div>
+            </div><!-- End of accordion. -->
+          </div><!-- End of rightbar-menu. -->
+        </div><!-- End of rightbar. -->
+      </div><!-- End of right container of dashboard. -->
+
+    </div><!-- End of row. -->
+  </div><!-- End of whole container. -->
+
+  <page-footer></page-footer>
+</div>

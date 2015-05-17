@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-2">
+    Club Photo
+  </div>
+
+  <div class="col-md-6">
+    <h5>{{ vm.event.club.name }}</h5>
+    <h5>{{ vm.event.name }}</h5>
+    <p>{{ vm.event.content }}</p>
+
+    <div class="row">
+      <button class="btn btn-primary"
+        ng-click="vm.viewEvent(vm.event)">
+        <i class="fa fa-gw fa-search"></i>
+        &nbsp;View(is this necessary?)
+      </button>
+      &nbsp; &nbsp;
+      <button class="btn btn-primary"
+        ng-click="vm.joinEvent(vm.event)"
+        ng-if="!event.hasJoined">
+        <i class="fa fa-gw fa-user-plus"></i>
+        &nbsp;Join
+      </button>
+      <button class="btn btn-danger"
+        ng-click="vm.quitEvent(vm.event)"
+        ng-if="event.hasJoined">
+        <i class="fa fa-gw fa-user-times"></i>
+        &nbsp;Quit
+      </button>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-6">
+        START<br/>
+        {{ vm.event.start | date:'yyyy-MM-dd' }}
+      </div>
+      <div class="col-md-6">
+        END<br/>
+        {{ vm.event.end | date:'yyyy-MM-dd' }}
+      </div>
+    </div>
+  </div>
+</div>

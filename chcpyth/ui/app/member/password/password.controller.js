@@ -9,7 +9,7 @@
     'Storage', 'Helpers'];
 
   function passwordController($scope, $translate, Member, Notification,
-    Storage) {
+    Storage, Helpers) {
     var vm = this;
 
     vm.changePassword = changePassword;

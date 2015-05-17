@@ -5,6 +5,7 @@
     'app.core',
     'app.routes',
     'app.config',
+    'app.layouts',
     'app.components',
     'app.member',
     'app.club',

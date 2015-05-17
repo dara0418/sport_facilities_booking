@@ -14,6 +14,7 @@
 
     var handler = ExceptionHandler;
 
+    vm.club = $scope.club;
     vm.updateProfile = updateProfile;
     vm.activate = activate;
 
@@ -30,8 +31,6 @@
 
     function activate() {
       Helpers.safeGetLoginMember(vm);
-
-      vm.club = angular.copy(SharedProperties.selectedClub);
     }
 
     function updateSuccess(result) {

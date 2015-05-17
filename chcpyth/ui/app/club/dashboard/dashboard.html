@@ -1,26 +1,55 @@
 <div>
-  <h2>My Clubs</h2>
+  <page-header></page-header>
 
-  <div ng-repeat="club in vm.clubs">
-    {{ club.ref }}<br/>
-    {{ club.name }}<br/>
-    {{ club.description }}<br/>
-    {{ club.url }}<br/>
-    {{ club.status }}<br/>
-    {{ club.email }}<br/>
-    {{ club.primary_phone }}<br/>
-    {{ club.secondary_phone }}<br/>
-    {{ club.fax_number }}<br/>
-    <button type="button" ng-click="vm.selectClub(club)">Edit Profile</button><br/>
-    <button type="button" ng-click="vm.goToMembershipRequest(club)">Membership Requests</button><br/>
-    <button type="button" ng-click="vm.goToMembershipDashboard(club)">View Members</button><br/>
-    <button type="button" ng-click="vm.goToFacilityDashboard(club)">Club Facilities</button><br/>
-    <button type="button" ng-click="vm.goToGeneralRule(club)">Club Rules</button><br/>
-    <button type="button" ng-click="vm.goToSportRule(club)">Sport Rules</button><br/>
-    <button type="button" ng-click="vm.goToClubRate(club)">Club Rates</button><br/>
-    <button type="button" ng-click="vm.goToEvent(club)">Events</button><br/>
-    <button type="button" ng-click="vm.goToBooking(club)">Bookings</button><br/>
-    <button type="button" ng-click="vm.quitClub(club)">Quit Club</button><br/>
-    <hr/>
-  </div>
+  <div class="container">
+    <div class="row">
+      <div class="dashboard-inner">
+        <ul class="nav nav-tabs" role="tablist" id="myTab">
+          <li role="presentation" class="active">
+            <a data-target="#profile" aria-controls="home" role="tab" data-toggle="tab">Profile</a>
+          </li>
+          <li role="presentation">
+            <a data-target="#booking" aria-controls="profile" role="tab" data-toggle="tab">Bookings</a>
+          </li>
+          <li role="presentation">
+            <a data-target="#events" aria-controls="messages" role="tab" data-toggle="tab">Events</a>
+          </li>
+          <li role="presentation">
+            <a data-target="#members" aria-controls="messages" role="tab" data-toggle="tab">Members</a>
+          </li>
+          <li role="presentation">
+            <a data-target="#facilities" aria-controls="facilities" role="tab" data-toggle="tab">Facilities</a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="profile">
+            <club-profile club="vm.club"></club-profile>
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="booking">
+            <club-booking ng-show="vm.sharedProperties.selectedBooking === undefined"></club-booking>
+            <booking-profile ng-show="vm.sharedProperties.selectedBooking !== undefined"></booking-profile>
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="events">
+            <club-event ng-show="vm.sharedProperties.selectedEvent === undefined"></club-event>
+            <event-profile ng-show="vm.sharedProperties.selectedEvent !== undefined"></event-profile>
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="members">
+            <club-member></club-member>
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="facilities">
+            <club-facility ng-show="vm.sharedProperties.selectedEvent === undefined"></club-facility>
+            <facility-profile ng-show="vm.sharedProperties.selectedEvent !== undefined"></facility-profile>
+          </div>
+        </div><!-- End of tab-content. -->
+
+      </div><!-- End of container-inner. -->
+    </div><!-- End of row. -->
+  </div><!-- End of whole container. -->
+
+  <page-footer></page-footer>
 </div>

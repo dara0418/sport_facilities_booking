@@ -39,7 +39,6 @@
       if (member === undefined) {
         // Invalid login user. Clear cache and redirect to login page.
         Storage.clearLoginMember();
-        $location.path('/member/login');
       }
 
       // Clone the login member.
@@ -73,7 +72,11 @@
         var clubs = $.map(
           membershipResource.objects,
           function(membership, index) {
-            return membership.club;
+            // Attach role of club.
+            var club = membership.club;
+            club.role = membership.role;
+
+            return club;
           }
         );
 

@@ -1,0 +1,42 @@
+<div>
+  <form class="form-inline" ng-if="!vm.hasLogin">
+    <div class="form-group">
+      <label>{{ 'EMAIL' | translate }}</label>
+      <input class="form-control"
+        id="email"
+        name="email"
+        ng-model="vm.email"
+        size="12" />
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'PASSWORD' | translate }}</label>
+      <input class="form-control"
+        id="password"
+        name="password"
+        ng-model="vm.password"
+        type="password"
+        size="12" />
+    </div>
+
+    <button class="btn btn-sm btn-default"
+      ng-click="vm.login()"
+      type="button">
+      {{ 'LOGIN' | translate }}
+    </button>
+  </form>
+
+  <div ng-if="vm.hasLogin">
+    <button class="btn btn-sm btn-default"
+      ng-click="vm.goToMyAccount()"
+      type="button">
+      {{ 'MY_ACCOUNT' | translate }}
+    </button>
+
+    <button class="btn btn-sm btn-default"
+      ng-click="vm.signOut()"
+      type="button">
+      {{ 'LOGOUT' | translate }}
+    </button>
+  </div>
+</div>

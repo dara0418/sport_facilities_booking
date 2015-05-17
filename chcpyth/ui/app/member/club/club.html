@@ -1,0 +1,31 @@
+<div>
+  <div class="row" ng-repeat="club in vm.clubs">
+    <div class="col-md-2">
+      Club Photo
+    </div>
+
+    <div class="col-md-7">
+      <h5>{{ club.name }}</h5>
+      <p>{{ club.description }}</p>
+      <p>Show something more interesting(e.g. recent booking...)</p>
+    </div>
+
+    <div class="col-md-3">
+      <div class="row">
+        <button class="btn btn-primary"
+          ng-click="vm.goToClubDashboard(club)"
+          ng-if="club.role == vm.mRole.ADMIN">
+          <i class="fa fa-gw fa-pencil"></i>
+          &nbsp;Manage
+        </button>
+        &nbsp; &nbsp;
+        <button class="btn btn-danger"
+          ng-click="vm.quitClub(club)"
+          ng-if="club.role != vm.mRole.ADMIN">
+          <i class="fa fa-gw fa-sign-out"></i>
+          &nbsp;Quit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

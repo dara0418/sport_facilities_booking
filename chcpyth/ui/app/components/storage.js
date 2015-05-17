@@ -21,7 +21,7 @@
     }
 
     function getLoginMember(member) {
-      if ($.isEmptyObject(sessionStorage.loginMember)) {
+      if (sessionStorage.loginMember === "undefined" || $.isEmptyObject(sessionStorage.loginMember)) {
         return undefined;
       }
       else {

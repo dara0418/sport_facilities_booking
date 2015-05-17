@@ -6,6 +6,7 @@
     'ngResource',
     'ngRoute',
     'mgcrea.ngStrap',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'ui.calendar'
   ]);
 })();

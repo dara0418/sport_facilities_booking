@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="bower_components/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet/less" type="text/css" href="less/index.less" />
@@ -26,11 +27,23 @@
     <script src="bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script type="text/javascript" src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script>
 
     <script src="app/app.js"></script>
     <script src="app/app.core.js"></script>
     <script src="app/app.config.js"></script>
     <script src="app/app.routes.js"></script>
+
+    <script src="app/layouts/layouts.js"></script>
+    <script src="app/layouts/header/header.js"></script>
+    <script src="app/layouts/header/header.controller.js"></script>
+    <script src="app/layouts/header/header.directive.js"></script>
+    <script src="app/layouts/footer/footer.js"></script>
+    <script src="app/layouts/footer/footer.controller.js"></script>
+    <script src="app/layouts/footer/footer.directive.js"></script>
 
     <script src="app/components/components.js"></script>
     <script src="app/components/constants.js"></script>
@@ -45,29 +58,77 @@
 
     <script src="app/member/member.js"></script>
     <script src="app/member/member.resource.js"></script>
+
+    <script src="app/member/dashboard/dashboard.js"></script>
+    <script src="app/member/dashboard/dashboard.controller.js"></script>
+
     <script src="app/member/register/register.js"></script>
     <script src="app/member/register/register.controller.js"></script>
+
     <script src="app/member/login/login.js"></script>
     <script src="app/member/login/login.controller.js"></script>
+    <script src="app/member/login/login.directive.js"></script>
+
     <script src="app/member/profile/profile.js"></script>
     <script src="app/member/profile/profile.controller.js"></script>
+    <script src="app/member/profile/profile.directive.js"></script>
+
     <script src="app/member/password/password.js"></script>
     <script src="app/member/password/password.controller.js"></script>
+    <script src="app/member/password/password.directive.js"></script>
+
+    <script src="app/member/booking/booking.js"></script>
+    <script src="app/member/booking/booking.controller.js"></script>
+    <script src="app/member/booking/booking.directive.js"></script>
+    <script src="app/member/booking/booking_item.controller.js"></script>
+    <script src="app/member/booking/booking_item.directive.js"></script>
+
+    <script src="app/member/event/event.js"></script>
+    <script src="app/member/event/event.controller.js"></script>
+    <script src="app/member/event/event.directive.js"></script>
+    <script src="app/member/event/event_item.controller.js"></script>
+    <script src="app/member/event/event_item.directive.js"></script>
+
+    <script src="app/member/notification/notification.js"></script>
+    <script src="app/member/notification/notification.controller.js"></script>
+    <script src="app/member/notification/notification.directive.js"></script>
+
+    <script src="app/member/club/club.js"></script>
+    <script src="app/member/club/club.controller.js"></script>
+    <script src="app/member/club/club.directive.js"></script>
 
     <script src="app/club/club.js"></script>
     <script src="app/club/club.resource.js"></script>
+
     <script src="app/club/bill/bill.js"></script>
     <script src="app/club/bill/bill.resource.js"></script>
     <script src="app/club/bill/bill.controller.js"></script>
+
     <script src="app/club/profile/profile.js"></script>
     <script src="app/club/profile/profile.controller.js"></script>
+    <script src="app/club/profile/profile.directive.js"></script>
+
+    <script src="app/club/event/event.js"></script>
+    <script src="app/club/event/event.controller.js"></script>
+    <script src="app/club/event/event.directive.js"></script>
+
+    <script src="app/club/booking/booking.js"></script>
+    <script src="app/club/booking/booking.controller.js"></script>
+    <script src="app/club/booking/booking.directive.js"></script>
+
+    <script src="app/club/facility/facility.js"></script>
+    <script src="app/club/facility/facility.controller.js"></script>
+    <script src="app/club/facility/facility.directive.js"></script>
+
+    <script src="app/club/member/member.js"></script>
+    <script src="app/club/member/member.controller.js"></script>
+    <script src="app/club/member/member.directive.js"></script>
+
     <script src="app/club/dashboard/dashboard.js"></script>
     <script src="app/club/dashboard/dashboard.controller.js"></script>
 
     <script src="app/facility/facility.js"></script>
     <script src="app/facility/facility.resource.js"></script>
-    <script src="app/facility/dashboard/dashboard.js"></script>
-    <script src="app/facility/dashboard/dashboard.controller.js"></script>
     <script src="app/facility/profile/profile.js"></script>
     <script src="app/facility/profile/profile.controller.js"></script>
 
@@ -109,27 +170,18 @@
     <script src="app/event/event.js"></script>
     <script src="app/event/event.resource.js"></script>
     <script src="app/event/event_reg.resource.js"></script>
-    <script src="app/event/club_dashboard/club_dashboard.js"></script>
-    <script src="app/event/club_dashboard/club_dashboard.controller.js"></script>
-    <script src="app/event/member_dashboard/member_dashboard.js"></script>
-    <script src="app/event/member_dashboard/member_dashboard.controller.js"></script>
     <script src="app/event/profile/profile.js"></script>
     <script src="app/event/profile/profile.controller.js"></script>
 
     <script src="app/booking/booking.js"></script>
     <script src="app/booking/booking.resource.js"></script>
     <script src="app/booking/booking_member.resource.js"></script>
-    <script src="app/booking/club_dashboard/club_dashboard.js"></script>
-    <script src="app/booking/club_dashboard/club_dashboard.controller.js"></script>
-    <script src="app/booking/member_dashboard/member_dashboard.js"></script>
-    <script src="app/booking/member_dashboard/member_dashboard.controller.js"></script>
     <script src="app/booking/profile/profile.js"></script>
     <script src="app/booking/profile/profile.controller.js"></script>
+    <script src="app/booking/profile/profile.directive.js"></script>
 
     <script src="app/membership/membership.js"></script>
     <script src="app/membership/membership.resource.js"></script>
-    <script src="app/membership/dashboard/dashboard.js"></script>
-    <script src="app/membership/dashboard/dashboard.controller.js"></script>
 
     <script src="app/membership_request/membership_request.js"></script>
     <script src="app/membership_request/membership_request.resource.js"></script>

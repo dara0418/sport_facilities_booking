@@ -1,68 +1,88 @@
 <div>
-  <form>
-    <div class="form-group">
-      <label>{{ 'NAME' | translate }}</label>
-      <input class="form-control"
-        id="name"
-        name="name"
-        ng-model="vm.club.name" />
-    </div>
+  <h4>Edit Profile</h4>
+  <div class="profile">
+    <form>
+      <ul>
+        <li>
+          <span>{{ 'NAME' | translate }}</span>
+          <input class="form-control"
+            id="name"
+            name="name"
+            ng-model="vm.club.name" />
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'URL' | translate }}</label>
-      <input class="form-control"
-        id="url"
-        name="url"
-        ng-model="vm.club.url" />
-    </div>
+        <li>
+          <span>{{ 'URL' | translate }}</span>
+          <input class="form-control"
+            id="url"
+            name="url"
+            ng-model="vm.club.url" />
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'STATUS' | translate }}</label>
-      <select class="form-control"
-        ng-model="vm.member.title">
-        <option value="" selected>Please select</option>
-        <!-- TODO - Remove hard coding. -->
-        <option value="A">{{ 'ACTIVE' | translate }}</option>
-        <option value="I">{{ 'INACTIVE' | translate }}</option>
-      </select>
-    </div>
+        <li class="li-3">
+          <span>{{ 'STATUS' | translate }}</span>
+          <label>
+            <select class="form-control"
+              ng-model="vm.member.title">
+              <option value="" selected>Please select</option>
+              <!-- TODO - Remove hard coding. -->
+              <option value="A">{{ 'ACTIVE' | translate }}</option>
+              <option value="I">{{ 'INACTIVE' | translate }}</option>
+            </select>
+          </label>
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'EMAIL' | translate }}</label>
-      <input class="form-control"
-        id="email"
-        name="email"
-        ng-model="vm.club.email" />
-    </div>
+        <li>
+          <span>{{ 'EMAIL' | translate }}</span>
+          <input class="form-control"
+            id="email"
+            name="email"
+            ng-model="vm.club.email" />
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'PRIMARY_PHONE' | translate }}</label>
-      <input class="form-control"
-        id="primaryPhone"
-        name="primaryPhone"
-        ng-model="vm.club.primary_phone" />
-    </div>
+        <li>
+          <span>{{ 'PRIMARY_PHONE' | translate }}</span>
+          <input class="form-control"
+            id="primaryPhone"
+            name="primaryPhone"
+            ng-model="vm.club.primary_phone" />
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'SECONDARY_PHONE' | translate }}</label>
-      <input class="form-control"
-        id="secondaryPhone"
-        name="secondaryPhone"
-        ng-model="vm.club.secondary_phone" />
-    </div>
+        <li>
+          <span>{{ 'SECONDARY_PHONE' | translate }}</span>
+          <input class="form-control"
+            id="secondaryPhone"
+            name="secondaryPhone"
+            ng-model="vm.club.secondary_phone" />
+        </li>
 
-    <div class="form-group">
-      <label>{{ 'FAX_NUMBER' | translate }}</label>
-      <input class="form-control"
-        id="faxNumber"
-        name="faxNumber"
-        ng-model="vm.club.fax_number" />
-    </div>
-  </form>
+        <li>
+          <span>{{ 'FAX_NUMBER' | translate }}</span>
+          <input class="form-control"
+            id="faxNumber"
+            name="faxNumber"
+            ng-model="vm.club.fax_number" />
+        </li>
 
-  <button class="btn btn-primary"
-    ng-click="vm.updateProfile()">
-    {{ 'UPDATE' | translate }}
-  </button>
-</div>
+        <div class="hr"></div>
+        <li>
+          <input type="button"
+            class="btn btn-success"
+            value="Save"
+            ng-click="vm.updateProfile()" />
 
+          <!-- Reset changes. -->
+          <a class="cancel-btn" href="#">Cancel</a>
+        </li>
+      </ul>
+
+      <div class="float-r"><img src="images/profile-img.jpg"><div class="flr"> <label><select class="form-control">
+        <option>Change photo</option>
+        <option>One</option>
+        <option>Two</option>
+        </select></label></div>
+      </div>
+
+      <div class="profile-links flr"><a class="de-active" href="#">Deactivate</a> <a class="my-account" href="#">my club</a></div>
+    </form>
+  </div>
