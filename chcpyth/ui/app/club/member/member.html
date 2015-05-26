@@ -1,5 +1,5 @@
 <div>
-  <h2>Members of Club {{ vm.selectedClub.name }}</h2>
+  <h2>Members of Club {{ vm.club.name }}</h2>
   <div ng-repeat="membership in vm.memberships">
     {{ membership.member.email }}<br/>
     {{ membership.role }}<br/>
@@ -14,9 +14,9 @@
         <select class="form-control"
           ng-model="membership.newRole">
           <option value="" selected>Please select</option>
-          <option value="{{ vm.role.ADMIN }}">{{ 'ADMIN' | translate }}</option>
-          <option value="{{ vm.role.PROFESSOR }}">{{ 'PROFESSOR' | translate }}</option>
-          <option value="{{ vm.role.MEMBER }}">{{ 'MEMBER' | translate }}</option>
+          <option value="{{ vm.mRole.ADMIN }}">{{ 'ADMIN' | translate }}</option>
+          <option value="{{ vm.mRole.PROFESSOR }}">{{ 'PROFESSOR' | translate }}</option>
+          <option value="{{ vm.mRole.MEMBER }}">{{ 'MEMBER' | translate }}</option>
         </select>
       </div>
       <button ng-click="vm.changeRole(membership)">

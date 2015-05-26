@@ -3,14 +3,14 @@
 
   angular.module('app.club.member')
 
-  .controller('ClubMemberController', memberController);
+  .controller('ClubMemberController', controller);
 
-  memberController.$inject = ['$scope', '$location', 'Notification', '$translate', 'Member',
-    'Storage', 'Membership', 'ExceptionHandler', 'Helpers', 'SharedProperties',
+  controller.$inject = ['$scope', '$location', '$translate',
+    'Membership', 'ExceptionHandler', 'Helpers',
     'MembershipRole'];
 
-  function memberController($scope, $location, Notification, $translate, Member,
-    Storage, Membership, ExceptionHandler, Helpers, SharedProperties,
+  function controller($scope, $location, $translate,
+    Membership, ExceptionHandler, Helpers,
     MembershipRole) {
     var vm = this;
 
@@ -19,19 +19,18 @@
     vm.activate = activate;
     vm.changeRole = changeRole;
     vm.removeMember = removeMember;
+    vm.club = $scope.club;
 
-    vm.role = MembershipRole;
+    vm.mRole = MembershipRole;
 
     vm.activate();
 
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
-      vm.selectedClub = angular.copy(SharedProperties.selectedClub);
-
       // Pull membership requests of the selected club.
-      if (vm.selectedClub !== undefined) {
-        Membership.get({ club__ref: vm.selectedClub.ref }).$promise
+      if (vm.club !== undefined) {
+        Membership.get({ club__ref: vm.club.ref }).$promise
         .then(setMemberships)
         .catch(handler.generalHandler);
       }

@@ -3,13 +3,13 @@
 
   angular.module('app.club.facility')
 
-  .controller('ClubFacilityController', facilityController);
+  .controller('ClubFacilityController', controller);
 
-  facilityController.$inject = ['$scope', 'Notification', '$translate', 'Club',
+  controller.$inject = ['$scope', 'Notification', '$translate', 'Club',
     'Helpers', 'SharedProperties', 'Membership', '$location', 'ExceptionHandler',
     'Facility', 'MembershipRole'];
 
-  function facilityController($scope, Notification, $translate, Club,
+  function controller($scope, Notification, $translate, Club,
     Helpers, SharedProperties, Membership, $location, ExceptionHandler,
     Facility, MembershipRole) {
     var vm = this;
@@ -22,6 +22,7 @@
     vm.activate = activate;
     vm.goToFacilityRule = goToFacilityRule;
     vm.goToFacilityRate = goToFacilityRate;
+    vm.club = $scope.club;
 
     vm.facilities = [];
 
@@ -31,28 +32,29 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
-      vm.selectedClub = angular.copy(SharedProperties.selectedClub);
-
       // Pull facilities of the current selected club.
-      if (!$.isEmptyObject(vm.selectedClub)) {
-        Facility.get({ club__ref: vm.selectedClub.ref }).$promise
+      if (!$.isEmptyObject(vm.club.ref)) {
+        Facility.get({ club__ref: vm.club.ref }).$promise
         .then(setFacilities)
         .catch(handler.generalHandler);
 
-        Helpers.getMembershipsByClubAndMember(vm.member.ref, vm.selectedClub.ref)
+        // Retrieve permission.
+        Helpers.getMembershipsByClubAndMember(vm.member.ref, vm.club.ref)
         .then(setClubRole)
         .catch(handler.generalHandler);
       }
     }
 
+    // TODO - CURRENTLY DISABLED.
     function goToFacilityRule(facility) {
-      SharedProperties.selectedFacility = facility;
+      Storage.setFacility(facility);
 
       $location.path('/facility_rule/dashboard');
     }
 
+    // TODO - CURRENTLY DISABLED.
     function goToFacilityRate(facility) {
-      SharedProperties.selectedFacility = facility;
+      Storage.setFacility(facility);
 
       $location.path('/facility_rate/dashboard');
     }
@@ -63,16 +65,12 @@
         return;
       }
 
-      SharedProperties.selectedFacility = facility;
-
-      $location.path('/facility/profile');
+      Storage.setFacility(facility);
     }
 
     function createFacility() {
       // Clear selectedFacility.
-      SharedProperties.selectedFacility = undefined;
-
-      $location.path('/facility/profile');
+      Storage.clearFacility();
     }
 
     // Private functions.

@@ -42,6 +42,13 @@
           controllerAs: 'vm'
         }
       )
+      .when (
+        '/booking/dashboard', {
+          templateUrl: 'app/booking/dashboard/dashboard.html',
+          controller: 'BookingDashboardController',
+          controllerAs: 'vm'
+        }
+      )
       .otherwise ({
         redirectTo: '/landing'
       })

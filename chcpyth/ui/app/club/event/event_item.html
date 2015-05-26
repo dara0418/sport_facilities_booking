@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-6">
+    <h5>{{ vm.event.club.name }}</h5>
+    <h5>{{ vm.event.name }}</h5>
+    <p>{{ vm.event.content }}</p>
+
+    <div class="row">
+      <button class="btn btn-primary btn-sm" ng-click="vm.selectEvent()">
+        <i class="fa fa-pencil-square-o fa-gw"></i>
+        &nbsp;View/Edit
+      </button>
+      &nbsp; &nbsp;
+      <button class="btn btn-danger btn-sm">
+        <i class="fa fa-trash fa-gw"></i>
+        &nbsp;Cancel
+      </button>
+    </div>
+  </div>
+</div>
+<!-- HISTORY/CURRENT Event FILTER. -->

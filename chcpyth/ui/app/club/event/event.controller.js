@@ -3,23 +3,21 @@
 
   angular.module('app.club.event')
 
-  .controller('ClubEventController', clubEventController);
+  .controller('ClubEventController', controller);
 
-  clubEventController.$inject = ['$scope', 'Notification', '$translate', 'Club',
-    'Helpers', 'SharedProperties', 'Membership', '$location', 'ExceptionHandler',
+  controller.$inject = ['$scope',  '$translate', 'Helpers',
+    '$location', 'ExceptionHandler',
     'Event', 'MembershipRole'];
 
-  function clubEventController($scope, Notification, $translate, Club,
-    Helpers, SharedProperties, Membership, $location, ExceptionHandler,
-    Event, MembershipRole) {
+  function controller($scope,  $translate, Helpers,
+    $location, ExceptionHandler, Event, MembershipRole) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
-    // TODO - Save the role into sessionStorage for easy access.
     vm.mRole = MembershipRole;
     vm.createEvent = createEvent;
-    vm.editEvent = editEvent;
+    vm.club = $scope.club;
     vm.activate = activate;
 
     vm.events = [];
@@ -30,29 +28,17 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
-      vm.selectedClub = angular.copy(SharedProperties.selectedClub);
-
       // Pull general events of the current selected club.
-      if (!$.isEmptyObject(vm.selectedClub)) {
-        Event.get({ club__ref: vm.selectedClub.ref }).$promise
+      if (!$.isEmptyObject(vm.club)) {
+        Event.get({ club__ref: vm.club.ref }).$promise
         .then(setEvents)
         .catch(handler.generalHandler);
 
-        Helpers.getMembershipsByClubAndMember(vm.member.ref, vm.selectedClub.ref)
+        // Verify permission from database.
+        Helpers.getMembershipsByClubAndMember(vm.member.ref, vm.club.ref)
         .then(setClubRole)
         .catch(handler.generalHandler);
       }
-    }
-
-    function editEvent(event) {
-      if ($.isEmptyObject(event)) {
-        // No event selected, quit.
-        return;
-      }
-
-      SharedProperties.selectedEvent = event;
-
-      $location.path('/event/profile');
     }
 
     function createEvent() {

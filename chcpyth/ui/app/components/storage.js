@@ -21,7 +21,15 @@
 
       setBooking: setBooking,
       getBooking: getBooking,
-      clearBooking: clearBooking
+      clearBooking: clearBooking,
+
+      setEvent: setEvent,
+      getEvent: getEvent,
+      clearEvent: clearEvent,
+
+      setFacility: setFacility,
+      getFacility: getFacility,
+      clearFacility: clearFacility
     };
 
     function clearData() {
@@ -84,6 +92,44 @@
 
     function clearBooking() {
       sessionStorage.selectedBooking = undefined;
+    }
+
+    function setEvent(event) {
+      if (!$.isEmptyObject(event)) {
+        sessionStorage.selectedEvent = angular.toJson(event);
+      }
+    }
+
+    function getEvent() {
+      if (sessionStorage.selectedEvent === "undefined" || $.isEmptyObject(sessionStorage.selectedEvent)) {
+        return undefined;
+      }
+      else {
+        return angular.fromJson(sessionStorage.selectedEvent);
+      }
+    }
+
+    function clearEvent() {
+      sessionStorage.selectedEvent = undefined;
+    }
+
+    function setFacility(facility) {
+      if (!$.isEmptyObject(facility)) {
+        sessionStorage.selectedFacility = angular.toJson(facility);
+      }
+    }
+
+    function getFacility() {
+      if (sessionStorage.selectedFacility === "undefined" || $.isEmptyObject(sessionStorage.selectedFacility)) {
+        return undefined;
+      }
+      else {
+        return angular.fromJson(sessionStorage.selectedFacility);
+      }
+    }
+
+    function clearFacility() {
+      sessionStorage.selectedFacility = undefined;
     }
 
     return service;

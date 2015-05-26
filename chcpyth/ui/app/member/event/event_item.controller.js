@@ -14,7 +14,6 @@
 
     vm.event = $scope.event;
     vm.activate = activate;
-    vm.selectBooking = selectBooking;
 
     var handler = ExceptionHandler;
 
@@ -27,10 +26,6 @@
       if ($.isEmptyObject(vm.member)) {
         $location.path('/member/login');
       }
-    }
-
-    function selectBooking(event) {
-      SharedProperties.selectedEvent = event;
     }
   }
 })();

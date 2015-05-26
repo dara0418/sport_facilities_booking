@@ -22,6 +22,7 @@
           </li>
         </ul>
 
+        <!-- TODO - Use action status to show/hide pages!!! -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="profile">
             <club-profile club="vm.club"></club-profile>
@@ -33,17 +34,17 @@
           </div>
 
           <div role="tabpanel" class="tab-pane" id="events">
-            <club-event ng-show="vm.sharedProperties.selectedEvent === undefined"></club-event>
-            <event-profile ng-show="vm.sharedProperties.selectedEvent !== undefined"></event-profile>
+            <club-event club="vm.club" ng-show="vm.s.getEvent() === undefined"></club-event>
+            <event-profile ng-show="vm.s.getEvent() !== undefined"></event-profile>
           </div>
 
           <div role="tabpanel" class="tab-pane" id="members">
-            <club-member></club-member>
+            <club-member club="vm.club"></club-member>
           </div>
 
           <div role="tabpanel" class="tab-pane" id="facilities">
-            <club-facility ng-show="vm.sharedProperties.selectedEvent === undefined"></club-facility>
-            <facility-profile ng-show="vm.sharedProperties.selectedEvent !== undefined"></facility-profile>
+            <club-facility club="vm.club" ng-show="vm.s.getFacility() === undefined"></club-facility>
+            <facility-profile ng-show="vm.s.getFacility() !== undefined"></facility-profile>
           </div>
         </div><!-- End of tab-content. -->
 
