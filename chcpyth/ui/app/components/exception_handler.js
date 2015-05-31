@@ -5,9 +5,9 @@
 
   .factory('ExceptionHandler', exceptionHandlerFactory);
 
-  exceptionHandlerFactory.$inject = ['$q', 'Notification'];
+  exceptionHandlerFactory.$inject = ['$q', 'Notification', 'Status'];
 
-  function exceptionHandlerFactory($q, Notification) {
+  function exceptionHandlerFactory($q, Notification, Status) {
     var service = {
       generalHandler: generalHandler
     };
@@ -24,6 +24,8 @@
       else {
         Notification.notifyFailure(error.errorMsg, error.prefix, error.suffix);
       }
+
+      Status.resetStatus();
 
       return $q.reject('Internal error');
     }

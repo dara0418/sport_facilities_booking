@@ -27,6 +27,7 @@
 
       if ($.isEmptyObject(vm.member)) {
         $location.path('/member/login');
+        return;
       }
 
       BookingMember.get({ member__ref: vm.member.ref }).$promise

@@ -20,8 +20,10 @@
       CELLPHONE: 'Cellphone',
       PASSWORD: 'Password',
       RE_ENTER: 'Re-enter',
-      REGISTER: 'Register',
+      REGISTER: 'Sign Up',
+      REGISTERING: 'Signing Up',
       LOGIN: 'Sign In',
+      LOGINING: 'Signing In',
       LOGOUT: 'Sign Out',
       UPDATE: 'Update',
       NEW: 'New',
@@ -39,6 +41,10 @@
       RATE: 'Rate',
       CURRENCY: 'Currency',
       MY_ACCOUNT: 'My Account',
+      SAVE: 'Save',
+      SAVING: 'Saving',
+      CHOOSE_FILE: 'Select a file',
+      UPLOAD: 'Upload',
 
       TITLE: 'Title',
       MR: 'Mr.',
@@ -85,7 +91,11 @@
       INTERNAL_ERROR: 'We are sorry but there\'s an error',
       MEMBER_NOT_FOUND: 'Couldn\'t find the member with email',
       IS_ALREADY_MEMBER: 'This user is already a member of the club',
-      QUIT_CLUB_SUCCESS: 'Quite club success'
+      QUIT_CLUB_SUCCESS: 'Quite club success',
+      INVALID_EMAIL: 'Invalid email address',
+      PASSWORD_LENGTH: 'Password length should between',
+      PASSWORD_MISMATCH: 'Password mismatch',
+      INVALID_PHONE_NUMBER: 'Invalid phone number'
     });
   }
 })();

@@ -6,20 +6,31 @@
   .controller('MemberRegisterController', registerController);
 
   registerController.$inject = ['$scope', '$location', 'Notification', '$translate',
-    'Member'];
+    'Member', 'ExceptionHandler', 'Status'];
 
   function registerController($scope, $location, Notification, $translate,
-    Member) {
+    Member, ExceptionHandler, Status) {
     var vm = this;
 
+    vm.activate = activate;
     vm.register = register;
+    vm.stu = Status;
+
+    var handler = ExceptionHandler;
+
+    vm.activate();
+
+    function activate() {
+      Status.setStatusIdle();
+    }
 
     function register() {
       if ($.isEmptyObject(vm.email) || $.isEmptyObject(vm.password) ||
-        $.isEmptyObject(vm.reEnter)) {
-        Notification.notifyFailure('EMPTY_FIELD');
+        vm.password.trim() !== vm.reEnter.trim()) {
         return;
       }
+
+      Status.setStatusRegister();
 
       var member = new Member({
         email: vm.email,
@@ -29,12 +40,9 @@
       member.$register()
       .then(function(result) {
         Notification.notifySuccess('REGISTER_SUCCESS');
-
-        $location.path('/member/login');
+        Status.setStatusIdle();
       })
-      .catch(function(error) {
-        // Go to global handler.
-      });
+      .catch(handler.generalHandler);
     }
   }
 })();

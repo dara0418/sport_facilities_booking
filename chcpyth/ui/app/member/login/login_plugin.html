@@ -1,42 +1,30 @@
-<div>
-  <form class="form-inline" ng-if="!vm.hasLogin">
-    <div class="form-group">
-      <label>{{ 'EMAIL' | translate }}</label>
-      <input class="form-control"
-        id="email"
-        name="email"
-        ng-model="vm.email"
-        size="12" />
-    </div>
-
-    <div class="form-group">
-      <label>{{ 'PASSWORD' | translate }}</label>
-      <input class="form-control"
-        id="password"
-        name="password"
-        ng-model="vm.password"
-        type="password"
-        size="12" />
-    </div>
-
-    <button class="btn btn-sm btn-default"
-      ng-click="vm.login()"
-      type="button">
-      {{ 'LOGIN' | translate }}
+<div data-container="#loginPlugin">
+  <div ng-if="!vm.hasLogin">
+    <button class="btn btn-primary"
+      type="button"
+      data-placement="bottom"
+      data-animation="am-flip-x"
+      data-template="app/member/login/login_popover.html"
+      auto-close="true"
+      bs-popover>
+      <i class="fa fa-gw fa-user-plus"></i>
+      &nbsp;{{ 'LOGIN' | translate }}
     </button>
-  </form>
+  </div>
 
   <div ng-if="vm.hasLogin">
-    <button class="btn btn-sm btn-default"
+    <button class="btn btn-primary"
       ng-click="vm.goToMyAccount()"
       type="button">
-      {{ 'MY_ACCOUNT' | translate }}
+      <i class="fa fa-user"></i>
+      &nbsp;{{ 'MY_ACCOUNT' | translate }}
     </button>
 
-    <button class="btn btn-sm btn-default"
+    <button class="btn btn-primary"
       ng-click="vm.signOut()"
       type="button">
-      {{ 'LOGOUT' | translate }}
+      <i class="fa fa-sign-out"></i>
+      &nbsp;{{ 'LOGOUT' | translate }}
     </button>
   </div>
 </div>

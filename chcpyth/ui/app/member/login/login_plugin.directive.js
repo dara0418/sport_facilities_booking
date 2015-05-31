@@ -3,13 +3,13 @@
 
   angular.module('app.member.login')
 
-  .directive('memberLogin', memberLogin);
+  .directive('loginPlugin', loginPlugin);
 
-  function memberLogin() {
+  function loginPlugin() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/member/login/login.html',
-      controller: 'MemberLoginController',
+      templateUrl: 'app/member/login/login_plugin.html',
+      controller: 'LoginPluginController',
       controllerAs: 'vm',
       scope: {}
     };

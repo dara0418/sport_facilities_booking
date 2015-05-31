@@ -15,6 +15,14 @@
       getLoginMember: getLoginMember,
       clearLoginMember: clearLoginMember,
 
+      setCurrentPage: setCurrentPage,
+      getCurrentPage: getCurrentPage,
+      clearCurrentPage: clearCurrentPage,
+
+      setServerStatus: setServerStatus,
+      getServerStatus: getServerStatus,
+      clearServerStatus: clearServerStatus,
+
       setClub: setClub,
       getClub: getClub,
       clearClub: clearClub,
@@ -54,6 +62,44 @@
 
     function clearLoginMember() {
       sessionStorage.loginMember = undefined;
+    }
+
+    function setCurrentPage(page) {
+      if (!$.isEmptyObject(page)) {
+        sessionStorage.currentPage = angular.toJson(page);
+      }
+    }
+
+    function getCurrentPage() {
+      if (sessionStorage.currentPage === "undefined" || $.isEmptyObject(sessionStorage.currentPage)) {
+        return undefined;
+      }
+      else {
+        return angular.fromJson(sessionStorage.currentPage);
+      }
+    }
+
+    function clearCurrentPage() {
+      sessionStorage.currentPage = undefined;
+    }
+
+    function setServerStatus(status) {
+      if (!$.isEmptyObject(status)) {
+        sessionStorage.serverStatus = angular.toJson(status);
+      }
+    }
+
+    function getServerStatus() {
+      if (sessionStorage.serverStatus === "undefined" || $.isEmptyObject(sessionStorage.serverStatus)) {
+        return undefined;
+      }
+      else {
+        return angular.fromJson(sessionStorage.serverStatus);
+      }
+    }
+
+    function clearServerStatus() {
+      sessionStorage.serverStatus = undefined;
     }
 
     function setClub(club) {

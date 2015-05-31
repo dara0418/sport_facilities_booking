@@ -14,3 +14,6 @@ DATABASES = {
         'PORT': '3306'
     }
 }
+
+# The base directory to upload any file.
+MEDIA_ROOT = "/Users/dara/working/part/club_house_media"

@@ -19,5 +19,20 @@
   .value('MembershipRequestType', {
     MEMBER_REQUEST: 'MR',
     CLUB_INVITATION: 'CI'
+  })
+
+  .value('ServerStatus', {
+    IDLE: 'IDLE',
+    GETTING: 'GETTING',
+    UPDATING: 'UPDATING',
+    ADDING: 'ADDING',
+    REMOVING: 'REMOVING',
+    LOGIN: 'LOGIN',
+    REGISTER: 'REGISTER'
+  })
+
+  .value('Pages', {
+    NONE: 'NONE',
+    MEMBER_PROFILE: 'MEMBER_PROFILE'
   });
 })();

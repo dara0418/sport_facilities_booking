@@ -10,6 +10,8 @@ from member.api import *
 from booking.api import *
 from picture.api import *
 
+from member import views as member_view
+
 admin.autodiscover()
 
 api = Api(api_name="v1")
@@ -44,6 +46,7 @@ api.register(BookingMemberResource())
 api.register(ClubPictureResource())
 
 urlpatterns = patterns("",
+    url("api/member/uploadAvatar", member_view.upload_avatar),
     url(r"^admin/", include(admin.site.urls)),
-    url(r"^api/", include(api.urls))
+    url(r"^api/", include(api.urls)),
 )

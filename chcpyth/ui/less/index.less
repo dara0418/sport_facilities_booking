@@ -1,0 +1,68 @@
+@import "../bower_components/bootstrap/less/variables.less";
+@import "../bower_components/bootstrap/less/mixins.less";
+@import "../bower_components/bootstrap/less/navs.less";
+
+// Override bootstrap styles but using different class name
+// to avoid naming conflict.
+.nav-dashboard {
+  .nav
+}
+
+.nav-dashboard > li > a {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important
+}
+
+.nav-tabs-dashboard {
+  .nav-tabs;
+}
+
+.nav-tabs-dashboard > li {
+  width:20%;
+  text-align:center;
+}
+
+.nav-tabs-dashboard > li > a {
+  background: #0197d4;
+  color: #fff;
+  font-size: 18px;
+  padding: 5px 15px !important;
+}
+
+.nav-tabs-dashboard > li > a:hover {
+  background: #fff;
+  color: #333;
+  border: #dcdbdb solid 1px;
+}
+
+.datepicker.dropdown-menu {
+  width: 250px;
+  height: 250px;
+  button {
+    outline: none;
+    border: 0px;
+  }
+  tbody {
+    height: 180px;
+  }
+  tbody button {
+    padding: 6px;
+  }
+  &.datepicker-mode-1, &.datepicker-mode-2 {
+    tbody button {
+      height: 65px;
+    }
+  }
+}
+
+.timepicker.dropdown-menu {
+  padding: 0 4px;
+  button {
+    outline: none;
+    border: 0px;
+  }
+  tbody button {
+    padding: 6px;
+  }
+}

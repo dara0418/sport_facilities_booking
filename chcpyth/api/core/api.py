@@ -1,5 +1,5 @@
 from tastypie.resources import ModelResource
-from tastypie.authentication import BasicAuthentication
+from tastypie.authentication import Authentication
 from tastypie.authorization import Authorization
 from tastypie.cache import SimpleCache
 from tastypie.throttle import BaseThrottle
@@ -7,7 +7,7 @@ from tastypie.throttle import BaseThrottle
 from .models import Address, SubscriptionPlan
 
 
-class CHCAuthentication(BasicAuthentication):
+class CHCAuthentication(Authentication):
     pass
 
 class BaseResource(ModelResource):

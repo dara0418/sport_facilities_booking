@@ -1,0 +1,18 @@
+<div class="popover" style="max-width: none; width: 400px">
+  <div class="arrow"></div>
+
+  <!--
+    Bootstrap official tabs don't work well in popover panel (can't switch between tabs).
+    Issue tracker: https://github.com/twbs/bootstrap/issues/4272
+    So we use the tab directive of angular strap project, nice and simple.
+  -->
+  <div bs-tabs>
+    <div title="{{ 'LOGIN' | translate }}" bs-pane>
+      <member-login></member-login>
+    </div>
+
+    <div title="{{ 'REGISTER' | translate }}" bs-pane>
+      <member-register></member-register>
+    </div>
+  </div>
+</div>

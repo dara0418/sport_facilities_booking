@@ -61,7 +61,7 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
       first_name (CharField): The first name.
       last_name (CharField): The last name.
       dob (DateField): Date of birth.
-      avatar (CharField): The URL pointing to user's head portrait.
+      avatar (ImageField): The URL pointing to user's head portrait.
 
       email (EmailField): User email to sign up and sign in.
       landline (CharField): Land line number to contact.
@@ -78,7 +78,7 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=35, blank=True)
     last_name = models.CharField(max_length=35, blank=True)
     dob = models.DateField(null=True, blank=True)
-    avatar = models.CharField(max_length=255, blank=True)
+    avatar = models.ImageField(upload_to="member_avatar/", null=True, blank=True)
 
     email = models.EmailField(max_length=255, unique=True)
     landline = models.CharField(max_length=16, blank=True)

@@ -49,8 +49,5 @@
           controllerAs: 'vm'
         }
       )
-      .otherwise ({
-        redirectTo: '/landing'
-      })
   }
 })();

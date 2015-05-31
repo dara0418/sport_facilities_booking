@@ -3,38 +3,33 @@
 
   angular.module('app.member.login')
 
-  .controller('MemberLoginController', loginController);
+  .controller('MemberLoginController', controller);
 
-  loginController.$inject = ['$scope', '$location', 'Notification', '$translate', 'Member',
-    'Storage', 'Helpers', 'ExceptionHandler'];
+  controller.$inject = ['$scope', '$location', '$translate', 'Member',
+    'Storage', 'ExceptionHandler', 'Status'];
 
-  function loginController($scope, $location, Notification, $translate, Member,
-    Storage, Helpers, ExceptionHandler) {
+  function controller($scope, $location, $translate, Member,
+    Storage, ExceptionHandler, Status) {
     var vm = this;
 
-    vm.login = login;
-    vm.logout = logout;
-    vm.goToMyAccount = goToMyAccount;
     vm.activate = activate;
-
-    vm.activate();
+    vm.login = login;
+    vm.stu = Status;
 
     var handler = ExceptionHandler;
 
-    function activate() {
-      // Check if user already signed in.
-      Helpers.safeGetLoginMember(vm);
+    vm.activate();
 
-      if (!$.isEmptyObject(vm.member)) {
-        vm.hasLogin = true;
-      }
+    function activate() {
+      Status.setStatusIdle();
     }
 
     function login() {
       if ($.isEmptyObject(vm.email) || $.isEmptyObject(vm.password)) {
-        Notification.notifyFailure('EMPTY_FIELD');
         return;
       }
+
+      Status.setStatusLogin();
 
       var member = new Member({
         username: vm.email,
@@ -48,23 +43,11 @@
           Storage.setLoginMember(result);
         }
 
+        Status.setStatusIdle();
+
         $location.path('/member/dashboard');
       })
       .catch(handler.generalHandler);
-    }
-
-    function logout() {
-      member.$login()
-      .then(function(result) {
-        Storage.clearLoginMember();
-
-        $location.path('/landing');
-      })
-      .catch(handler.generalHandler);
-    }
-
-    function goToMyAccount() {
-      $location.path('/member/dashboard');
     }
   }
 })();

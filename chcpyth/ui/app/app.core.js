@@ -7,6 +7,7 @@
     'ngRoute',
     'mgcrea.ngStrap',
     'pascalprecht.translate',
-    'ui.calendar'
+    'ui.calendar',
+    'angularFileUpload'
   ]);
 })();
