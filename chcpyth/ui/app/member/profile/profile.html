@@ -125,25 +125,28 @@
         <div class="float-r">
           <div class="row">
             <!-- This will only show the last uploaded photo. This is a trick to reload image-thumb directive. -->
-            <!-- By using ng-repeat, the directive will get reloaded everytime uploader queue has been changed. -->
+            <!-- By using ng-repeat, the image-thumb directive will get reloaded everytime uploader queue has been changed. -->
             <span ng-repeat="item in vm.uploader.queue">
-              <div ng-if="vm.uploader.queue.length - 1 == $index" class="col-md-6" image-thumb="{ file: item._file, width: 120, height: 130}">
+              <div ng-if="vm.uploader.queue.length - 1 == $index" class="col-md-6" image-thumb="{ file: item._file, width: 130, height: 140}">
               </div>
             </span>
 
             <div ng-show="vm.uploader.queue.length == 0" class="col-md-6">
-              <img src="images/profile-img.jpg">
+              <img ng-src="{{ vm.avatarSrc }}" style="width: 130px; height: 140px">
             </div>
 
             <div class="col-md-6 flr">
               <button class="btn btn-success"
                 ng-disabled="vm.uploader.queue.length != 0 && vm.uploader.queue[vm.uploader.queue.length - 1].isUploading"
                 ng-click="vm.uploadAvatar()">
-                <span>
+                <span ng-show="!vm.uploader.queue[vm.uploader.queue.length - 1].isUploading">
                   <i class="fa fa-upload"></i>
                 </span>
+                <span ng-show="vm.uploader.queue[vm.uploader.queue.length - 1].isUploading">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </span>
 
-                {{ 'UPLOAD' | translate }}
+                {{ vm.uploader.queue[vm.uploader.queue.length - 1].isUploading ? ('UPLOADING' | translate) : ('UPLOAD' | translate) }}
               </button>
             </div>
           </div>

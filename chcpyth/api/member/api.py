@@ -20,6 +20,7 @@ from helpers.utils import to_json
 
 class MemberResource(BaseResource):
     address = fields.ForeignKey(AddressResource, "address", null=True, full=True)
+    avatar = fields.FileField(attribute='avatar', null=True, blank=True)
 
     class Meta(BaseResource.Meta):
         queryset = Member.objects.all()

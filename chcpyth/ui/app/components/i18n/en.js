@@ -45,6 +45,7 @@
       SAVING: 'Saving',
       CHOOSE_FILE: 'Select a file',
       UPLOAD: 'Upload',
+      UPLOAD: 'Uploading',
 
       TITLE: 'Title',
       MR: 'Mr.',
@@ -95,7 +96,9 @@
       INVALID_EMAIL: 'Invalid email address',
       PASSWORD_LENGTH: 'Password length should between',
       PASSWORD_MISMATCH: 'Password mismatch',
-      INVALID_PHONE_NUMBER: 'Invalid phone number'
+      INVALID_PHONE_NUMBER: 'Invalid phone number',
+      UPLOAD_SUCCESS: 'Succeed to upload',
+      UPLOAD_FAILED: 'Failed to upload'
     });
   }
 })();

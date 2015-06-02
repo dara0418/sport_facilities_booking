@@ -17,8 +17,13 @@
     vm.cancel = cancel;
     vm.uploadAvatar = uploadAvatar;
     vm.stu = Status;
+
     vm.uploader = new FileUploader({
-      url: '/api/member/uploadAvatar/'
+      url: '/api/member/avatar/',
+      method: 'POST',
+      onSuccessItem: onUploadSuccess,
+      onErrorItem: onUploadFailed
+      // formData will be append in vm.activate().
     });
 
     var handler = ExceptionHandler;
@@ -56,6 +61,17 @@
       Status.setPageMemberProfile();
 
       Helpers.safeGetLoginMember(vm);
+
+      if (vm.member === undefined) {
+        $location.path('/landing');
+      }
+
+      var formData = [{ member_ref: vm.member.ref }];
+      vm.uploader.formData = formData;
+
+      vm.avatarSrc = (!$.isEmptyObject(vm.member.avatar) ?
+        vm.member.avatar :
+        'images/profile-img.jpg');
     }
 
     function cancel() {
@@ -70,6 +86,26 @@
       }
 
       vm.uploader.queue[vm.uploader.queue.length - 1].upload();
+    }
+
+    function onUploadSuccess() {
+      Notification.notifySuccess('UPLOAD_SUCCESS');
+
+      // Reload login user.
+      Member.get({ ref: vm.member.ref }).$promise
+      .then(updateLoginMember)
+      .catch(handler.general_handler);
+    }
+
+    function onUploadFailed() {
+      Notification.notifyFailure('UPLOAD_FAILED');
+    }
+
+    function updateLoginMember(loginMember) {
+      if (!$.isEmptyObject(loginMember)) {
+        Storage.setLoginMember(loginMember);
+        vm.member = angular.copy(loginMember);
+      }
     }
   }
 })();
