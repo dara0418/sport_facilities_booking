@@ -11,11 +11,13 @@
           type="email"
           required />
 
-        <p ng-show="form.email.$error.required && !form.email.$pristine" class="help-block">
-          {{ 'EMPTY_FIELD' | translate }}
-        </p>
-        <p ng-show="form.email.$error.email && !form.email.$pristine" class="help-block">
-          {{ 'INVALID_EMAIL' | translate }}
+        <p>
+          <span ng-show="form.email.$error.required && !form.email.$pristine" class="help-block">
+            {{ 'EMPTY_FIELD' | translate }}
+          </span>
+          <span ng-show="form.email.$error.email && !form.email.$pristine" class="help-block">
+            {{ 'INVALID_EMAIL' | translate }}
+          </span>
         </p>
       </div>
 

@@ -53,7 +53,7 @@
         Status.resetStatus();
         Notification.notifySuccess('UPDATE_SUCCESS');
       })
-      .catch(handler.general_handler);
+      .catch(handler.generalHandler);
     }
 
     function activate() {
@@ -99,7 +99,7 @@
       // Reload login user.
       Member.get({ ref: vm.member.ref }).$promise
       .then(updateLoginMember)
-      .catch(handler.general_handler);
+      .catch(handler.generalHandler);
     }
 
     function onUploadFailed() {

@@ -44,7 +44,7 @@
         Notification.notifySuccess('PASSWORD_CHANGED');
         Status.resetStatus();
       })
-      .catch(handler.general_handler);
+      .catch(handler.generalHandler);
     }
 
     function resetPassword() {
