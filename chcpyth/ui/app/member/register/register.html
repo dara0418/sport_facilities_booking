@@ -48,14 +48,14 @@
           ng-model="vm.reEnter"
           ng-minlength="6"
           ng-maxlength="20"
-          ng-match="vm.password"
+          input-match="vm.password"
           type="password"
           required />
 
         <p ng-show="form.reEnter.$error.required && !form.reEnter.$pristine" class="help-block">
           {{ 'EMPTY_FIELD' | translate }}
         </p>
-        <p ng-show="(form.reEnter.$error.minLength || form.reEnter.$error.maxLength) && !form.reEnter.$pristine" class="help-block">
+        <p ng-show="(form.reEnter.$error.minlength || form.reEnter.$error.maxlength) && !form.reEnter.$pristine" class="help-block">
           {{ 'PASSWORD_LENGTH' | translate }} 6 - 20
         </p>
         <p ng-show="form.reEnter.$error.match && !form.reEnter.$pristine" class="help-block">

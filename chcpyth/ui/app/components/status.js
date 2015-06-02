@@ -11,11 +11,12 @@
     var service = {
       isIdle: isIdle,
       isGetting: isGetting,
-      isUpdatting: isUpdatting,
+      isUpdating: isUpdating,
       isAdding: isAdding,
       isRemoving: isRemoving,
       isLogin: isLogin,
       isRegister: isRegister,
+      isChangingPassword: isChangingPassword,
 
       resetStatus: resetStatus,
       setStatusIdle: setStatusIdle,
@@ -25,6 +26,7 @@
       setStatusRemoving: setStatusRemoving,
       setStatusLogin: setStatusLogin,
       setStatusRegister: setStatusRegister,
+      setStatusChangePassword: setStatusChangePassword,
 
       isInMemberProfile: isInMemberProfile,
 
@@ -41,7 +43,7 @@
       return Storage.getServerStatus() === ServerStatus.GETTING;
     }
 
-    function isUpdatting() {
+    function isUpdating() {
       return Storage.getServerStatus() === ServerStatus.UPDATING;
     }
 
@@ -59,6 +61,10 @@
 
     function isRegister() {
       return Storage.getServerStatus() === ServerStatus.REGISTER;
+    }
+
+    function isChangingPassword() {
+      return Storage.getServerStatus() === ServerStatus.CHANGE_PASSWORD;
     }
 
     function resetStatus() {
@@ -91,6 +97,10 @@
 
     function setStatusRegister() {
       Storage.setServerStatus(ServerStatus.REGISTER);
+    }
+
+    function setStatusChangePassword() {
+      Storage.setServerStatus(ServerStatus.CHANGE_PASSWORD);
     }
 
     function resetPage() {

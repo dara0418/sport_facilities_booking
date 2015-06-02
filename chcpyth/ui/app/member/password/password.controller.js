@@ -6,15 +6,18 @@
   .controller('MemberPasswordController', passwordController);
 
   passwordController.$inject = ['$scope', '$translate', 'Member', 'Notification',
-    'Storage', 'Helpers'];
+    'Storage', 'Helpers', 'ExceptionHandler', 'Status'];
 
   function passwordController($scope, $translate, Member, Notification,
-    Storage, Helpers) {
+    Storage, Helpers, ExceptionHandler, Status) {
     var vm = this;
 
     vm.changePassword = changePassword;
     vm.resetPassword = resetPassword;
     vm.activate = activate;
+    vm.stu = Status;
+
+    var handler = ExceptionHandler;
 
     vm.activate();
 
@@ -28,6 +31,8 @@
         return;
       }
 
+      Status.setStatusChangePassword();
+
       var member = new Member({
         username: vm.member.email,
         old_password: vm.oldPassword,
@@ -37,10 +42,9 @@
       member.$change_password()
       .then(function(result) {
         Notification.notifySuccess('PASSWORD_CHANGED');
+        Status.resetStatus();
       })
-      .catch(function(error) {
-        // Go to global handler.
-      });
+      .catch(handler.general_handler);
     }
 
     function resetPassword() {
@@ -48,6 +52,7 @@
     }
 
     function activate() {
+      Status.resetStatus();
       Helpers.safeGetLoginMember(vm);
     }
   }

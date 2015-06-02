@@ -72,6 +72,11 @@
       vm.avatarSrc = (!$.isEmptyObject(vm.member.avatar) ?
         vm.member.avatar :
         'images/profile-img.jpg');
+
+      // Convert landline and cellphone to int type, otherwise there will be an error
+      // due to the type="number" in input tags. It won't hurt the backend.
+      vm.member.landline = $.isEmptyObject(vm.member.landline) ? vm.member.landline : Number(vm.member.landline);
+      vm.member.cellphone = $.isEmptyObject(vm.member.cellphone) ? vm.member.cellphone : Number(vm.member.cellphone);
     }
 
     function cancel() {

@@ -10,6 +10,7 @@
     'app.components.helpers',
     'app.components.shared_properties',
     'app.components.exception_handler',
-    'app.components.image_thumb'
+    'app.components.image_thumb',
+    'app.components.input_match'
   ]);
 })();

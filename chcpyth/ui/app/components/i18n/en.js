@@ -30,6 +30,7 @@
       OLD: 'Old',
       CONFIRM: 'Confirm',
       CHANGE: 'Change',
+      CHANGING: 'Changing',
       RESET: 'Reset',
       URL: 'URL',
       PRIMARY_PHONE: 'Primary Phone Number',

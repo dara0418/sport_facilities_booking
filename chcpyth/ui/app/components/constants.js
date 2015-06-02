@@ -28,7 +28,8 @@
     ADDING: 'ADDING',
     REMOVING: 'REMOVING',
     LOGIN: 'LOGIN',
-    REGISTER: 'REGISTER'
+    REGISTER: 'REGISTER',
+    CHANGE_PASSWORD: 'CHANGE_PASSWORD'
   })
 
   .value('Pages', {
