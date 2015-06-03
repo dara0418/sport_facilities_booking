@@ -129,7 +129,11 @@
       THURSDAY: 'Thursday',
       FRIDAY: 'Friday',
       SATURDAY: 'Saturday',
-      SUNDAY: 'Sunday'
+      SUNDAY: 'Sunday',
+
+      ADMIN_OF_CLUB: 'You have administrator rights of the club.',
+      PROFESSOR_OF_CLUB: 'You are a professor of the club.',
+      MEMBER_OF_CLUB: 'You are a member of the club.'
     });
   }
 })();
