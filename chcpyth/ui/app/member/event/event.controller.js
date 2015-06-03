@@ -75,12 +75,14 @@
     // Combine the events.
     function combineEvents(promises) {
       var deferred = $q.defer();
+      var cnt = 0;
 
       $.each(promises, function(index, promise) {
         promise.then(function(eventResource) {
           vm.events = vm.events.concat(eventResource.objects);
+          cnt += 1;
 
-          if (index == promises.length - 1) {
+          if (cnt == promises.length) {
             deferred.resolve();
           }
         });
@@ -89,8 +91,7 @@
       return deferred.promise;
     }
 
-    // TODO - Load the registration status from the Event GET request.
-    function attachEventRegStatus() {
+    function attachEventRegStatus(events) {
       $.each(vm.events, function(index, event) {
         EventReg.get({
           event__ref: event.ref,

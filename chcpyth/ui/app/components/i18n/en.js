@@ -46,7 +46,15 @@
       SAVING: 'Saving',
       CHOOSE_FILE: 'Select a file',
       UPLOAD: 'Upload',
-      UPLOAD: 'Uploading',
+      UPLOADING: 'Uploading',
+      CHECKIN: 'CHECK-IN',
+      DURATION: 'Duration',
+      CANCEL: 'Cancel',
+      BOOKING: 'Booking',
+      DATE: 'Date',
+      TIMESLOT: 'Timeslot',
+      NOTES: 'Notes',
+      NUM_OF_BOOKING: 'Total People of Booking',
 
       TITLE: 'Title',
       MR: 'Mr.',
@@ -75,11 +83,11 @@
       FOOTBALL_5: 'Football-5',
 
       TIME_UNIT: 'Time Unit',
-      MINUTE: 'Minute',
-      HOUR: 'Hour',
-      DAY: 'Day',
-      MONTH: 'Month',
-      YEAR: 'Year',
+      MINUTE: 'Minute(s)',
+      HOUR: 'Hour(s)',
+      DAY: 'Day(s)',
+      MONTH: 'Month(s)',
+      YEAR: 'Year(s)',
 
       EMPTY_FIELD: 'You can\'t leave this empty',
       REGISTER_SUCCESS: 'You have registered',
@@ -99,7 +107,29 @@
       PASSWORD_MISMATCH: 'Password mismatch',
       INVALID_PHONE_NUMBER: 'Invalid phone number',
       UPLOAD_SUCCESS: 'Succeed to upload',
-      UPLOAD_FAILED: 'Failed to upload'
+      UPLOAD_FAILED: 'Failed to upload',
+
+      // A list of shortcuts of months.
+      MONTH_JAN: 'JAN',
+      MONTH_FEB: 'FEB',
+      MONTH_MAR: 'MAR',
+      MONTH_APR: 'APR',
+      MONTH_MAY: 'MAY',
+      MONTH_JUN: 'JUN',
+      MONTH_JUL: 'JUL',
+      MONTH_AUG: 'AUG',
+      MONTH_SEP: 'SEP',
+      MONTH_OCT: 'OCT',
+      MONTH_NOV: 'NOV',
+      MONTH_DEC: 'DEC',
+
+      MONDAY: 'Monday',
+      TUESDAY: 'Tuesday',
+      WEDNESDAY: 'Wednesday',
+      THURSDAY: 'Thursday',
+      FRIDAY: 'Friday',
+      SATURDAY: 'Saturday',
+      SUNDAY: 'Sunday'
     });
   }
 })();

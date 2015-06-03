@@ -8,19 +8,53 @@
           <div class="leftbar">
             <ul class="nav-dashboard nav-tabs-dashboard" role="tablist" id="myTab">
               <li role="presentation" class="active">
-                <a data-target="#profile" aria-controls="home" role="tab" data-toggle="tab">Profile</a>
+                <a data-target="#profile"
+                  aria-controls="home"
+                  role="tab"
+                  data-toggle="tab"
+                  ng-click="">
+                  Profile
+                </a>
               </li>
+
               <li role="presentation">
-                <a data-target="#booking" aria-controls="profile" role="tab" data-toggle="tab">Booking</a>
+                <a data-target="#booking"
+                  aria-controls="profile"
+                  role="tab"
+                  data-toggle="tab"
+                  ng-click="">
+                  Booking
+                </a>
               </li>
+
               <li role="presentation">
-                <a data-target="#events" aria-controls="messages" role="tab" data-toggle="tab">Events</a>
+                <a data-target="#events"
+                  aria-controls="messages"
+                  role="tab"
+                  data-toggle="tab"
+                  ng-click="">
+                  Events
+                </a>
               </li>
+
               <li role="presentation">
-                <a data-target="#clubs" aria-controls="messages" role="tab" data-toggle="tab">Clubs</a>
+                <a data-target="#clubs"
+                  aria-controls="messages"
+                  role="tab"
+                  data-toggle="tab"
+                  ng-click="">
+                  Clubs
+                </a>
               </li>
+
               <li role="presentation">
-                <a data-target="#notifications" aria-controls="settings" role="tab" data-toggle="tab">Notifications</a>
+                <a data-target="#notifications"
+                  aria-controls="settings"
+                  role="tab"
+                  data-toggle="tab"
+                  ng-click="">
+                  Notifications
+                </a>
               </li>
             </ul>
 
@@ -32,8 +66,8 @@
               </div>
 
               <div role="tabpanel" class="tab-pane" id="booking">
-                <member-booking ng-show="vm.sharedProperties.selectedBooking === undefined"></member-booking>
-                <booking-profile ng-show="vm.sharedProperties.selectedBooking !== undefined"></booking-profile>
+                <member-booking ng-show="vm.s.getBooking() === undefined"></member-booking>
+                <booking-profile ng-show="vm.s.getBooking() !== undefined"></booking-profile>
               </div>
 
               <div role="tabpanel" class="tab-pane" id="events">

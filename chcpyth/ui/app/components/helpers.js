@@ -22,7 +22,12 @@
       createMembership: createMembership,
       saveSuccess: saveSuccess,
       updateSuccess: updateSuccess,
-      deleteSuccess: deleteSuccess
+      deleteSuccess: deleteSuccess,
+      getDayOfWeekStr: getDayOfWeekStr,
+      getTimeslotStr: getTimeslotStr,
+      getTimeUnitStr: getTimeUnitStr,
+      getMonthStr: getMonthStr,
+      isString: isString
     };
 
     var handler = ExceptionHandler;
@@ -136,6 +141,105 @@
       Notification.notifySuccess('DELETE_SUCCESS');
     }
 
+    /**
+     * Get day of week string by given number.
+     * Should translate it to partiluar language.
+     */
+    function getDayOfWeekStr(dow) {
+      switch (dow) {
+        case 0:
+          return 'SUNDAY';
+        case 1:
+          return 'MONDAY';
+        case 2:
+          return 'TUESDAY';
+        case 3:
+          return 'WEDNESDAY';
+        case 4:
+          return 'THURSDAY';
+        case 5:
+          return 'FRIDAY';
+        case 6:
+          return 'SATURDAY';
+        default:
+          return 'UNKNOWN';
+      }
+    }
+
+    function getTimeslotStr(timeslot) {
+      if (isString(timeslot)) {
+        // Timeslot should be 4 digits number.
+        if (timeslot.length == 4 && !isNaN(timeslot)) {
+          // Insert a ':' in the middle.
+          return [timeslot.slice(0, 2), ':', timeslot.slice(2)].join('');
+        }
+      }
+      else {
+        return 'Error Input';
+      }
+    }
+
+    function getTimeUnitStr(timeUnit) {
+      if (!isString(timeUnit)) {
+        return 'Error Input';
+      }
+
+      switch (timeUnit) {
+        case 'M':
+          return 'MINUTE';
+        case 'H':
+          return 'HOUR';
+        case 'D':
+          return 'DAY';
+        case 'N':
+          return 'MONTH';
+        case 'Y':
+          return 'YEAR';
+        default:
+          return 'UNKNOWN';
+      }
+    }
+
+    function getMonthStr(month) {
+      if (isNaN(month)) {
+        return 'UNKNOWN';
+      }
+
+      switch (month) {
+        case 0:
+          return 'MONTH_JAN';
+        case 1:
+          return 'MONTH_FEB';
+        case 2:
+          return 'MONTH_MAR';
+        case 3:
+          return 'MONTH_APR';
+        case 4:
+          return 'MONTH_MAY';
+        case 5:
+          return 'MONTH_JUN';
+        case 6:
+          return 'MONTH_JUL';
+        case 7:
+          return 'MONTH_AUG';
+        case 8:
+          return 'MONTH_SEP';
+        case 9:
+          return 'MONTH_OCT';
+        case 10:
+          return 'MONTH_NOV';
+        case 11:
+          return 'MONTH_DEC';
+        default:
+          return 'UNKNOWN';
+      }
+    }
+
+    function isString(s) {
+      return typeof(s) === 'string' || s instanceof String;
+    }
+
     return service;
   }
+
 })();

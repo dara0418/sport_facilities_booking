@@ -1,20 +1,28 @@
-<div class="row">
-  <div class="col-md-2">
-    Club Photo
+<div class="row booking-item">
+  <div class="col-md-3">
+    <img class="pull-right"
+      ng-src="{{ vm.clubImg }}"
+      style="width: 150px; height: 170px" />
   </div>
 
-  <div class="col-md-6">
-    <h5>{{ vm.event.club.name }}</h5>
-    <h5>{{ vm.event.name }}</h5>
-    <p>{{ vm.event.content }}</p>
+  <div class="col-md-5">
+    <div class="row">
+      <div class="club-name">
+        <a ng-click="">{{ vm.event.club.name }}</a>
+      </div>
+
+      <div class="facility-name">
+        <a ng-click="">{{ vm.event.name }}</a>
+      </div>
+
+      <div class="dashboard-div">
+        {{ vm.event.content }}
+      </div>
+    </div>
+
+    <div class="row booking-hr"></div>
 
     <div class="row">
-      <button class="btn btn-primary"
-        ng-click="vm.viewEvent(vm.event)">
-        <i class="fa fa-gw fa-search"></i>
-        &nbsp;View(is this necessary?)
-      </button>
-      &nbsp; &nbsp;
       <button class="btn btn-primary"
         ng-click="vm.joinEvent(vm.event)"
         ng-if="!event.hasJoined">
@@ -32,13 +40,40 @@
 
   <div class="col-md-4">
     <div class="row">
-      <div class="col-md-6">
-        START<br/>
-        {{ vm.event.start | date:'yyyy-MM-dd' }}
+      <div class="col-md-6 dotted-border-right">
+        <div class="dashboard-div-center">
+          {{ ('START' | translate).toUpperCase() }}
+        </div>
+
+        <div class="booking-day">
+          {{ vm.startDay }}
+        </div>
+
+        <div class="booking-year">
+          {{ vm.startMonth | translate }} {{ vm.startYear }}
+        </div>
+
+        <div class="booking-dow">
+          {{ vm.startDow | translate }}
+        </div>
       </div>
+
       <div class="col-md-6">
-        END<br/>
-        {{ vm.event.end | date:'yyyy-MM-dd' }}
+        <div class="dashboard-div-center">
+          {{ ('END' | translate).toUpperCase() }}
+        </div>
+
+        <div class="booking-day">
+          {{ vm.endDay }}
+        </div>
+
+        <div class="booking-year">
+          {{ vm.endMonth | translate }} {{ vm.endYear }}
+        </div>
+
+        <div class="booking-dow">
+          {{ vm.endDow | translate }}
+        </div>
       </div>
     </div>
   </div>

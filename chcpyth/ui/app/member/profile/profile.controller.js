@@ -58,7 +58,6 @@
 
     function activate() {
       Status.resetStatus();
-      Status.setPageMemberProfile();
 
       Helpers.safeGetLoginMember(vm);
 

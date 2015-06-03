@@ -11,6 +11,7 @@
     var vm = this;
 
     vm.sharedProperties = SharedProperties;
+    vm.s = Storage;
 
     vm.activate = activate;
 

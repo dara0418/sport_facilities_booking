@@ -1,10 +1,25 @@
 <div>
-  <h4>Events in my clubs</h4>
-  <div ng-repeat="event in vm.events">
+  <h4>Upcoming Events</h4>
+  <div class="booking-item-list" ng-repeat="event in upcomingEvents=(vm.events | filterUpcomingEvents)">
     <member-event-item event="event"></member-event-item>
+  </div>
+  <div ng-show="upcomingEvents.length == 0">
+    There're no upcoming events at the moment.
   </div>
 
   <h4>Past events</h4>
+  <div class="booking-item-list" ng-repeat="event in pastEvents=(vm.events | filterPastEvents)">
+    <member-event-item event="event"></member-event-item>
+  </div>
+  <div ng-show="pastEvents.length == 0">
+    There're no past events.
+  </div>
+
   <h4>Events registered</h4>
+  <div class="booking-item-list" ng-repeat="event in registeredEvents=(vm.events | filterRegisteredEvents)">
+    <member-event-item event="event"></member-event-item>
+  </div>
+  <div ng-show="registeredEvents.length == 0">
+    You haven't registered any events.
+  </div>
 </div>
-<!-- Filters. -->

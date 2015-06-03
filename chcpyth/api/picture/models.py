@@ -12,4 +12,4 @@ class ClubPicture(BaseModel):
     """
     id = models.AutoField(primary_key=True)
     club = models.ForeignKey('club.Club')
-    url = models.CharField(max_length=255)
+    url = models.ImageField(upload_to="club_picture/")

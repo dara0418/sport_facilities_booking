@@ -26,12 +26,7 @@
       setStatusRemoving: setStatusRemoving,
       setStatusLogin: setStatusLogin,
       setStatusRegister: setStatusRegister,
-      setStatusChangePassword: setStatusChangePassword,
-
-      isInMemberProfile: isInMemberProfile,
-
-      resetPage: resetPage,
-      setPageMemberProfile: setPageMemberProfile
+      setStatusChangePassword: setStatusChangePassword
     };
 
     function isIdle() {
@@ -101,18 +96,6 @@
 
     function setStatusChangePassword() {
       Storage.setServerStatus(ServerStatus.CHANGE_PASSWORD);
-    }
-
-    function resetPage() {
-      Storage.setCurrentPage(Pages.NONE);
-    }
-
-    function isInMemberProfile() {
-      return Storage.getCurrentPage() === Pages.MEMBER_PROFILE;
-    }
-
-    function setPageMemberProfile() {
-      Storage.setCurrentPage(Pages.MEMBER_PROFILE);
     }
 
     return service;
