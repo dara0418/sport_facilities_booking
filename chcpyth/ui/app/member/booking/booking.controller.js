@@ -19,6 +19,18 @@
 
     var handler = ExceptionHandler;
 
+    $scope.renderCalendar = renderCalendar;
+
+    vm.calendar = {
+      height: 450,
+      editable: false,
+      header:{
+        left: 'month basicWeek basicDay',
+        center: 'title',
+        right: 'today prev,next'
+      }
+    };
+
     vm.activate();
 
     function activate() {
@@ -33,6 +45,10 @@
       BookingMember.get({ member__ref: vm.member.ref }).$promise
         .then(setBookings)
         .catch(handler.generalHandler);
+    }
+
+    function renderCalendar() {
+      $scope.myCalendar.fullCalendar('render');
     }
 
     // Private functions.

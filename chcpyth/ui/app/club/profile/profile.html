@@ -1,18 +1,18 @@
 <div>
   <h4>Edit Profile</h4>
   <div class="profile">
-    <form>
+    <form class="form" name="form" novalidate>
       <ul>
-        <li>
-          <span>{{ 'NAME' | translate }}</span>
+        <li class="form-group">
+          <span class="profile-span">{{ 'NAME' | translate }}</span>
           <input class="form-control"
             id="name"
             name="name"
             ng-model="vm.club.name" />
         </li>
 
-        <li>
-          <span>{{ 'URL' | translate }}</span>
+        <li class="form-group">
+          <span class="profile-span">{{ 'URL' | translate }}</span>
           <input class="form-control"
             id="url"
             name="url"
@@ -20,7 +20,7 @@
         </li>
 
         <li class="li-3">
-          <span>{{ 'STATUS' | translate }}</span>
+          <span class="profile-span">{{ 'STATUS' | translate }}</span>
           <label>
             <select class="form-control"
               ng-model="vm.member.title">
@@ -32,32 +32,32 @@
           </label>
         </li>
 
-        <li>
-          <span>{{ 'EMAIL' | translate }}</span>
+        <li class="form-group">
+          <span class="profile-span">{{ 'EMAIL' | translate }}</span>
           <input class="form-control"
             id="email"
             name="email"
             ng-model="vm.club.email" />
         </li>
 
-        <li>
-          <span>{{ 'PRIMARY_PHONE' | translate }}</span>
+        <li class="form-group">
+          <span class="profile-span">{{ 'PRIMARY_PHONE' | translate }}</span>
           <input class="form-control"
             id="primaryPhone"
             name="primaryPhone"
             ng-model="vm.club.primary_phone" />
         </li>
 
-        <li>
-          <span>{{ 'SECONDARY_PHONE' | translate }}</span>
+        <li class="form-group">
+          <span class="profile-span">{{ 'SECONDARY_PHONE' | translate }}</span>
           <input class="form-control"
             id="secondaryPhone"
             name="secondaryPhone"
             ng-model="vm.club.secondary_phone" />
         </li>
 
-        <li>
-          <span>{{ 'FAX_NUMBER' | translate }}</span>
+        <li class="form-group">
+          <span class="profile-span">{{ 'FAX_NUMBER' | translate }}</span>
           <input class="form-control"
             id="faxNumber"
             name="faxNumber"

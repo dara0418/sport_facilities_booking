@@ -1,6 +1,6 @@
 <div>
   <h4>Calendar view</h4>
-  <div ui-calendar ng-model="vm.eventSources"></div>
+  <div ui-calendar="uiConfig.calendar" select="renderCalendar()" calendar="myCalendar" ng-model="vm.eventSources"></div>
 
   <h4>Current reservations</h4>
   <div class="booking-item-list" ng-repeat="booking in currentBookings=(vm.bookings | bookingsAfterToday)">
