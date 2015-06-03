@@ -9,7 +9,6 @@
             <ul class="nav-dashboard nav-tabs-dashboard" role="tablist" id="myTab">
               <li role="presentation" class="active">
                 <a data-target="#profile"
-                  aria-controls="home"
                   role="tab"
                   data-toggle="tab"
                   ng-click="">
@@ -17,9 +16,8 @@
                 </a>
               </li>
 
-              <li role="presentation">
+              <li role="presentation" ng-show="vm.member.is_active">
                 <a data-target="#booking"
-                  aria-controls="profile"
                   role="tab"
                   data-toggle="tab"
                   ng-click="">
@@ -27,9 +25,8 @@
                 </a>
               </li>
 
-              <li role="presentation">
+              <li role="presentation" ng-show="vm.member.is_active">
                 <a data-target="#events"
-                  aria-controls="messages"
                   role="tab"
                   data-toggle="tab"
                   ng-click="">
@@ -37,9 +34,8 @@
                 </a>
               </li>
 
-              <li role="presentation">
+              <li role="presentation" ng-show="vm.member.is_active">
                 <a data-target="#clubs"
-                  aria-controls="messages"
                   role="tab"
                   data-toggle="tab"
                   ng-click="">
@@ -47,9 +43,8 @@
                 </a>
               </li>
 
-              <li role="presentation">
+              <li role="presentation" ng-show="vm.member.is_active">
                 <a data-target="#notifications"
-                  aria-controls="settings"
                   role="tab"
                   data-toggle="tab"
                   ng-click="">

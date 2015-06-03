@@ -1,6 +1,6 @@
 <div data-container="#loginPlugin">
   <div ng-if="!vm.hasLogin">
-    <button class="btn btn-primary"
+    <button class="btn btn-primary active no-round-corner"
       type="button"
       data-placement="bottom"
       data-animation="am-flip-x"
@@ -13,14 +13,14 @@
   </div>
 
   <div ng-if="vm.hasLogin">
-    <button class="btn btn-primary"
+    <button class="btn btn-primary active no-round-corner"
       ng-click="vm.goToMyAccount()"
       type="button">
       <i class="fa fa-user"></i>
       &nbsp;{{ 'MY_ACCOUNT' | translate }}
     </button>
 
-    <button class="btn btn-primary"
+    <button class="btn btn-primary active no-round-corner"
       ng-click="vm.signOut()"
       type="button">
       <i class="fa fa-sign-out"></i>

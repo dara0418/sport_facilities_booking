@@ -13,6 +13,7 @@
     var vm = this;
 
     vm.event = $scope.event;
+    vm.hasCompleted = $scope.hasCompleted;
     vm.activate = activate;
 
     var handler = ExceptionHandler;

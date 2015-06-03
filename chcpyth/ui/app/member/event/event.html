@@ -1,7 +1,7 @@
 <div>
   <h4>Upcoming Events</h4>
   <div class="booking-item-list" ng-repeat="event in upcomingEvents=(vm.events | filterUpcomingEvents)">
-    <member-event-item event="event"></member-event-item>
+    <member-event-item event="event" has-completed="false"></member-event-item>
   </div>
   <div ng-show="upcomingEvents.length == 0">
     There're no upcoming events at the moment.
@@ -9,7 +9,7 @@
 
   <h4>Past events</h4>
   <div class="booking-item-list" ng-repeat="event in pastEvents=(vm.events | filterPastEvents)">
-    <member-event-item event="event"></member-event-item>
+    <member-event-item event="event" has-completed="true"></member-event-item>
   </div>
   <div ng-show="pastEvents.length == 0">
     There're no past events.
@@ -17,7 +17,7 @@
 
   <h4>Events registered</h4>
   <div class="booking-item-list" ng-repeat="event in registeredEvents=(vm.events | filterRegisteredEvents)">
-    <member-event-item event="event"></member-event-item>
+    <member-event-item event="event" has-completed="false"></member-event-item>
   </div>
   <div ng-show="registeredEvents.length == 0">
     You haven't registered any events.

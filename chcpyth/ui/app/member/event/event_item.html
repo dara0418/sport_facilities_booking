@@ -1,6 +1,6 @@
 <div class="row booking-item">
   <div class="col-md-3">
-    <img class="pull-right"
+    <img class="img-thumbnail pull-right"
       ng-src="{{ vm.clubImg }}"
       style="width: 150px; height: 170px" />
   </div>
@@ -11,9 +11,13 @@
         <a ng-click="">{{ vm.event.club.name }}</a>
       </div>
 
+      <div class="booking-hr"></div>
+
       <div class="facility-name">
         <a ng-click="">{{ vm.event.name }}</a>
       </div>
+
+      <div class="booking-hr"></div>
 
       <div class="dashboard-div">
         {{ vm.event.content }}
@@ -22,18 +26,24 @@
 
     <div class="row booking-hr"></div>
 
-    <div class="row">
-      <button class="btn btn-primary"
+    <div class="row" ng-show="!vm.hasCompleted">
+      <button class="btn btn-primary active no-round-corner"
         ng-click="vm.joinEvent(vm.event)"
         ng-if="!event.hasJoined">
         <i class="fa fa-gw fa-user-plus"></i>
-        &nbsp;Join
+        &nbsp;{{ 'JOIN' | translate }}
       </button>
-      <button class="btn btn-danger"
+      <button class="btn btn-danger active no-round-corner"
         ng-click="vm.quitEvent(vm.event)"
         ng-if="event.hasJoined">
         <i class="fa fa-gw fa-user-times"></i>
-        &nbsp;Quit
+        &nbsp;{{ 'UNREGISTER' | translate }}
+      </button>
+    </div>
+
+    <div class="row" ng-show="vm.hasCompleted">
+      <button type="button" class="btn btn-primary pull-left disabled no-round-corner">
+        &nbsp;{{ 'EVENT_COMPLETED' | translate }}
       </button>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <div class="row booking-item">
   <div class="col-md-3">
-    <img class="pull-right"
+    <img class="img-thumbnail pull-right"
       ng-src="{{ vm.clubImg }}"
       style="width: 150px; height: 170px" />
   </div>
@@ -11,19 +11,29 @@
         <a ng-click="">{{ vm.club.name }}</a>
       </div>
 
-      <div class="dashboard-div">
-        {{ vm.addressStr }}
+      <div class="booking-hr"></div>
+
+      <div class="dashboard-address">
+        <span class="flag-icon flag-icon-{{ vm.country.toLowerCase() }}"></span>
+        &nbsp;{{ vm.addressStr }}, {{ vm.country.toUpperCase() | translate }}
       </div>
 
+      <div class="booking-hr"></div>
+
       <div class="dashboard-tip" ng-show="vm.club.role == 'A'">
-        {{ 'ADMIN_OF_CLUB' | translate }}
+        <i class="fa fa-wrench"></i>
+        &nbsp;{{ 'ADMIN_OF_CLUB' | translate }}
       </div>
       <div class="dashboard-tip" ng-show="vm.club.role == 'P'">
-        {{ 'PROFESSOR_OF_CLUB' | translate }}
+        <i class="fa fa-graduation-cap"></i>
+        &nbsp;{{ 'PROFESSOR_OF_CLUB' | translate }}
       </div>
       <div class="dashboard-tip" ng-show="vm.club.role == 'M'">
-        {{ 'MEMBER_OF_CLUB' | translate }}
+        <i class="fa fa-user"></i>
+        &nbsp;{{ 'MEMBER_OF_CLUB' | translate }}
       </div>
+
+      <div class="booking-hr"></div>
 
       <div class="dashboard-div">
         {{ vm.club.description }}

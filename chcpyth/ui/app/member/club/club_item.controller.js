@@ -39,7 +39,8 @@
 
       var address = vm.club.address;
       vm.addressStr = address.line1 + ' ' + address.line2 + ', ' +
-        address.city + ', ' + address.province + ', ' + address.country;
+        address.city + ', ' + address.province;
+      vm.country = address.country;
     }
 
     function goToClubDashboard() {

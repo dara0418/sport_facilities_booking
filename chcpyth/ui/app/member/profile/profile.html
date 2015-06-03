@@ -1,4 +1,9 @@
 <div>
+  <div class="alert alert-danger" role="alert" ng-show="!vm.member.is_active">
+    {{ 'ACCOUNT_INACTIVE' | translate }}&nbsp;
+    <a ng-click="vm.activateMember()">{{ 'REQUEST_ACTIVATE' | translate }}</a>
+  </div>
+
   <h4>Edit Profile</h4>
   <div class="profile">
     <form name="form" novalidate>
@@ -127,16 +132,29 @@
             <!-- This will only show the last uploaded photo. This is a trick to reload image-thumb directive. -->
             <!-- By using ng-repeat, the image-thumb directive will get reloaded everytime uploader queue has been changed. -->
             <span ng-repeat="item in vm.uploader.queue">
-              <div ng-if="vm.uploader.queue.length - 1 == $index" class="col-md-6" image-thumb="{ file: item._file, width: 130, height: 140}">
+              <div ng-if="vm.uploader.queue.length - 1 == $index"
+                class="col-md-6 dotted-border-right"
+                image-thumb="{ file: item._file, width: 130, height: 140}">
               </div>
             </span>
 
-            <div ng-show="vm.uploader.queue.length == 0" class="col-md-6">
-              <img ng-src="{{ vm.avatarSrc }}" style="width: 130px; height: 140px">
+            <div ng-show="vm.uploader.queue.length == 0" class="col-md-6 dotted-border-right">
+              <img class="img-thumbnail"
+                ng-src="{{ vm.avatarSrc }}"
+                style="width: 130px; height: 140px" />
             </div>
 
             <div class="col-md-6 flr">
-              <button class="btn btn-success"
+              <button class="btn btn-block btn-success btn-file active no-round-corner">
+                <i class="fa fa-search"></i>
+                &nbsp;{{ 'CHOOSE_FILE' | translate }}
+
+                <input type="file"
+                  uploader="vm.uploader"
+                  nv-file-select />
+              </button>
+
+              <button class="btn btn-block btn-success active no-round-corner"
                 ng-disabled="vm.uploader.queue.length != 0 && vm.uploader.queue[vm.uploader.queue.length - 1].isUploading"
                 ng-click="vm.uploadAvatar()">
                 <span ng-show="!vm.uploader.queue[vm.uploader.queue.length - 1].isUploading">
@@ -146,22 +164,32 @@
                   <i class="fa fa-spinner fa-spin"></i>
                 </span>
 
-                {{
+                &nbsp;{{
                   (vm.uploader.queue.length > 0 && vm.uploader.queue[vm.uploader.queue.length - 1].isUploading) ?
                   ('UPLOADING' | translate) :
                   ('UPLOAD' | translate)
                 }}
               </button>
-            </div>
-          </div>
 
-          <input type="file"
-            nv-file-select
-            value="{{ 'CHOOSE_FILE' | translate }}"
-            uploader="vm.uploader" />
+              <button class="btn btn-block btn-default active no-round-corner"
+                ng-click="vm.resetAvatar()">
+                <i class="fa fa-times"></i>
+                &nbsp;{{ 'CANCEL' | translate }}
+              </button>
+            </div>
+
+          </div>
         </div>
 
-        <div class="profile-links flr"> <a class="de-active" href="#">Deactivate</a> <a class="my-account" href="#">my account</a></div>
+        <div class="profile-links flr" ng-show="vm.member.is_active">
+          <a class="de-active" ng-click="vm.deactivateMember()">
+            Deactivate
+          </a>
+          &nbsp;
+          <a class="my-account" ng-click="">
+            my account
+          </a>
+        </div>
       </fieldset>
     </form>
   </div>

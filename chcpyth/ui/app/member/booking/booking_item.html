@@ -1,7 +1,7 @@
 <!-- Outline each booking in the booking list. -->
 <div class="row booking-item">
   <div class="col-md-3">
-    <img class="pull-right"
+    <img class="img-thumbnail pull-right"
       ng-src="{{ vm.clubImg }}"
       style="width: 150px; height: 170px" />
   </div>
@@ -12,13 +12,20 @@
         <a ng-click="">{{ vm.booking.facility.club.name }}</a>
       </div>
 
+      <div class="booking-hr"></div>
+
       <div class="facility-name">
         <a ng-click="">{{ vm.booking.facility.name }}</a>
       </div>
 
-      <div class="dashboard-div">
-        {{ vm.booking.addressStr }}
+      <div class="booking-hr"></div>
+
+      <div class="dashboard-address">
+        <span class="flag-icon flag-icon-{{ vm.country.toLowerCase() }}"></span>
+        &nbsp;{{ vm.addressStr }}, {{ vm.country.toUpperCase() | translate }}
       </div>
+
+      <div class="booking-hr"></div>
 
       <div class="price">
         <!-- TODO - Dynamically generate currency symbols. -->
@@ -26,17 +33,25 @@
       </div>
     </div>
 
-    <div class="row dashboard-div">
+    <div class="row booking-hr"></div>
+
+    <div class="row dashboard-div" ng-if="!vm.hasCompleted">
       <button type="button"
-        class="btn btn-primary pull-left"
+        class="btn btn-primary pull-left active no-round-corner"
         ng-click="vm.selectBooking(vm.booking)">
         <i class="fa fa-pencil-square-o fa-gw"></i>
-        &nbsp;View/Edit
+        &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
       </button>
 
       <a class="cancel-btn" ng-click="vm.cancel()">
         {{ 'CANCEL' | translate }}
       </a>
+    </div>
+
+    <div class="row dashboard-div" ng-if"vm.hasCompleted">
+      <button type="button" class="btn btn-primary pull-left disabled no-round-corner">
+        &nbsp;{{ 'BOOKING_COMPLETED' | translate }}
+      </button>
     </div>
   </div>
 

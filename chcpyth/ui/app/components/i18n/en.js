@@ -22,6 +22,8 @@
       RE_ENTER: 'Re-enter',
       REGISTER: 'Sign Up',
       REGISTERING: 'Signing Up',
+      UNREGISTER: 'Unregister',
+      JOIN: 'Join',
       LOGIN: 'Sign In',
       LOGINING: 'Signing In',
       LOGOUT: 'Sign Out',
@@ -55,6 +57,7 @@
       TIMESLOT: 'Timeslot',
       NOTES: 'Notes',
       NUM_OF_BOOKING: 'Total People of Booking',
+      VIEW_OR_EDIT: 'View/Edit',
 
       TITLE: 'Title',
       MR: 'Mr.',
@@ -108,6 +111,10 @@
       INVALID_PHONE_NUMBER: 'Invalid phone number',
       UPLOAD_SUCCESS: 'Succeed to upload',
       UPLOAD_FAILED: 'Failed to upload',
+      BOOKING_COMPLETED: 'The booking is complete',
+      EVENT_COMPLETED: 'The event is complete',
+      ACCOUNT_INACTIVE: 'Your account is currently inactive. You may not able to use most functions.',
+      REQUEST_ACTIVATE: 'Request to activate.',
 
       // A list of shortcuts of months.
       MONTH_JAN: 'JAN',
@@ -131,9 +138,17 @@
       SATURDAY: 'Saturday',
       SUNDAY: 'Sunday',
 
-      ADMIN_OF_CLUB: 'You have administrator rights of the club.',
-      PROFESSOR_OF_CLUB: 'You are a professor of the club.',
-      MEMBER_OF_CLUB: 'You are a member of the club.'
+      ADMIN_OF_CLUB: 'Administrator of club',
+      PROFESSOR_OF_CLUB: 'Professor of club',
+      MEMBER_OF_CLUB: 'Member of club',
+
+      AR: 'Argentina',
+      CN: 'China',
+      DE: 'Germany',
+      FR: 'France',
+      IE: 'Ireland',
+      USA: 'USA',
+      UK: 'UK'
     });
   }
 })();

@@ -4,7 +4,7 @@
 
   <h4>Current reservations</h4>
   <div class="booking-item-list" ng-repeat="booking in currentBookings=(vm.bookings | bookingsAfterToday)">
-    <member-booking-item booking="booking"></member-booking-item>
+    <member-booking-item booking="booking" has-completed="false"></member-booking-item>
   </div>
   <div ng-show="currentBookings.length == 0">
     You don't have any current bookings.
@@ -12,7 +12,7 @@
 
   <h4>History of reservations</h4>
   <div class="booking-item-list" ng-repeat="booking in historyBookings=(vm.bookings | bookingsBeforeToday)">
-    <member-booking-item booking="booking"></member-booking-item>
+    <member-booking-item booking="booking" has-completed="true"></member-booking-item>
   </div>
   <div ng-show="historyBookings.length == 0">
     You don't have any history bookings.

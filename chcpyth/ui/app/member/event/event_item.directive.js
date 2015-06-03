@@ -12,7 +12,8 @@
       controller: 'MemberEventItemController',
       controllerAs: 'vm',
       scope: {
-        event: '='
+        event: '=',
+		hasCompleted: '@'
       }
     };
 

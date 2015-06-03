@@ -12,7 +12,8 @@
       controller: 'MemberBookingItemController',
       controllerAs: 'vm',
       scope: {
-        booking: '='
+        booking: '=',
+        hasCompleted: '@'
       }
     };
 

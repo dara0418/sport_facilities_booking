@@ -6,16 +6,21 @@
   .controller('MemberProfileController', profileController);
 
   profileController.$inject = ['$scope', 'Notification', '$translate', 'Member',
-    'Storage', 'Helpers', 'Status', 'FileUploader', 'ExceptionHandler'];
+    'Storage', 'Helpers', 'Status', 'FileUploader', 'ExceptionHandler',
+    '$route', '$location'];
 
   function profileController($scope, Notification, $translate, Member,
-    Storage, Helpers, Status, FileUploader, ExceptionHandler) {
+    Storage, Helpers, Status, FileUploader, ExceptionHandler,
+    $route, $location) {
     var vm = this;
 
     vm.updateProfile = updateProfile;
     vm.activate = activate;
     vm.cancel = cancel;
     vm.uploadAvatar = uploadAvatar;
+    vm.resetAvatar = resetAvatar;
+    vm.activateMember = activateMember;
+    vm.deactivateMember = deactivateMember;
     vm.stu = Status;
 
     vm.uploader = new FileUploader({
@@ -35,7 +40,7 @@
 
       if (member === undefined) {
         Notification.notifyFailure('INVALID_LOGIN');
-        $location.path('/login');
+        $location.path('/landing');
 
         return;
       }
@@ -82,6 +87,50 @@
       // Reset the recent changes.
       // No tricks just get another clone of login member.
       Helpers.safeGetLoginMember(vm);
+    }
+
+    function resetAvatar() {
+      vm.uploader.queue = [];
+    }
+
+    function activateMember() {
+      // TODO - We should probably send an email to user email address to activate.
+      //        Currently we don't have SMTP running so just activate directly.
+      vm.member.is_active = true;
+
+      Status.setStatusUpdating();
+
+      new Member(vm.member).$update()
+      .then(function(result) {
+        // Sync with cache.
+        Storage.setLoginMember(vm.member);
+
+        Status.resetStatus();
+        Notification.notifySuccess('UPDATE_SUCCESS');
+
+        // Reload page.
+        $route.reload();
+      })
+      .catch(handler.generalHandler);
+    }
+
+    function deactivateMember() {
+      vm.member.is_active = false;
+
+      Status.setStatusUpdating();
+
+      new Member(vm.member).$update()
+      .then(function(result) {
+        // Sync with cache.
+        Storage.setLoginMember(vm.member);
+
+        Status.resetStatus();
+        Notification.notifySuccess('UPDATE_SUCCESS');
+
+        // Reload page.
+        $route.reload();
+      })
+      .catch(handler.generalHandler);
     }
 
     function uploadAvatar() {

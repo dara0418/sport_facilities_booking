@@ -13,8 +13,10 @@
     var vm = this;
 
     vm.booking = $scope.booking;
+    vm.hasCompleted = $scope.hasCompleted;
     vm.activate = activate;
     vm.selectBooking = selectBooking;
+    vm.cancelBooking = cancelBooking;
     vm.clubImg = '';
 
     var handler = ExceptionHandler;
@@ -30,9 +32,11 @@
       }
 
       var address = vm.booking.facility.club.address;
-      var addressStr = address.line1 + ' ' + address.line2 + ', ' +
-        address.city + ', ' + address.province + ', ' + address.country;
-      vm.booking.addressStr = addressStr;
+      vm.addressStr = address.line1 + ' ' + address.line2 + ', ' +
+        address.city + ', ' + address.province;
+
+      // The country code.
+      vm.country = address.country;
 
       // Pull club pictures.
       var club = vm.booking.facility.club;
@@ -55,6 +59,12 @@
 
     function selectBooking(booking) {
       Storage.setBooking(booking);
+    }
+
+    function cancelBooking() {
+      // TODO - To cancel booking, we shouldn't remove the booking object. Instead we
+      //        should mark the booking status as cancelled. We need to add a booking
+      //        status field to the Booking model.
     }
 
     function setClubPicture(resource) {
