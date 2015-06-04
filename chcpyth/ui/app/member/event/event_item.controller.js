@@ -6,10 +6,10 @@
   .controller('MemberEventItemController', eventItemController);
 
   eventItemController.$inject = ['$scope', '$location', '$translate',
-    'Helpers', 'ExceptionHandler', 'ClubPicture', 'EventReg'];
+    'Helpers', 'ExceptionHandler', 'ClubPicture', 'EventReg', 'Notification'];
 
   function eventItemController($scope, $location, $translate,
-    Helpers, ExceptionHandler, ClubPicture, EventReg) {
+    Helpers, ExceptionHandler, ClubPicture, EventReg, Notification) {
     var vm = this;
 
     vm.event = $scope.event;
@@ -57,7 +57,7 @@
       };
 
       new EventReg(eventReg).$save()
-      .then(Helpers.saveSuccess)
+      .then(onJoinEvent)
       .catch(handler.generalHandler);
     }
 
@@ -69,7 +69,7 @@
       .then(function(eventRegResource) {
         return eventRegResource.$delete();
       })
-      .then(Helpers.deleteSuccess)
+      .then(onQuitEvent)
       .catch(handler.generalHandler);
     }
 
@@ -81,6 +81,18 @@
       else {
         vm.clubImg = resource.objects[0].url;
       }
+    }
+
+    function onJoinEvent() {
+      $scope.$parent.$parent.attachEventRegStatus();
+
+      Notification.notifySuccess('REGISTER_EVENT');
+    }
+
+    function onQuitEvent() {
+      $scope.$parent.$parent.attachEventRegStatus();
+
+      Notification.notifySuccess('UNREGISTER_EVENT');
     }
   }
 })();

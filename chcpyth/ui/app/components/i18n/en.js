@@ -115,6 +115,8 @@
       EVENT_COMPLETED: 'The event is complete',
       ACCOUNT_INACTIVE: 'Your account is currently inactive. You may not able to use most functions.',
       REQUEST_ACTIVATE: 'Request to activate.',
+      REGISTER_EVENT: 'Registered event',
+      UNREGISTER_EVENT: 'Unregistered event',
 
       // A list of shortcuts of months.
       MONTH_JAN: 'JAN',
@@ -148,7 +150,7 @@
       FR: 'France',
       IE: 'Ireland',
       USA: 'USA',
-      UK: 'UK'
+      GB: 'UK'
     });
   }
 })();

@@ -6,14 +6,15 @@
   .controller('MemberEventController', eventController);
 
   eventController.$inject = ['$scope', 'ExceptionHandler', 'Helpers', 'Event',
-    '$q'];
+    '$q', 'EventReg'];
 
   function eventController($scope, ExceptionHandler, Helpers, Event,
-    $q) {
+    $q, EventReg) {
     var vm = this;
 
     vm.activate = activate;
     vm.events = [];
+    $scope.attachEventRegStatus = attachEventRegStatus;
 
     var handler = ExceptionHandler;
 
@@ -66,7 +67,7 @@
       return deferred.promise;
     }
 
-    function attachEventRegStatus(events) {
+    function attachEventRegStatus() {
       $.each(vm.events, function(index, event) {
         EventReg.get({
           event__ref: event.ref,
