@@ -67,9 +67,11 @@
         member_ref: vm.member.ref
       }).$promise
       .then(function(eventRegResource) {
-        return eventRegResource.$delete();
+        if (eventRegResource.objects.length == 1) {
+          new EventReg(eventRegResource.objects[0]).$delete()
+          .then(onQuitEvent)
+        }
       })
-      .then(onQuitEvent)
       .catch(handler.generalHandler);
     }
 
