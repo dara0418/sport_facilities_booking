@@ -1,20 +1,36 @@
-<div>
-  <h4>Calendar view</h4>
-  <div ui-calendar="uiConfig.calendar" select="renderCalendar()" calendar="myCalendar" ng-model="vm.eventSources"></div>
+<div ng-init="vm.showHistory = false">
+  <div ng-show="!vm.showHistory">
+    <h4>{{ 'CALENDAR_VIEW' | translate }}</h4>
+    <div ui-calendar="uiConfig.calendar" select="renderCalendar()" calendar="myCalendar" ng-model="vm.eventSources"></div>
 
-  <h4>Current reservations</h4>
-  <div class="booking-item-list" ng-repeat="booking in currentBookings=(vm.bookings | bookingsAfterToday)">
-    <member-booking-item booking="booking" has-completed="false"></member-booking-item>
-  </div>
-  <div ng-show="currentBookings.length == 0">
-    You don't have any current bookings.
+    <h4>{{ vm.h.firstCharToUpperCase(('CURRENT_BOOKINGS' | translate)) }}</h4>
+
+    <div>
+      {{ 'SHOW' | translate }}
+      &nbsp;<a ng-click="vm.showHistory = true">{{ 'HISTORY_BOOKINGS' | translate }}</a>.
+    </div>
+
+    <div class="booking-item-list" ng-repeat="booking in currentBookings=(vm.bookings | bookingsAfterToday)">
+      <member-booking-item booking="booking" has-completed="false"></member-booking-item>
+    </div>
+    <div ng-show="currentBookings.length == 0">
+      {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'CURRENT_BOOKINGS' | translate }}.
+    </div>
   </div>
 
-  <h4>History of reservations</h4>
-  <div class="booking-item-list" ng-repeat="booking in historyBookings=(vm.bookings | bookingsBeforeToday)">
-    <member-booking-item booking="booking" has-completed="true"></member-booking-item>
-  </div>
-  <div ng-show="historyBookings.length == 0">
-    You don't have any history bookings.
+  <div ng-show="vm.showHistory">
+    <h4>{{ vm.h.firstCharToUpperCase(('HISTORY_BOOKINGS' | translate)) }}</h4>
+
+    <div>
+      {{ 'SHOW' | translate }}
+      &nbsp;<a ng-click="vm.showHistory = false">{{ 'CURRENT_BOOKINGS' | translate }}</a>.
+    </div>
+
+    <div class="booking-item-list" ng-repeat="booking in historyBookings=(vm.bookings | bookingsBeforeToday)">
+      <member-booking-item booking="booking" has-completed="true"></member-booking-item>
+    </div>
+    <div ng-show="historyBookings.length == 0">
+      {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'HISTORY_BOOKINGS' | translate }}.
+    </div>
   </div>
 </div>

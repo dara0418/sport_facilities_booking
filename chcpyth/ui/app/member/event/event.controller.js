@@ -14,6 +14,7 @@
 
     vm.activate = activate;
     vm.events = [];
+    vm.h = Helpers;
     $scope.attachEventRegStatus = attachEventRegStatus;
 
     var handler = ExceptionHandler;

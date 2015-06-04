@@ -58,6 +58,8 @@
       NOTES: 'Notes',
       NUM_OF_BOOKING: 'Total People of Booking',
       VIEW_OR_EDIT: 'View/Edit',
+      SHOW: 'Show',
+      AND: 'And',
 
       TITLE: 'Title',
       MR: 'Mr.',
@@ -117,6 +119,13 @@
       REQUEST_ACTIVATE: 'Request to activate.',
       REGISTER_EVENT: 'Registered event',
       UNREGISTER_EVENT: 'Unregistered event',
+      YOU_DONT_HAVE_ANY: 'You don\'t have any',
+      CURRENT_BOOKINGS: 'current bookings',
+      HISTORY_BOOKINGS: 'history bookings',
+      CALENDAR_VIEW: 'Calendar view',
+      REGISTERED_EVENTS: 'registered events',
+      UPCOMING_EVENTS: 'upcoming events',
+      PAST_EVENTS: 'past events',
 
       // A list of shortcuts of months.
       MONTH_JAN: 'JAN',

@@ -27,7 +27,8 @@
       getTimeslotStr: getTimeslotStr,
       getTimeUnitStr: getTimeUnitStr,
       getMonthStr: getMonthStr,
-      isString: isString
+      isString: isString,
+      firstCharToUpperCase: firstCharToUpperCase
     };
 
     var handler = ExceptionHandler;
@@ -237,6 +238,15 @@
 
     function isString(s) {
       return typeof(s) === 'string' || s instanceof String;
+    }
+
+    function firstCharToUpperCase(str) {
+      if (!isString(str)) {
+        return 'UNKNOWN';
+      }
+      else {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
     }
 
     return service;

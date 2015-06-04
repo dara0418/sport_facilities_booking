@@ -16,6 +16,7 @@
     vm.todayDate = new Date();
     vm.eventSources = [];
     vm.bookings = [];
+    vm.h = Helpers;
 
     var handler = ExceptionHandler;
 
