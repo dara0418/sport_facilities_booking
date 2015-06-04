@@ -10,7 +10,7 @@
   function routeConfig($routeProvider) {
     $routeProvider
       .when (
-        '/landing', {
+        '/home', {
           templateUrl: 'app/landing/landing.html'
         }
       )
@@ -49,5 +49,8 @@
           controllerAs: 'vm'
         }
       )
+      .otherwise ({
+        redirectTo: '/home'
+      });
   }
 })();
