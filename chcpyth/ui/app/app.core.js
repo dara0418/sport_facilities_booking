@@ -8,6 +8,7 @@
     'mgcrea.ngStrap',
     'pascalprecht.translate',
     'ui.calendar',
-    'angularFileUpload'
+    'angularFileUpload',
+    'ngPasswordStrength'
   ]);
 })();

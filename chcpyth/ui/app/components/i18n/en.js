@@ -144,6 +144,14 @@
       PROFESSOR_OF_CLUB: 'Professor of club',
       MEMBER_OF_CLUB: 'Member of club',
 
+      PASSWORD_STRENGTH: 'Password Strength',
+      ILLEGAL: 'Illegal',
+      VERY_WEAK: 'Very weak',
+      WEAK: 'Weak',
+      GOOD: 'Good',
+      STRONG: 'Strong',
+      VERY_STRONG: 'Very strong',
+
       AR: 'Argentina',
       CN: 'China',
       DE: 'Germany',

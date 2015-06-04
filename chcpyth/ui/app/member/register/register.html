@@ -71,6 +71,28 @@
         </p>
       </div>
 
+      <div class="form-group">
+        <label>{{ 'PASSWORD_STRENGTH' | translate }}
+          <span ng-show="vm.passStrength < 30 && vm.passStrength > 0" class="password-weak">
+            : {{ 'VERY_WEAK' | translate }}
+          </span>
+          <span ng-show="vm.passStrength >= 30 && vm.passStrength < 50" class="password-weak">
+            : {{ 'WEAK' | translate }}
+          </span>
+          <span ng-show="vm.passStrength >= 50 && vm.passStrength < 83" class="password-good">
+            : {{ 'GOOD' | translate }}
+          </span>
+          <span ng-show="vm.passStrength >= 83 && vm.passStrength < 100" class="password-strong">
+            : {{ 'STRONG' | translate }}
+          </span>
+          <span ng-show="vm.passStrength == 100" class="password-strong">
+            : {{ 'VERY_STRONG' | translate }}
+          </span>
+        </label>
+
+        <div ng-password-strength="vm.password" mode="bootstrap" strength="vm.passStrength" inner-class="progress-bar"></div>
+      </div>
+
       <button class="btn btn-primary"
         ng-click="vm.register()"
         type="button">
