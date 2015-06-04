@@ -15,6 +15,7 @@
     vm.activate = activate;
     vm.login = login;
     vm.stu = Status;
+    vm.keyUp = keyUp;
 
     var handler = ExceptionHandler;
 
@@ -48,6 +49,12 @@
         $location.path('/member/dashboard');
       })
       .catch(handler.generalHandler);
+    }
+
+    function keyUp(event) {
+      if (event.keyCode == '13') {
+        vm.login();
+      }
     }
   }
 })();

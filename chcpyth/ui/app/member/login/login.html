@@ -11,6 +11,7 @@
           name="email"
           ng-model="vm.email"
           type="email"
+          ng-keyup="vm.keyUp($event)"
           required />
 
         <p>
@@ -30,6 +31,7 @@
           id="password"
           name="password"
           ng-model="vm.password"
+          ng-keyup="vm.keyUp($event)"
           type="password"
           required />
 
