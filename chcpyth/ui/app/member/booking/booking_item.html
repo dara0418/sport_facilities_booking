@@ -35,7 +35,7 @@
 
     <div class="row booking-hr"></div>
 
-    <div class="row dashboard-div" ng-if="!vm.hasCompleted">
+    <div class="row dashboard-div" ng-if="vm.hasCompleted != 'true'">
       <button type="button"
         class="btn btn-primary pull-left active no-round-corner"
         ng-click="vm.selectBooking(vm.booking)">
@@ -48,7 +48,7 @@
       </a>
     </div>
 
-    <div class="row dashboard-div" ng-if"vm.hasCompleted">
+    <div class="row dashboard-div" ng-if="vm.hasCompleted == 'true'">
       <button type="button" class="btn btn-primary pull-left disabled no-round-corner">
         &nbsp;{{ 'BOOKING_COMPLETED' | translate }}
       </button>

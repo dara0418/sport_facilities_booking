@@ -6,14 +6,16 @@
   .controller('MemberEventItemController', eventItemController);
 
   eventItemController.$inject = ['$scope', '$location', '$translate',
-    'Helpers', 'ExceptionHandler', 'ClubPicture'];
+    'Helpers', 'ExceptionHandler', 'ClubPicture', 'EventReg'];
 
   function eventItemController($scope, $location, $translate,
-    Helpers, ExceptionHandler, ClubPicture) {
+    Helpers, ExceptionHandler, ClubPicture, EventReg) {
     var vm = this;
 
     vm.event = $scope.event;
     vm.hasCompleted = $scope.hasCompleted;
+    vm.joinEvent = joinEvent;
+    vm.quitEvent = quitEvent;
     vm.activate = activate;
 
     var handler = ExceptionHandler;
@@ -47,6 +49,30 @@
       vm.endYear = endDate.getFullYear();
       vm.endDow = Helpers.getDayOfWeekStr(endDate.getDay()); // Day of week.
     }
+
+    function joinEvent(event) {
+      var eventReg = {
+        member: vm.member,
+        event: event.resource_uri
+      };
+
+      new EventReg(eventReg).$save()
+      .then(Helpers.saveSuccess)
+      .catch(handler.generalHandler);
+    }
+
+    function quitEvent(event) {
+      EventReg.get({
+        event__ref: event.ref,
+        member_ref: vm.member.ref
+      }).$promise
+      .then(function(eventRegResource) {
+        return eventRegResource.$delete();
+      })
+      .then(Helpers.deleteSuccess)
+      .catch(handler.generalHandler);
+    }
+
 
     function setClubPicture(resource) {
       if ($.isEmptyObject(resource.objects) || resource.objects.length == 0) {

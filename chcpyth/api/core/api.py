@@ -14,7 +14,7 @@ class BaseResource(ModelResource):
     class Meta:
         cache = SimpleCache(timeout=10)
 
-        excludes = ["id", "password", "is_active", "is_staff", "is_superuser"]
+        excludes = ["id", "password", "is_staff", "is_superuser"]
 
         authentication = CHCAuthentication()
 

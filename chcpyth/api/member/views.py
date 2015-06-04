@@ -30,11 +30,11 @@ class MemberAvatar(View):
                 if member.avatar is not None:
                     try:
                         os.remove(member.avatar.file.name)
-                    except IOError:
+                    except:
                         # Ignore if file not exist.
                         pass
 
-                member.avatar = file;
+                member.avatar = file
                 member.save()
 
                 return HttpResponse()

@@ -6,15 +6,13 @@
   .controller('MemberEventController', eventController);
 
   eventController.$inject = ['$scope', 'ExceptionHandler', 'Helpers', 'Event',
-    'EventReg', '$q'];
+    '$q'];
 
   function eventController($scope, ExceptionHandler, Helpers, Event,
-    EventReg, $q) {
+    $q) {
     var vm = this;
 
     vm.activate = activate;
-    vm.joinEvent = joinEvent;
-    vm.quitEvent = quitEvent;
     vm.events = [];
 
     var handler = ExceptionHandler;
@@ -37,29 +35,6 @@
         .then(attachEventRegStatus)
         .catch(handler.generalHandler);
       }
-    }
-
-    function joinEvent(event) {
-      var eventReg = {
-        member: vm.member,
-        event: event.resource_uri
-      };
-
-      new EventReg(eventReg).$save()
-      .then(Helpers.saveSuccess)
-      .catch(handler.generalHandler);
-    }
-
-    function quitEvent(event) {
-      EventReg.get({
-        event__ref: event.ref,
-        member_ref: vm.member.ref
-      }).$promise
-      .then(function(eventRegResource) {
-        return eventRegResource.$delete();
-      })
-      .then(Helpers.deleteSuccess)
-      .catch(handler.generalHandler);
     }
 
     // Private functions.
