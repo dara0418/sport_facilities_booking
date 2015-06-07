@@ -45,18 +45,18 @@ src: local('Roboto Medium'), local('Roboto-Medium'), url(http://fonts.gstatic.co
 }
 
 
-body{font-family: 'Roboto'; font-size:13px; line-height:22px; color:#666;}
 a{ outline:0 none}
 ul,li{ list-style:none; padding:0; }
 .flr{ float:right;}
 .flt{ float:left;}
 
-.logo{position:relative;bottom:10px; z-index:9999; height:1px; padding:15px}
+.logo{
+  z-index: 9999;
+  position: relative;
+}
 .page .logo{ position:relative;bottom:10px;z-index:9999; height:1px;}
-.logo img{ border:#fff solid 4px; border-radius:100%; max-width:178px; width:100%;}
+.logo img{ border:#fff solid 4px; border-radius:100%; max-width:178px; width:80%; }
 
-.navbar{position: inherit !important;margin-bottom: 3px !important;padding:0px 0;}
-.navbar .pull-right {margin:20px 0 15px;}
 ul.top-menu{ padding:0; float:right}
 ul.top-menu li{ list-style:none; display:inline; margin-left:0px;}
 ul.top-menu li a{ display:inline-block; font-size:14px; color:#636363; border-right:#575757 solid 1px; line-height:12px;padding-right:20px;
@@ -98,15 +98,6 @@ ul.media-top li a:hover.signout{ text-decoration:none;}
     padding: 11px 22px 5px 0;
     text-align: center;
 }
-.banner{position:relative;width:100%; clear:both;}
-.banner img{ position:relative; width:100%;}
-
-.banner .container{  width:1170px;}
-.banner-container{  position:absolute; top:22%; left:0; right:0;}
-.banner-content{ background:rgba(0,0,0,0.5); padding:20px 40px;  color:#fff; width:650px; float:right;}
-.banner-content h1{ text-transform:uppercase;font-family: 'Roboto'; font-weight:500; font-size:38px;margin-bottom:20px;}
-.banner-content p{ font-size:16px;}
-
 
 .home-section-article{ clear:both; background:url(../images/plus-m.png) no-repeat center 165px; box-shadow:0 0 6px #ccc;}
 
@@ -405,21 +396,15 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
 .reset-password ul{ width:69%;}
 .accordion .accordion-head h5{ font-size:12px;}
 .lefttable{ padding:0 10px;}
-.banner .container{ width:auto;}
 
 
 }
 @media (min-width:992px) and (max-width:1199px) {
-.banner-content h1{ font-size:30px; }
 }
 
 @media (min-width:768px) and (max-width:992px) {
 .user-section-article .article .description{ width:84% }
-.banner .container{ width:750px;}
-.banner-content h1{ font-size:28px; margin:5px}
-.banner-content p{ font-size:12px; line-height:normal}
 
-.navbar-nav{ float:right;}
 a.sign-in{ display:inline-block; margin:10px 0;}
 .testimonial{ padding:0 15px; width:275px;}
 
@@ -430,17 +415,6 @@ a.sign-in{ display:inline-block; margin:10px 0;}
 .change-password input.form-control,.reset-password .content{ width:auto;}
 .scroll{ overflow-y:auto; display:block; margin-bottom:15px;}
 
-.navbar-collapse{
-    background: none repeat scroll 0 0 #cccccc;
-    float: none;
-    left:0px;
-    padding-top: 15px;
-    position: absolute;
-    right: 0;
-    top: -25%;
-    width: 100%;
-    z-index: 999;
-}
 ul.top-menu li a{ padding:8px !important; margin:0;border:none; border-bottom:#fff dotted 1px; display:block;}
 ul.top-menu li a:hover{ background:#4998db !important; color:#fff !important; border:none;}
 ul.top-menu li {
@@ -450,24 +424,14 @@ ul.top-menu li {
     margin-left: 0;
     width: 100%;
 }
-.navbar-header{ float:right; width:100%;}
 ul.top-menu{ width:100%; float:right; text-align:center; }
 }
 
 @media (min-width:40px) and (max-width:767px) {
-.banner-content,.banner .container{ width:auto;}
-.banner-container{ top:13%;}	
 .dashboard-inner  .col-lg-9{ float: left; margin-bottom: 15px; padding:0;}
 ul.top-menu li{ text-align:center; display:block;}
 ul.top-menu li a{ border:none; font-size:14px; margin:10px 0;}
 
-.navbar-collapse.in {
-    overflow-y: inherit;
-}
-.navbar-collapse{float: none;
-    margin:15px auto;
-    padding: 0;
-    text-align: center;}
 ul.top-menu{ margin-bottom:30px;}
 ul.top-menu li:last-child a{ padding-right:15px;}
 
@@ -481,33 +445,18 @@ ul.footer-menu { margin: 0 auto; padding: 0; text-align: center;}
 ul.footer-menu li a{ display:inline;}
 ul.footer-menu li:last-child a{ margin-right:-15px;}
 
-.navbar .pull-right{ margin:0; float:none !important; padding:0;}
 ul.media-top { margin: 0 7%; padding: 0; text-align: center; width: 100%;}
 
 .page .logo{ position:static; height:100%}
 .logo{ height:100%; padding-bottom:5px}
 .logo img{ width:150px;}
 
-.navbar-header{ float:none; margin:0 auto; text-align:center;}
 .quicklinks, .contact,.testimonial{ width:auto; padding:0; text-align:center}
 .testimonial,.home-section-article{ background:none;}
-.banner-content h1{ font-size:28px; margin:5px}
-.banner-content p{ font-size:12px; line-height:normal}
 ul.media-top li.callnow{ padding-top:10px;}
 ul.media-top{ text-align:right;}
 
 ul.top-menu{ float:none; width:90%; margin:0 auto;}
-.navbar-collapse{
-    background: none repeat scroll 0 0 #cccccc;
-    float: none;
-    left:0px;
-    padding-top: 15px;
-    position: absolute;
-    right: 0;
-    top: -25%;
-    width: 100%;
-    z-index: 999;
-}
 
 .change-password,.reset-password{}
 .profile-links{ margin:15px 0;}
@@ -519,7 +468,6 @@ ul.media-top{ margin:0;}
 .quicklinks h4, .testimonial h4, .contact h4{ clear:both}
 }
 @media (min-width:200px) and (max-width:639px) {
-.banner-container{ display:none}
 
 }
 @media (min-width:200px) and (max-width:479px) {

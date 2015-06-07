@@ -1,9 +1,68 @@
 @import "../bower_components/bootstrap/less/variables.less";
 @import "../bower_components/bootstrap/less/mixins.less";
 @import "../bower_components/bootstrap/less/navs.less";
+@import "variables.less";
 
-// Override bootstrap styles but using different class name
-// to avoid naming conflict.
+/**
+ * General styles.
+ */
+body {
+  font-family: 'Roboto';
+  font-size: 13px;
+  line-height: 22px;
+  color: #666;
+
+  // Make space for bootstrap navbar.
+  padding-top: 110px;
+}
+
+.absolute-pos {
+  position: absolute;
+}
+
+.dotted-border-right {
+  border-style: none dotted none none;
+  border-width: 1px;
+}
+
+.dotted-border-left {
+  border-style: none none none dotted;
+  border-width: 1px;
+}
+
+.booking-hr {
+  border-style: none none dotted none;
+  border-width: 1px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.border-shadow {
+  box-shadow: 0 0 10px #46B0D3;
+}
+
+.top-spacer-md {
+  margin-top: 18px;
+}
+
+.bottom-spacer-md {
+  margin-bottom: 18px;
+}
+
+.bottom-spacer-sm {
+  margin-bottom: 10px;
+}
+
+.font-roboto(@size: 16px; @weight: 400; @style: normal) {
+  font-family: "Roboto";
+  font-size: @size;
+  font-weight: @weight;
+  font-style: @style;
+}
+
+/**
+ * Bootstrap styles overrrides
+ */
 .nav-dashboard {
   .nav
 }
@@ -36,6 +95,9 @@
   border: #dcdbdb solid 1px;
 }
 
+/**
+ * Angular Strap datepicker style.
+ */
 .datepicker.dropdown-menu {
   width: 250px;
   height: 250px;
@@ -67,6 +129,44 @@
   }
 }
 
+/**
+ * Home page styles.
+ */
+.banner img {
+  width: 100%;
+}
+
+.banner-content {
+  background: @trans-black;
+  padding: 20px 40px;
+  color: #fff;
+  width: 650px;
+
+  position: absolute;
+  top: 45%;
+  left: 47%;
+}
+
+.banner-content h1 {
+  .font-roboto(38px, 500);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.banner-content p {
+  .font-roboto;
+}
+
+.footer {
+  width: 100%;
+  float: left;
+  background: #1b4a74;
+  color: #d1dbe3;
+}
+
+/**
+ * Dashboard styles.
+ */
 .dashboard-div {
   padding: 5px 0px 5px 0px;
   font-family: 'Roboto';
@@ -116,22 +216,6 @@
   font-style: italic;
 }
 
-.dotted-border-right {
-  border-style: none dotted none none;
-  border-width: 1px;
-}
-
-.dotted-border-left {
-  border-style: none none none dotted;
-  border-width: 1px;
-}
-
-.booking-hr {
-  border-style: none none dotted none;
-  border-width: 1px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
 
 .pull-left {
   float: left;
@@ -203,25 +287,17 @@
   font-weight: 400;
 }
 
-.border-shadow {
-  box-shadow: 0 0 10px #46B0D3;
-}
-
-.password-font {
-  font-weight: bold;
-}
-
 .password-weak {
-  .password-font;
+  font-weight: bold;
   color: #ff5b5b;
 }
 
 .password-good {
-  .password-font;
+  font-weight: bold;
   color: #46b0d3;
 }
 
 .password-strong {
-  .password-font;
+  font-weight: bold;
   color: #009900;
 }

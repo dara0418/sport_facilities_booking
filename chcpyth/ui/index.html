@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css"/>
     <link rel="stylesheet" href="bower_components/flag-icon-css/css/flag-icon.min.css"/>
 
-    <link rel="stylesheet/less" type="text/css" href="less/index.less" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet/less" type="text/css" href="less/index.less" />
 
     <!-- Referenced javascript libs. -->
     <script type="text/javascript" src="bower_components/less/dist/less.min.js"></script>
@@ -50,6 +50,8 @@
     <script src="app/layouts/footer/footer.js"></script>
     <script src="app/layouts/footer/footer.controller.js"></script>
     <script src="app/layouts/footer/footer.directive.js"></script>
+    <script src="app/layouts/banner/banner.js"></script>
+    <script src="app/layouts/banner/banner.directive.js"></script>
 
     <script src="app/components/components.js"></script>
     <script src="app/components/constants.js"></script>
@@ -229,6 +231,6 @@
     <title>Sports Booking</title>
   </head>
   <body>
-    <div ng-view></div>
+    <div ng-view class="container-fluid"></div>
   </body>
 </html>

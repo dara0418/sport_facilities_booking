@@ -5,24 +5,26 @@
   </div>
 
   <h4>Edit Profile</h4>
-  <div class="profile">
-    <form name="form" novalidate>
+  <div>
+    <form name="form" class="form-horizontal" novalidate>
       <fieldset ng-disabled="vm.stu.isUpdatting()">
-        <!-- Should really use bootstrap standard tags rather than ul, li and span... -->
-        <!-- Their styles are easy to conflict with other plugins. -->
-        <ul>
-          <li class="form-group">
-            <span class="profile-span">{{ 'EMAIL' | translate }}</span>
-            <input class="form-control"
-              id="email"
-              name="email"
-              ng-model="vm.member.email"
-              readonly />
-          </li>
+        <div class="col-md-7">
+          <div class="form-group">
+            <label class="col-md-4 control-label">{{ 'EMAIL' | translate }}</label>
 
-          <li class="li-3">
-            <span class="profile-span">{{ 'TITLE' | translate }}</span>
-            <label>
+            <div class="col-md-8">
+              <input class="form-control"
+                id="email"
+                name="email"
+                ng-model="vm.member.email"
+                readonly />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4">{{ 'TITLE' | translate }}</label>
+
+            <div class="col-md-8">
               <select class="form-control"
                 ng-model="vm.member.title">
                 <option value="" selected>Please select</option>
@@ -30,30 +32,30 @@
                 <option value="MRS">{{ 'MRS' | translate }}</option>
                 <option value="MS">{{ 'MS' | translate }}</option>
               </select>
-            </label>
-          </li>
+            </div>
+          </div>
 
           <!-- Just don't check first_name and last_name. -->
           <!-- Nobody wants to see a message saying something like: your name is invalid! -->
-          <li>
+          <div>
             <span class="profile-span">{{ 'FIRST_NAME' | translate }}</span>
             <input class="form-control"
               id="firstName"
               name="firstname"
               type="text"
               ng-model="vm.member.first_name" />
-          </li>
+          </div>
 
-          <li>
+          <div>
             <span class="profile-span">{{ 'LAST_NAME' | translate }}</span>
             <input class="form-control"
               id="lastName"
               name="lastName"
               type="text"
               ng-model="vm.member.last_name" />
-          </li>
+          </div>
 
-          <li class="li-3">
+          <div class="li-3">
             <span class="profile-span">{{ 'GENDER' | translate }}</span>
             <label>
               <select class="form-control"
@@ -65,9 +67,9 @@
                 <option value="F">{{ 'FEMALE' | translate }}</option>
               </select>
             </label>
-          </li>
+          </div>
 
-          <li>
+          <div>
             <!-- TODO - Check why customised style of datepicker not working. -->
             <span class="profile-span">{{ 'DOB' | translate }}</span>
             <input class="form-control"
@@ -79,9 +81,9 @@
               placement="right"
               ng-keyup="vm.member.dob = ''"
               bs-datepicker />
-          </li>
+          </div>
 
-          <li class="form-group"
+          <div class="form-group"
             ng-class="{ 'has-error': form.landline.$invalid && !form.landline.$pristine }">
             <span class="profile-span">{{ 'PHONE' | translate }}</span>
             <input class="form-control"
@@ -93,9 +95,9 @@
             <p ng-show="form.landline.$error.number && !form.landline.$pristine" class="help-block">
               {{ 'INVALID_PHONE_NUMBER' | translate }}
             </p>
-          </li>
+          </div>
 
-          <li class="form-group"
+          <div class="form-group"
             ng-class="{ 'has-error': form.cellphone.$invalid && !form.cellphone.$pristine }">
             <span class="profile-span">{{ 'CELLPHONE' | translate }}</span>
             <input class="form-control"
@@ -107,10 +109,10 @@
             <p ng-show="form.cellphone.$error.number && !form.cellphone.$pristine" class="help-block">
               {{ 'INVALID_PHONE_NUMBER' | translate }}
             </p>
-          </li>
+          </div>
 
           <div class="hr"></div>
-          <li>
+          <div>
             <button type="button"
               class="btn btn-success"
               ng-click="vm.updateProfile()">
@@ -124,10 +126,10 @@
             <a class="cancel-btn" ng-click="vm.cancel()">
               {{ 'CANCEL' | translate }}
             </a>
-          </li>
-        </ul>
+          </div>
+        </div><!-- End of left container. -->
 
-        <div class="float-r">
+        <div class="col-md-5">
           <div class="row">
             <!-- This will only show the last uploaded photo. This is a trick to reload image-thumb directive. -->
             <!-- By using ng-repeat, the image-thumb directive will get reloaded everytime uploader queue has been changed. -->
