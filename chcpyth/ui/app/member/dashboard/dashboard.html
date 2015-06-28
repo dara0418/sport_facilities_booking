@@ -2,86 +2,79 @@
   <page-header></page-header>
 
   <div class="row">
-    <div class="col-md-offset-2 col-md-8 col-sm-offset-2 col-sm-8 col-xs-offset-2 col-xs-8">
-      <div class="row">
-        <div class="dashboard-inner">
-          <div class="leftbar">
-            <ul class="nav-dashboard nav-tabs-dashboard" role="tablist" id="myTab">
-              <li role="presentation" class="active">
-                <a data-target="#profile"
-                  role="tab"
-                  data-toggle="tab"
-                  ng-click="">
-                  Profile
-                </a>
-              </li>
+    <div class="col-xs-offset-1 col-xs-10 col-md-offset-2 col-md-8 dashboard-inner">
+      <ul class="nav-dashboard nav-tabs-dashboard" role="tablist" id="myTab">
+        <li role="presentation" class="active">
+          <a data-target="#profile"
+            role="tab"
+            data-toggle="tab"
+            ng-click="">
+            {{ 'PROFILE' | translate }}
+          </a>
+        </li>
 
-              <li role="presentation" ng-show="vm.member.is_active">
-                <a data-target="#booking"
-                  role="tab"
-                  data-toggle="tab"
-                  ng-click="">
-                  Booking
-                </a>
-              </li>
+        <li role="presentation" ng-show="vm.member.is_active">
+          <a data-target="#booking"
+            role="tab"
+            data-toggle="tab"
+            ng-click="">
+            {{ 'BOOKINGS' | translate }}
+          </a>
+        </li>
 
-              <li role="presentation" ng-show="vm.member.is_active">
-                <a data-target="#events"
-                  role="tab"
-                  data-toggle="tab"
-                  ng-click="">
-                  Events
-                </a>
-              </li>
+        <li role="presentation" ng-show="vm.member.is_active">
+          <a data-target="#events"
+            role="tab"
+            data-toggle="tab"
+            ng-click="">
+            {{ 'EVENTS' | translate }}
+          </a>
+        </li>
 
-              <li role="presentation" ng-show="vm.member.is_active">
-                <a data-target="#clubs"
-                  role="tab"
-                  data-toggle="tab"
-                  ng-click="">
-                  Clubs
-                </a>
-              </li>
+        <li role="presentation" ng-show="vm.member.is_active">
+          <a data-target="#clubs"
+            role="tab"
+            data-toggle="tab"
+            ng-click="">
+            {{ 'CLUBS' | translate }}
+          </a>
+        </li>
 
-              <li role="presentation" ng-show="vm.member.is_active">
-                <a data-target="#notifications"
-                  role="tab"
-                  data-toggle="tab"
-                  ng-click="">
-                  Notifications
-                </a>
-              </li>
-            </ul>
+        <li role="presentation" ng-show="vm.member.is_active">
+          <a data-target="#notifications"
+            role="tab"
+            data-toggle="tab"
+            ng-click="">
+            {{ 'NOTIFICATIONS' | translate }}
+          </a>
+        </li>
+      </ul>
 
-            <!-- TODO - Use action status to show/hide pages!!! -->
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="profile">
-                <member-profile></member-profile>
-                <member-password></member-password>
-              </div>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="profile">
+          <member-profile></member-profile>
+          <member-password></member-password>
+        </div>
 
-              <div role="tabpanel" class="tab-pane" id="booking">
-                <member-booking ng-show="vm.s.getBooking() === undefined"></member-booking>
-                <booking-profile ng-show="vm.s.getBooking() !== undefined"></booking-profile>
-              </div>
+        <div role="tabpanel" class="tab-pane" id="booking">
+          <member-booking ng-show="vm.s.getBooking() === undefined"></member-booking>
+          <booking-profile ng-show="vm.s.getBooking() !== undefined"></booking-profile>
+        </div>
 
-              <div role="tabpanel" class="tab-pane" id="events">
-                <member-event></member-event>
-              </div>
+        <div role="tabpanel" class="tab-pane" id="events">
+          <member-event></member-event>
+        </div>
 
-              <div role="tabpanel" class="tab-pane" id="clubs">
-                <member-club></member-club>
-              </div>
+        <div role="tabpanel" class="tab-pane" id="clubs">
+          <member-club></member-club>
+        </div>
 
-              <div role="tabpanel" class="tab-pane" id="notifications">
-                <member-notification></member-notification>
-              </div>
-          </div><!-- End of left-bar -->
-        </div><!-- End of dashboard-inner. -->
-
-      </div><!-- End of row. -->
-    </div><!-- End of whole container. -->
-  </div>
+        <div role="tabpanel" class="tab-pane" id="notifications">
+          <member-notification></member-notification>
+        </div>
+      </div>
+    </div><!-- End of column. -->
+  </div><!-- End of row. -->
 
   <page-footer></page-footer>
 </div>

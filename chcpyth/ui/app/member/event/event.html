@@ -1,46 +1,51 @@
-<div ng-init="vm.showHistory = false">
-  <div ng-show="!vm.showHistory">
-    <h4>{{ vm.h.firstCharToUpperCase(('UPCOMING_EVENTS' | translate)) }}</h4>
+<div class="row" ng-init="vm.showHistory = false">
+  <div class="col-xs-12">
+    <div ng-show="!vm.showHistory">
+      <h4 class="tab-content-header text-capitalize">
+        {{ 'UPCOMING' | translate }} {{ 'EVENTS' | translate }}
+      </h4>
 
-    <div>
-      {{ 'SHOW' | translate }}&nbsp;
-      <a ng-click="vm.showHistory = true">{{ 'PAST_EVENTS' | translate }}</a>.
+      <div>
+        {{ 'SHOW' | translate }}
+        <a ng-click="vm.showHistory = true">{{ 'PAST' | translate }} {{ 'EVENTS' | translate }}</a>.
+      </div>
+
+      <div class="dashboard-item-list" ng-repeat="event in upcomingEvents=(vm.events | filterUpcomingEvents)">
+        <member-event-item event="event" has-completed="false"></member-event-item>
+      </div>
+      <div ng-show="upcomingEvents.length == 0">
+        {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'UPCOMING' | translate }} {{ 'EVENTS' | translate }}.
+      </div>
+
+      <h4 class="tab-content-header text-capitalize">
+        {{ 'REGISTERED' | translate }} {{ 'EVENTS' | translate }}
+      </h4>
+      <div class="dashboard-item-list" ng-repeat="event in registeredEvents=(vm.events | filterRegisteredEvents)">
+        <member-event-item event="event" has-completed="false"></member-event-item>
+      </div>
+      <div ng-show="registeredEvents.length == 0">
+        {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'REGISTERED' | translate }} {{ 'EVENTS' | translate }}.
+      </div>
     </div>
 
-    <div class="booking-item-list" ng-repeat="event in upcomingEvents=(vm.events | filterUpcomingEvents)">
-      <member-event-item event="event" has-completed="false"></member-event-item>
-    </div>
-    <div ng-show="upcomingEvents.length == 0">
-      {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'UPCOMING_EVENTS' | translate }}
-    </div>
+    <div ng-show="vm.showHistory">
+      <h4 class="tab-content-header text-capitalize">
+        {{ 'PAST' | translate }} {{ 'EVENTS' | translate }}
+      </h4>
 
-    <h4>{{ vm.h.firstCharToUpperCase(('REGISTERED_EVENTS' | translate)) }}</h4>
-    <div class="booking-item-list" ng-repeat="event in registeredEvents=(vm.events | filterRegisteredEvents)">
-      <member-event-item event="event" has-completed="false"></member-event-item>
-    </div>
-    <div ng-show="registeredEvents.length == 0">
-      {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'REGISTERED_EVENTS' | translate }}
+      <div>
+        {{ 'SHOW' | translate }}
+        <a ng-click="vm.showHistory = false">
+          {{ 'UPCOMING' | translate }} {{ 'EVENTS' | translate }}
+        </a>.
+      </div>
+
+      <div class="dashboard-item-list" ng-repeat="event in pastEvents=(vm.events | filterPastEvents)">
+        <member-event-item event="event" has-completed="true"></member-event-item>
+      </div>
+      <div ng-show="pastEvents.length == 0">
+        {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'PAST' | translate }} {{ 'EVENTS' | translate }}.
+      </div>
     </div>
   </div>
-
-  <div ng-show="vm.showHistory">
-    <h4>{{ vm.h.firstCharToUpperCase(('PAST_EVENTS' | translate)) }}</h4>
-
-    <div>
-      {{ 'SHOW' | translate }}&nbsp;
-      <a ng-click="vm.showHistory = false">
-        {{ 'UPCOMING_EVENTS' | translate }}
-        {{ ('AND' | translate).toLowerCase() }}
-        {{ 'REGISTERED_EVENTS' | translate }}
-      </a>.
-    </div>
-
-    <div class="booking-item-list" ng-repeat="event in pastEvents=(vm.events | filterPastEvents)">
-      <member-event-item event="event" has-completed="true"></member-event-item>
-    </div>
-    <div ng-show="pastEvents.length == 0">
-      {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'PAST_EVENTS' | translate }}
-    </div>
-  </div>
-
 </div>

@@ -1,6 +1,7 @@
 @import "../bower_components/bootstrap/less/variables.less";
 @import "../bower_components/bootstrap/less/mixins.less";
 @import "../bower_components/bootstrap/less/navs.less";
+@import "../bower_components/bootstrap/less/mixins/gradients.less";
 @import "variables.less";
 
 /**
@@ -13,7 +14,7 @@ body {
   color: #666;
 
   // Make space for bootstrap navbar.
-  padding-top: 110px;
+  padding-top: 130px;
 }
 
 .absolute-pos {
@@ -30,7 +31,17 @@ body {
   border-width: 1px;
 }
 
-.booking-hr {
+.hr {
+  margin-left: 15px;
+  border-bottom: #c9c9c9 solid 1px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  color: #000;
+  width: 100%;
+  float: left;
+}
+
+.dashboard-hr {
   border-style: none none dotted none;
   border-width: 1px;
   margin-bottom: 5px;
@@ -137,6 +148,7 @@ body {
 }
 
 .banner-content {
+  .font-roboto;
   background: @trans-black;
   padding: 20px 40px;
   color: #fff;
@@ -145,16 +157,12 @@ body {
   position: absolute;
   top: 45%;
   left: 47%;
-}
 
-.banner-content h1 {
-  .font-roboto(38px, 500);
-  text-transform: uppercase;
-  margin-bottom: 20px;
-}
-
-.banner-content p {
-  .font-roboto;
+  h1 {
+    .font-roboto(38px, 500);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
 }
 
 .footer {
@@ -164,9 +172,33 @@ body {
   color: #d1dbe3;
 }
 
+.shadow {
+  box-shadow: 0 0 8px #999;
+}
+
+.logo {
+  z-index: 9999;
+  position: relative;
+
+  img {
+    border:#fff solid 4px;
+    border-radius:100%;
+    max-width:150px;
+    width:80%;
+  }
+}
+
 /**
  * Dashboard styles.
  */
+.dashboard-inner{
+  box-shadow: 0 0 10px #666;
+  background: #f6f6f6;
+  margin-top: 30px;
+  padding: 15px;
+  margin-bottom: 30px;
+}
+
 .dashboard-div {
   padding: 5px 0px 5px 0px;
   font-family: 'Roboto';
@@ -176,6 +208,15 @@ body {
 .dashboard-div-center {
   .dashboard-div;
   text-align: center;
+}
+
+.dashboard-thumbnail {
+  margin: 0px 0px 0px 20px;
+  background: #f6f6f6;
+  padding: 15px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
 }
 
 .club-name {
@@ -193,24 +234,24 @@ body {
   font-size: 22px;
 }
 
-.booking-day {
+.dashboard-day {
   .dashboard-div-center;
   font-weight: 800;
   font-size: 45px;
 }
 
-.booking-year {
+.dashboard-year {
   .dashboard-div-center;
   font-weight: 600;
 }
 
-.booking-time {
+.dashboard-time {
   .dashboard-div-center;
   font-weight: 600;
   padding-top: 0px;
 }
 
-.booking-dow {
+.dashboard-dow {
   .dashboard-div-center;
   padding-top: 0px;
   font-style: italic;
@@ -221,11 +262,11 @@ body {
   float: left;
 }
 
-.booking-item-list {
+.dashboard-item-list {
   padding: 0px 10px 0px 10px;
 }
 
-.booking-item {
+.dashboard-item {
   border-style: solid solid solid solid;
   border-width: 1px;
   border-color: #ccc;
@@ -300,4 +341,58 @@ body {
 .password-strong {
   font-weight: bold;
   color: #009900;
+}
+
+.tab-content-header {
+  border-bottom: #c9c9c9 solid 1px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  color: #000;
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
+.gray-btn {
+  .font-roboto;
+  font-size: 14px;
+  display: block;
+  color: #7d7d7d;
+  border-left: #ccc solid 1px;
+  padding-left: 30px;
+  width: 80px;
+  height: 37px;
+  padding-top: 7px;
+}
+
+.dashboard-btn {
+  width: 100px;
+}
+
+.dashboard-content {
+  padding: 0px 20px 10px 20px;
+}
+
+.dashboard-links {
+  .font-roboto;
+  font-size: 14px;
+  color: #696969;
+  display: inline-block;
+
+  .a {
+    color: #119ed8;
+  }
+}
+
+.profile-deactivate {
+  .dashboard-links;
+  margin-top: 40%;
+  margin-right: 30px;
+}
+
+.dashboard-panel-header {
+  #gradient > .vertical(#12A1DB; #0784B7);
+  .font-roboto;
+  border: #ccc solid 1px;
+  color: #fff;
+  padding: 15px;
 }

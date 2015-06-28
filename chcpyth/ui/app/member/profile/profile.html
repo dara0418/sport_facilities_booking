@@ -1,198 +1,223 @@
-<div>
-  <div class="alert alert-danger" role="alert" ng-show="!vm.member.is_active">
-    {{ 'ACCOUNT_INACTIVE' | translate }}&nbsp;
-    <a ng-click="vm.activateMember()">{{ 'REQUEST_ACTIVATE' | translate }}</a>
-  </div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="alert alert-danger" role="alert" ng-show="!vm.member.is_active">
+      {{ 'ACCOUNT_INACTIVE' | translate }}
+      <a ng-click="vm.activateMember()">{{ 'REQUEST_ACTIVATE' | translate }}</a>
+    </div>
 
-  <h4>Edit Profile</h4>
-  <div>
-    <form name="form" class="form-horizontal" novalidate>
-      <fieldset ng-disabled="vm.stu.isUpdatting()">
-        <div class="col-md-7">
-          <div class="form-group">
-            <label class="col-md-4 control-label">{{ 'EMAIL' | translate }}</label>
+    <h4 class="tab-content-header text-capitalize">
+      {{ 'EDIT' | translate }} {{ 'PROFILE' | translate }}
+    </h4>
 
-            <div class="col-md-8">
-              <input class="form-control"
-                id="email"
-                name="email"
-                ng-model="vm.member.email"
-                readonly />
+    <div class="row">
+      <div class="col-xs-7">
+        <div class="row">
+          <form name="form" class="form-horizontal" novalidate>
+            <fieldset ng-disabled="vm.stu.isUpdatting()">
+              <div class="form-group">
+                <label class="col-xs-4 control-label">{{ 'EMAIL' | translate }}</label>
+
+                <div class="col-xs-8 form-control-static">
+                  {{ vm.member.email }}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-xs-4 control-label">{{ 'TITLE' | translate }}</label>
+
+                <div class="col-xs-8">
+                  <select class="form-control"
+                    ng-model="vm.member.title">
+                    <option value="" selected>Please select</option>
+                    <option value="MR">{{ 'MR' | translate }}</option>
+                    <option value="MRS">{{ 'MRS' | translate }}</option>
+                    <option value="MS">{{ 'MS' | translate }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Just don't check first_name and last_name. -->
+              <!-- Nobody wants to see a message saying something like: your name is invalid! -->
+              <div class="form-group">
+                <label class="col-xs-4 control-label">{{ 'FIRST_NAME' | translate }}</label>
+
+                <div class="col-xs-8">
+                  <input class="form-control"
+                    id="firstName"
+                    name="firstname"
+                    type="text"
+                    ng-model="vm.member.first_name" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-xs-4 control-label">{{ 'LAST_NAME' | translate }}</label>
+
+                <div class="col-xs-8">
+                  <input class="form-control"
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    ng-model="vm.member.last_name" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-xs-4 control-label">{{ 'GENDER' | translate }}</label>
+                <div class="col-xs-8">
+                  <select class="form-control"
+                    id="gender"
+                    name="gender"
+                    ng-model="vm.member.gender">
+                    <option value="" selected>Please select</option>
+                    <option value="M">{{ 'MALE' | translate }}</option>
+                    <option value="F">{{ 'FEMALE' | translate }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <!-- TODO - Check why customised style of datepicker not working. -->
+                <label class="col-xs-4 control-label">{{ 'DOB' | translate }}</label>
+
+                <div class="col-xs-8">
+                  <input class="form-control"
+                    id="dob"
+                    name="dob"
+                    ng-model="vm.member.dob"
+                    max-date="today"
+                    type="text"
+                    placement="right"
+                    ng-keyup="vm.member.dob = ''"
+                    bs-datepicker />
+                </div>
+              </div>
+
+              <div class="form-group"
+                ng-class="{ 'has-error': form.landline.$invalid && !form.landline.$pristine }">
+                <label class="col-xs-4 control-label">{{ 'PHONE' | translate }}</label>
+
+                <div class="col-xs-8">
+                  <input class="form-control"
+                    id="landline"
+                    name="landline"
+                    ng-model="vm.member.landline"
+                    type="number" />
+
+                  <p ng-show="form.landline.$error.number && !form.landline.$pristine"
+                    class="help-block">
+                    {{ 'INVALID_PHONE_NUMBER' | translate }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="form-group"
+                ng-class="{ 'has-error': form.cellphone.$invalid && !form.cellphone.$pristine }">
+                <label class="col-xs-4 control-label">{{ 'CELLPHONE' | translate }}</label>
+
+                <div class="col-xs-8">
+                  <input class="form-control"
+                    id="cellphone"
+                    name="cellphone"
+                    ng-model="vm.member.cellphone"
+                    type="number" />
+
+                  <p ng-show="form.cellphone.$error.number && !form.cellphone.$pristine" class="help-block">
+                    {{ 'INVALID_PHONE_NUMBER' | translate }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="hr"></div>
+
+              <div class="form-group">
+                <div class="col-xs-4">
+                  <button type="button"
+                    class="btn btn-success pull-right dashboard-btn"
+                    ng-click="vm.updateProfile()">
+                    <span ng-show="vm.stu.isUpdating()">
+                      <i class="fa fa-spinner fa-spin"></i>
+                    </span>
+                    {{ vm.stu.isUpdating() ? ('SAVING' | translate) : ('SAVE' | translate) }}
+                  </button>
+                </div>
+
+                <!-- Reset changes. -->
+                <div class="col-xs-4">
+                  <a class="gray-btn" ng-click="vm.cancel()">
+                    {{ 'CANCEL' | translate }}
+                  </a>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div><!-- End of left column. -->
+
+      <div class="col-xs-5">
+        <div class="row dashboard-thumbnail">
+          <!-- This will only show the last uploaded photo. This is a trick to reload image-thumb directive. -->
+          <!-- By using ng-repeat, the image-thumb directive will get reloaded everytime uploader queue has been changed. -->
+          <span ng-repeat="item in vm.uploader.queue">
+            <div ng-if="vm.uploader.queue.length - 1 == $index"
+              class="col-xs-6 dotted-border-right pull-right"
+              image-thumb="{ file: item._file, width: 180, height: 195}">
             </div>
+          </span>
+
+          <div ng-show="vm.uploader.queue.length == 0" class="col-xs-6 dotted-border-right">
+            <img class="img-thumbnail pull-right"
+              ng-src="{{ vm.avatarSrc }}"
+              style="width: 180px; height: 195px" />
           </div>
 
-          <div class="form-group">
-            <label class="col-md-4">{{ 'TITLE' | translate }}</label>
+          <div class="col-xs-6 flr">
+            <button class="btn btn-block btn-success btn-file active no-round-corner">
+              <i class="fa fa-search"></i>
+              &nbsp;{{ 'CHOOSE_FILE' | translate }}
 
-            <div class="col-md-8">
-              <select class="form-control"
-                ng-model="vm.member.title">
-                <option value="" selected>Please select</option>
-                <option value="MR">{{ 'MR' | translate }}</option>
-                <option value="MRS">{{ 'MRS' | translate }}</option>
-                <option value="MS">{{ 'MS' | translate }}</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Just don't check first_name and last_name. -->
-          <!-- Nobody wants to see a message saying something like: your name is invalid! -->
-          <div>
-            <span class="profile-span">{{ 'FIRST_NAME' | translate }}</span>
-            <input class="form-control"
-              id="firstName"
-              name="firstname"
-              type="text"
-              ng-model="vm.member.first_name" />
-          </div>
-
-          <div>
-            <span class="profile-span">{{ 'LAST_NAME' | translate }}</span>
-            <input class="form-control"
-              id="lastName"
-              name="lastName"
-              type="text"
-              ng-model="vm.member.last_name" />
-          </div>
-
-          <div class="li-3">
-            <span class="profile-span">{{ 'GENDER' | translate }}</span>
-            <label>
-              <select class="form-control"
-                id="gender"
-                name="gender"
-                ng-model="vm.member.gender">
-                <option value="" selected>Please select</option>
-                <option value="M">{{ 'MALE' | translate }}</option>
-                <option value="F">{{ 'FEMALE' | translate }}</option>
-              </select>
-            </label>
-          </div>
-
-          <div>
-            <!-- TODO - Check why customised style of datepicker not working. -->
-            <span class="profile-span">{{ 'DOB' | translate }}</span>
-            <input class="form-control"
-              id="dob"
-              name="dob"
-              ng-model="vm.member.dob"
-              max-date="today"
-              type="text"
-              placement="right"
-              ng-keyup="vm.member.dob = ''"
-              bs-datepicker />
-          </div>
-
-          <div class="form-group"
-            ng-class="{ 'has-error': form.landline.$invalid && !form.landline.$pristine }">
-            <span class="profile-span">{{ 'PHONE' | translate }}</span>
-            <input class="form-control"
-              id="landline"
-              name="landline"
-              ng-model="vm.member.landline"
-              type="number" />
-
-            <p ng-show="form.landline.$error.number && !form.landline.$pristine" class="help-block">
-              {{ 'INVALID_PHONE_NUMBER' | translate }}
-            </p>
-          </div>
-
-          <div class="form-group"
-            ng-class="{ 'has-error': form.cellphone.$invalid && !form.cellphone.$pristine }">
-            <span class="profile-span">{{ 'CELLPHONE' | translate }}</span>
-            <input class="form-control"
-              id="cellphone"
-              name="cellphone"
-              ng-model="vm.member.cellphone"
-              type="number" />
-
-            <p ng-show="form.cellphone.$error.number && !form.cellphone.$pristine" class="help-block">
-              {{ 'INVALID_PHONE_NUMBER' | translate }}
-            </p>
-          </div>
-
-          <div class="hr"></div>
-          <div>
-            <button type="button"
-              class="btn btn-success"
-              ng-click="vm.updateProfile()">
-              <span ng-show="vm.stu.isUpdating()">
-                <i class="fa fa-spinner fa-spin"></i>
-              </span>
-              {{ vm.stu.isUpdating() ? ('SAVING' | translate) : ('SAVE' | translate) }}
+              <input type="file"
+                uploader="vm.uploader"
+                nv-file-select />
             </button>
 
-            <!-- Reset changes. -->
-            <a class="cancel-btn" ng-click="vm.cancel()">
-              {{ 'CANCEL' | translate }}
+            <button class="btn btn-block btn-success active no-round-corner"
+              ng-disabled="vm.uploader.queue.length != 0 && vm.uploader.queue[vm.uploader.queue.length - 1].isUploading"
+              ng-click="vm.uploadAvatar()">
+              <span ng-show="!vm.uploader.queue[vm.uploader.queue.length - 1].isUploading">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span ng-show="vm.uploader.queue[vm.uploader.queue.length - 1].isUploading">
+                <i class="fa fa-spinner fa-spin"></i>
+              </span>
+
+              &nbsp;{{
+                (vm.uploader.queue.length > 0 && vm.uploader.queue[vm.uploader.queue.length - 1].isUploading) ?
+                ('UPLOADING' | translate) :
+                ('UPLOAD' | translate)
+              }}
+            </button>
+
+            <button class="btn btn-block btn-default active no-round-corner"
+              ng-click="vm.resetAvatar()">
+              <i class="fa fa-times"></i>
+              &nbsp;{{ 'CANCEL' | translate }}
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="profile-deactivate pull-right" ng-show="vm.member.is_active">
+            <a ng-click="vm.deactivateMember()" class="text-capitalize">
+              {{ 'DEACTIVATE' | translate }}
             </a>
-          </div>
-        </div><!-- End of left container. -->
-
-        <div class="col-md-5">
-          <div class="row">
-            <!-- This will only show the last uploaded photo. This is a trick to reload image-thumb directive. -->
-            <!-- By using ng-repeat, the image-thumb directive will get reloaded everytime uploader queue has been changed. -->
-            <span ng-repeat="item in vm.uploader.queue">
-              <div ng-if="vm.uploader.queue.length - 1 == $index"
-                class="col-md-6 dotted-border-right"
-                image-thumb="{ file: item._file, width: 130, height: 140}">
-              </div>
+            &nbsp;
+            <span class="text-lowercase">
+              {{ 'MY_ACCOUNT' | translate }}
             </span>
-
-            <div ng-show="vm.uploader.queue.length == 0" class="col-md-6 dotted-border-right">
-              <img class="img-thumbnail"
-                ng-src="{{ vm.avatarSrc }}"
-                style="width: 130px; height: 140px" />
-            </div>
-
-            <div class="col-md-6 flr">
-              <button class="btn btn-block btn-success btn-file active no-round-corner">
-                <i class="fa fa-search"></i>
-                &nbsp;{{ 'CHOOSE_FILE' | translate }}
-
-                <input type="file"
-                  uploader="vm.uploader"
-                  nv-file-select />
-              </button>
-
-              <button class="btn btn-block btn-success active no-round-corner"
-                ng-disabled="vm.uploader.queue.length != 0 && vm.uploader.queue[vm.uploader.queue.length - 1].isUploading"
-                ng-click="vm.uploadAvatar()">
-                <span ng-show="!vm.uploader.queue[vm.uploader.queue.length - 1].isUploading">
-                  <i class="fa fa-upload"></i>
-                </span>
-                <span ng-show="vm.uploader.queue[vm.uploader.queue.length - 1].isUploading">
-                  <i class="fa fa-spinner fa-spin"></i>
-                </span>
-
-                &nbsp;{{
-                  (vm.uploader.queue.length > 0 && vm.uploader.queue[vm.uploader.queue.length - 1].isUploading) ?
-                  ('UPLOADING' | translate) :
-                  ('UPLOAD' | translate)
-                }}
-              </button>
-
-              <button class="btn btn-block btn-default active no-round-corner"
-                ng-click="vm.resetAvatar()">
-                <i class="fa fa-times"></i>
-                &nbsp;{{ 'CANCEL' | translate }}
-              </button>
-            </div>
-
           </div>
         </div>
-
-        <div class="profile-links flr" ng-show="vm.member.is_active">
-          <a class="de-active" ng-click="vm.deactivateMember()">
-            Deactivate
-          </a>
-          &nbsp;
-          <a class="my-account" ng-click="">
-            my account
-          </a>
-        </div>
-      </fieldset>
-    </form>
+      </div><!-- End of right column. -->
+    </div>
   </div>
 </div>

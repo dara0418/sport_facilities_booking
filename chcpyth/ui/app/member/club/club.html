@@ -1,9 +1,14 @@
-<div>
-  <h4>Your Clubs</h4>
-  <div class="booking-item-list" ng-repeat="club in vm.clubs">
-    <member-club-item club="club"></member-club-item>
-  </div>
-  <div ng-show="vm.clubs.length == 0">
-    You hasn't joined any club at the moment.
+<div class="row">
+  <div class="col-xs-12">
+    <h4 class="tab-content-header text-capitalize">
+      {{ 'YOUR' | translate }} {{ 'CLUBS' | translate }}
+    </h4>
+
+    <div class="dashboard-item-list" ng-repeat="club in vm.clubs">
+      <member-club-item club="club"></member-club-item>
+    </div>
+    <div ng-show="vm.clubs.length == 0">
+      {{ 'YOU_HAVENT_JOINED_ANY_CLUB' | translate }}.
+    </div>
   </div>
 </div>

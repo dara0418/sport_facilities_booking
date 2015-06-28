@@ -1,30 +1,30 @@
-<div class="row booking-item">
-  <div class="col-md-3">
+<div class="row dashboard-item">
+  <div class="col-xs-3 col-md-2">
     <img class="img-thumbnail pull-right"
       ng-src="{{ vm.clubImg }}"
       style="width: 150px; height: 170px" />
   </div>
 
-  <div class="col-md-5">
+  <div class="col-xs-5 col-md-6">
     <div class="row">
       <div class="club-name">
         <a ng-click="">{{ vm.event.club.name }}</a>
       </div>
 
-      <div class="booking-hr"></div>
+      <div class="dashboard-hr"></div>
 
       <div class="facility-name">
         <a ng-click="">{{ vm.event.name }}</a>
       </div>
 
-      <div class="booking-hr"></div>
+      <div class="dashboard-hr"></div>
 
       <div class="dashboard-div">
         {{ vm.event.content }}
       </div>
     </div>
 
-    <div class="row booking-hr"></div>
+    <div class="row dashboard-hr"></div>
 
     <div class="row" ng-show="vm.hasCompleted != 'true'">
       <button class="btn btn-primary active no-round-corner"
@@ -55,15 +55,15 @@
           {{ ('START' | translate).toUpperCase() }}
         </div>
 
-        <div class="booking-day">
+        <div class="dashboard-day">
           {{ vm.startDay }}
         </div>
 
-        <div class="booking-year">
+        <div class="dashboard-year">
           {{ vm.startMonth | translate }} {{ vm.startYear }}
         </div>
 
-        <div class="booking-dow">
+        <div class="dashboard-dow">
           {{ vm.startDow | translate }}
         </div>
       </div>
@@ -73,15 +73,15 @@
           {{ ('END' | translate).toUpperCase() }}
         </div>
 
-        <div class="booking-day">
+        <div class="dashboard-day">
           {{ vm.endDay }}
         </div>
 
-        <div class="booking-year">
+        <div class="dashboard-year">
           {{ vm.endMonth | translate }} {{ vm.endYear }}
         </div>
 
-        <div class="booking-dow">
+        <div class="dashboard-dow">
           {{ vm.endDow | translate }}
         </div>
       </div>
