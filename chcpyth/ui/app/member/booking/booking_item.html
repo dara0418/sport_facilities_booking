@@ -30,22 +30,27 @@
         <!-- TODO - Dynamically generate currency symbols. -->
         {{ vm.booking.currency == 'USD' ? '$' : '€' }} {{ vm.booking.rate }}
       </div>
+
+      <div class="dashboard-hr"></div>
+
+      <div class="dashboard-div" ng-if="vm.hasCompleted != 'true'">
+        <div>
+          <button type="button"
+            class="btn btn-primary active no-round-corner pull-left"
+            ng-click="vm.selectBooking(vm.booking)">
+            <i class="fa fa-pencil-square-o fa-gw"></i>
+            &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
+          </button>
+        </div>
+
+        <div class="col-xs-4">
+          <a class="gray-btn" ng-click="vm.cancel()">
+            {{ 'CANCEL' | translate }}
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="row dashboard-hr"></div>
-
-    <div class="row dashboard-div" ng-if="vm.hasCompleted != 'true'">
-      <button type="button"
-        class="btn btn-primary pull-left active no-round-corner"
-        ng-click="vm.selectBooking(vm.booking)">
-        <i class="fa fa-pencil-square-o fa-gw"></i>
-        &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
-      </button>
-
-      <a class="cancel-btn" ng-click="vm.cancel()">
-        {{ 'CANCEL' | translate }}
-      </a>
-    </div>
 
     <div class="row dashboard-div" ng-if="vm.hasCompleted == 'true'">
       <button type="button" class="btn btn-primary pull-left disabled no-round-corner">

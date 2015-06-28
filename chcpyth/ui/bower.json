@@ -22,6 +22,7 @@
     "bootstrap-additions": "~0.3.1",
     "angular-file-upload": "~1.1.5",
     "flag-icon-css": "~0.7.1",
-    "ng-password-strength": "~0.2.1"
+    "ng-password-strength": "~0.2.1",
+    "angular-motion": "~0.4.2"
   }
 }

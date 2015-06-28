@@ -6,10 +6,10 @@
   .controller('MemberBookingItemController', bookingItemController);
 
   bookingItemController.$inject = ['$scope', '$location', '$translate',
-    'Helpers', 'ExceptionHandler', 'Storage', 'ClubPicture'];
+    'Helpers', 'ExceptionHandler', 'Storage', 'ClubPicture', '$modal'];
 
   function bookingItemController($scope, $location, $translate,
-    Helpers, ExceptionHandler, Storage, ClubPicture) {
+    Helpers, ExceptionHandler, Storage, ClubPicture, $modal) {
     var vm = this;
 
     vm.booking = $scope.booking;
@@ -18,6 +18,13 @@
     vm.selectBooking = selectBooking;
     vm.cancelBooking = cancelBooking;
     vm.clubImg = '';
+
+    vm.bookingProfileModal = $modal ({
+      scope: $scope,
+      template: 'app/booking/profile/profile.modal.html',
+      show: false,
+      placement: 'center'
+    });
 
     var handler = ExceptionHandler;
 
@@ -59,6 +66,7 @@
 
     function selectBooking(booking) {
       Storage.setBooking(booking);
+      vm.bookingProfileModal.show();
     }
 
     function cancelBooking() {
