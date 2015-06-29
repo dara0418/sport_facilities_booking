@@ -11,9 +11,7 @@
       templateUrl: 'app/club/profile/profile.html',
       controller: 'ClubProfileController',
       controllerAs: 'vm',
-      scope: {
-        club: '='
-      }
+      scope: {}
     };
 
     return directive;

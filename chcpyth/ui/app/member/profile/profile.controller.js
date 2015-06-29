@@ -38,6 +38,10 @@
     function updateProfile() {
       var member = vm.member;
 
+      if ($scope.form.$invalid) {
+        return;
+      }
+
       if (member === undefined) {
         Notification.notifyFailure('INVALID_LOGIN');
         $location.path('/landing');

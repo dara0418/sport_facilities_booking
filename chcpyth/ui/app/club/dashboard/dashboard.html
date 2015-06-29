@@ -1,56 +1,113 @@
 <div>
   <page-header></page-header>
 
-  <div class="container">
-    <div class="row">
-      <div class="dashboard-inner">
-        <ul class="nav-dashboard nav-tabs-dashboard" role="tablist" id="myTab">
-          <li role="presentation" class="active">
-            <a data-target="#profile" role="tab" data-toggle="tab">Profile</a>
-          </li>
-          <li role="presentation">
-            <a data-target="#booking" role="tab" data-toggle="tab">Bookings</a>
-          </li>
-          <li role="presentation">
-            <a data-target="#events" role="tab" data-toggle="tab">Events</a>
-          </li>
-          <li role="presentation">
-            <a data-target="#members" role="tab" data-toggle="tab">Members</a>
-          </li>
-          <li role="presentation">
-            <a data-target="#facilities" role="tab" data-toggle="tab">Facilities</a>
-          </li>
-        </ul>
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10 col-md-offset-2 col-md-8 dashboard-inner">
+      <ul class="nav-dashboard nav-tabs-dashboard nav-tabs-width-7"
+        role="tablist"
+        id="myTab">
 
-        <!-- TODO - Use action status to show/hide pages!!! -->
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="profile">
-            <club-profile club="vm.club"></club-profile>
-          </div>
+        <li role="presentation" class="active">
+          <a data-target="#profile"
+            role="tab"
+            data-toggle="tab"
+            class="text-capitalize"
+            ng-click="">
+            {{ 'PROFILE' | translate }}
+          </a>
+        </li>
 
-          <div role="tabpanel" class="tab-pane" id="booking">
-            <club-booking club="vm.club" ng-show="vm.s.getBooking() === undefined"></club-booking>
-            <booking-profile ng-show="vm.s.getBooking() !== undefined"></booking-profile>
-          </div>
+        <li role="presentation" ng-show="vm.club.status == 'A'">
+          <a data-target="#photos"
+            role="tab"
+            data-toggle="tab"
+            class="text-capitalize"
+            ng-click="">
+            {{ 'PHOTOS' | translate }}
+          </a>
+        </li>
 
-          <div role="tabpanel" class="tab-pane" id="events">
-            <club-event club="vm.club" ng-show="vm.s.getEvent() === undefined"></club-event>
-            <event-profile ng-show="vm.s.getEvent() !== undefined"></event-profile>
-          </div>
+        <li role="presentation" ng-show="vm.club.status == 'A'">
+          <a data-target="#booking"
+            role="tab"
+            data-toggle="tab"
+            class="text-capitalize"
+            ng-click="">
+            {{ 'BOOKINGS' | translate }}
+          </a>
+        </li>
 
-          <div role="tabpanel" class="tab-pane" id="members">
-            <club-member club="vm.club"></club-member>
-          </div>
+        <li role="presentation" ng-show="vm.club.status == 'A'">
+          <a data-target="#events"
+            role="tab"
+            data-toggle="tab"
+            class="text-capitalize"
+            ng-click="">
+            {{ 'EVENTS' | translate }}
+          </a>
+        </li>
 
-          <div role="tabpanel" class="tab-pane" id="facilities">
-            <club-facility club="vm.club" ng-show="vm.s.getFacility() === undefined"></club-facility>
-            <facility-profile ng-show="vm.s.getFacility() !== undefined"></facility-profile>
-          </div>
-        </div><!-- End of tab-content. -->
+        <li role="presentation" ng-show="vm.club.status == 'A'">
+          <a data-target="#members"
+            role="tab"
+            data-toggle="tab"
+            class="text-capitalize"
+            ng-click="">
+            {{ 'MEMBERS' | translate }}
+          </a>
+        </li>
 
-      </div><!-- End of container-inner. -->
-    </div><!-- End of row. -->
-  </div><!-- End of whole container. -->
+        <li role="presentation" ng-show="vm.club.status == 'A'">
+          <a data-target="#facilities"
+            role="tab"
+            data-toggle="tab"
+            class="text-capitalize"
+            ng-click="">
+            {{ 'FACILITIES' | translate }}
+          </a>
+        </li>
+
+        <li role="presentation" ng-show="vm.club.status == 'A'">
+          <a data-target="#billings"
+            role="tab"
+            data-toggle="tab"
+            class="text-capitalize"
+            ng-click="">
+            {{ 'BILLINGS' | translate }}
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="profile">
+          <club-profile></club-profile>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="photos">
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="booking">
+          <club-booking club="vm.club"></club-booking>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="events">
+          <club-event club="vm.club"></club-event>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="members">
+          <club-member club="vm.club"></club-member>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="facilities">
+          <club-facility club="vm.club"></club-facility>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="billings">
+        </div>
+      </div><!-- End of tab-content. -->
+
+    </div><!-- End of container-inner. -->
+  </div><!-- End of row. -->
 
   <page-footer></page-footer>
 </div>

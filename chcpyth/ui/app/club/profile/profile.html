@@ -1,88 +1,175 @@
-<div>
-  <h4>Edit Profile</h4>
-  <div class="profile">
-    <form class="form" name="form" novalidate>
-      <ul>
-        <li class="form-group">
-          <span class="profile-span">{{ 'NAME' | translate }}</span>
-          <input class="form-control"
-            id="name"
-            name="name"
-            ng-model="vm.club.name" />
-        </li>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="alert alert-danger" role="alert" ng-show="vm.club.status != 'A'">
+      {{ 'CLUB_INACTIVE' | translate }}
+    </div>
 
-        <li class="form-group">
-          <span class="profile-span">{{ 'URL' | translate }}</span>
-          <input class="form-control"
-            id="url"
-            name="url"
-            ng-model="vm.club.url" />
-        </li>
+    <h4 class="tab-content-header text-capitalize">
+      {{ 'EDIT' | translate }} {{ 'PROFILE' | translate }}
+    </h4>
 
-        <li class="li-3">
-          <span class="profile-span">{{ 'STATUS' | translate }}</span>
-          <label>
-            <select class="form-control"
-              ng-model="vm.member.title">
-              <option value="" selected>Please select</option>
-              <!-- TODO - Remove hard coding. -->
-              <option value="A">{{ 'ACTIVE' | translate }}</option>
-              <option value="I">{{ 'INACTIVE' | translate }}</option>
-            </select>
-          </label>
-        </li>
+    <div class="row">
+      <form name="form" class="form-horizontal" novalidate>
+        <fieldset ng-disabled="vm.stu.isUpdating()">
+          <div class="form-group"
+            ng-class="{ 'has-error': form.name.$invalid && !form.name.$pristine }">
+            <label class="col-xs-4 control-label">{{ 'NAME' | translate }}</label>
 
-        <li class="form-group">
-          <span class="profile-span">{{ 'EMAIL' | translate }}</span>
-          <input class="form-control"
-            id="email"
-            name="email"
-            ng-model="vm.club.email" />
-        </li>
+            <div class="col-xs-6">
+              <input class="form-control"
+                id="name"
+                name="name"
+                ng-model="vm.club.name"
+                required />
 
-        <li class="form-group">
-          <span class="profile-span">{{ 'PRIMARY_PHONE' | translate }}</span>
-          <input class="form-control"
-            id="primaryPhone"
-            name="primaryPhone"
-            ng-model="vm.club.primary_phone" />
-        </li>
+              <p>
+                <span ng-show="form.name.$error.required && !form.name.$pristine" class="help-block">
+                  {{ 'EMPTY_FIELD' | translate }}
+                </span>
+              </p>
+            </div>
+          </div>
 
-        <li class="form-group">
-          <span class="profile-span">{{ 'SECONDARY_PHONE' | translate }}</span>
-          <input class="form-control"
-            id="secondaryPhone"
-            name="secondaryPhone"
-            ng-model="vm.club.secondary_phone" />
-        </li>
+          <div class="form-group"
+            ng-class="{ 'has-error': form.url.$invalid && !form.url.$pristine }">
+            <label class="col-xs-4 control-label">{{ 'URL' | translate }}</label>
 
-        <li class="form-group">
-          <span class="profile-span">{{ 'FAX_NUMBER' | translate }}</span>
-          <input class="form-control"
-            id="faxNumber"
-            name="faxNumber"
-            ng-model="vm.club.fax_number" />
-        </li>
+            <div class="col-xs-6">
+              <input class="form-control"
+                id="url"
+                name="url"
+                ng-model="vm.club.url"
+                required />
 
-        <div class="hr"></div>
-        <li>
-          <input type="button"
-            class="btn btn-success"
-            value="Save"
-            ng-click="vm.updateProfile()" />
+              <p>
+                <span ng-show="form.url.$error.required && !form.url.$pristine" class="help-block">
+                  {{ 'EMPTY_FIELD' | translate }}
+                </span>
+              </p>
+            </div>
+          </div>
 
-          <!-- Reset changes. -->
-          <a class="cancel-btn" href="#">Cancel</a>
-        </li>
-      </ul>
+          <div class="form-group"
+            ng-class="{ 'has-error': form.email.$invalid && !form.email.$pristine }">
+            <label class="col-xs-4 control-label">{{ 'EMAIL' | translate }}</label>
 
-      <div class="float-r"><img src="images/profile-img.jpg"><div class="flr"> <label><select class="form-control">
-        <option>Change photo</option>
-        <option>One</option>
-        <option>Two</option>
-        </select></label></div>
-      </div>
+            <div class="col-xs-6">
+              <input class="form-control"
+                id="email"
+                name="email"
+                ng-model="vm.club.email"
+                type="email"
+                required />
 
-      <div class="profile-links flr"><a class="de-active" href="#">Deactivate</a> <a class="my-account" href="#">my club</a></div>
-    </form>
+              <p>
+                <span ng-show="form.email.$error.required && !form.email.$pristine" class="help-block">
+                  {{ 'EMPTY_FIELD' | translate }}
+                </span>
+                <span ng-show="form.email.$error.email && !form.email.$pristine" class="help-block">
+                  {{ 'INVALID_EMAIL' | translate }}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group"
+            ng-class="{ 'has-error': form.primaryPhone.$invalid && !form.primaryPhone.$pristine }">
+            <label class="col-xs-4 control-label">{{ 'PRIMARY_PHONE' | translate }}</label>
+
+            <div class="col-xs-6">
+              <input class="form-control"
+                id="primaryPhone"
+                name="primaryPhone"
+                ng-model="vm.club.primary_phone"
+                type="number"
+                required />
+
+              <p>
+                <span ng-show="form.primaryPhone.$error.number && !form.primaryPhone.$pristine"
+                  class="help-block">
+                  {{ 'INVALID_PHONE_NUMBER' | translate }}
+                </span>
+
+                <span ng-show="form.primaryPhone.$error.required && !form.primaryPhone.$pristine"
+                  class="help-block">
+                  {{ 'EMPTY_FIELD' | translate }}
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group"
+            ng-class="{ 'has-error': form.secondaryPhone.$invalid && !form.secondaryPhone.$pristine }">
+
+            <label class="col-xs-4 control-label">{{ 'SECONDARY_PHONE' | translate }}</label>
+
+            <div class="col-xs-6">
+              <input class="form-control"
+                id="secondaryPhone"
+                name="secondaryPhone"
+                ng-model="vm.club.secondary_phone"
+                type="number" />
+
+              <p ng-show="form.secondaryPhone.$error.number && !form.secondaryPhone.$pristine"
+                class="help-block">
+                {{ 'INVALID_PHONE_NUMBER' | translate }}
+              </p>
+            </div>
+          </div>
+
+          <div class="form-group"
+            ng-class="{ 'has-error': form.faxNumber.$invalid && !form.faxNumber.$pristine }">
+
+            <label class="col-xs-4 control-label">{{ 'FAX_NUMBER' | translate }}</label>
+
+            <div class="col-xs-6">
+              <input class="form-control"
+                id="faxNumber"
+                name="faxNumber"
+                ng-model="vm.club.fax_number"
+                type="number" />
+
+              <p ng-show="form.faxNumber.$error.number && !form.faxNumber.$pristine"
+                class="help-block">
+                {{ 'INVALID_PHONE_NUMBER' | translate }}
+              </p>
+            </div>
+          </div>
+
+          <div class="col-xs-12">
+            <div class="hr"></div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-4">
+              <button type="button"
+                class="btn btn-success pull-right dashboard-btn"
+                ng-click="vm.updateProfile()">
+                <span ng-show="vm.stu.isUpdating()">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </span>
+                {{ vm.stu.isUpdating() ? ('SAVING' | translate) : ('SAVE' | translate) }}
+              </button>
+            </div>
+
+            <!-- Reset changes. -->
+            <div class="col-xs-4">
+              <a class="gray-btn" ng-click="vm.cancel()">
+                {{ 'CANCEL' | translate }}
+              </a>
+            </div>
+
+            <div class="club-deactivate pull-right">
+              <a ng-click="vm.deactivateClub()" class="text-capitalize">
+                {{ 'DEACTIVATE' | translate }}
+              </a>
+              <span class="text-lowercase">
+                {{ 'MY_CLUB' | translate }}
+              </span>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
   </div>
+</div>

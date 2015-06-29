@@ -32,9 +32,8 @@ body {
 }
 
 .hr {
-  margin-left: 15px;
-  border-bottom: #c9c9c9 solid 1px;
   margin-bottom: 20px;
+  border-bottom: #c9c9c9 solid 1px;
   padding-bottom: 10px;
   color: #000;
   width: 100%;
@@ -103,7 +102,6 @@ body {
 }
 
 .nav-tabs-dashboard > li {
-  width:20%;
   text-align:center;
 }
 
@@ -118,6 +116,21 @@ body {
   background: #fff;
   color: #333;
   border: #dcdbdb solid 1px;
+}
+
+// 5 tabs in a row.
+.nav-tabs-width-5 > li {
+  width: 20%;
+}
+
+// 6 tabs in a row.
+.nav-tabs-width-6 > li {
+  width: 16.66%;
+}
+
+// 7 tabs in a row.
+.nav-tabs-width-7 > li {
+  width: 14.25%;
 }
 
 /**
@@ -400,6 +413,11 @@ body {
 .profile-deactivate {
   .dashboard-links;
   margin-top: 40%;
+  margin-right: 30px;
+}
+
+.club-deactivate {
+  .dashboard-links;
   margin-right: 30px;
 }
 
