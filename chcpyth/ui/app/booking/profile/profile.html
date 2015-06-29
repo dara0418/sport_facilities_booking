@@ -1,134 +1,101 @@
 <div>
   <form class="form-horizontal" name="form" novalidate>
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'BOOKING' | translate }} {{ 'DATE' | translate }}
-      </label>
+    <fieldset ng-disabled="vm.stu.isUpdatting()">
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'BOOKING' | translate }} {{ 'DATE' | translate }}
+        </label>
 
-      <div class="col-md-9">
-        <input class="form-control"
-          id="bookingDate"
-          name="bookingDate"
-          ng-model="vm.s.getBooking().booking_date"
-          ng-keyup="vm.member.dob = ''"
-          bs-datepicker />
+        <div class="col-xs-9">
+          <input class="form-control"
+            id="bookingDate"
+            name="bookingDate"
+            ng-model="vm.booking.booking_date"
+            ng-keyup="vm.booking.booking_date = ''"
+            bs-datepicker />
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'BOOKING' | translate }} {{ 'TIMESLOT' | translate }}
-      </label>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'BOOKING' | translate }} {{ 'TIMESLOT' | translate }}
+        </label>
 
-      <div class="col-md-9">
-        <input class="form-control"
-          id="bookingTimeslot"
-          name="bookingTimeslot"
-          ng-model="vm.s.getBooking().booking_timeslot" />
+        <div class="col-xs-9">
+          <input class="form-control"
+            id="bookingTimeslot"
+            name="bookingTimeslot"
+            ng-model="vm.booking.booking_timeslot" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'TIME_UNIT' | translate }}
-      </label>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'DURATION' | translate }}
+        </label>
 
-      <div class="col-md-9">
-        <select class="form-control"
-          ng-model="vm.s.getBooking().time_unit">
-          <option value="" selected>Please select</option>
-          <!-- TODO - Remove hard coding. -->
-          <option value="M">{{ 'MINUTE' | translate }}</option>
-          <option value="H">{{ 'HOUR' | translate }}</option>
-          <option value="D">{{ 'DAY' | translate }}</option>
-          <option value="N">{{ 'MONTH' | translate }}</option>
-          <option value="Y">{{ 'YEAR' | translate }}</option>
-        </select>
+        <div class="col-xs-9">
+          <div class="row">
+            <div class="col-xs-6">
+              <input class="form-control"
+                id="duration"
+                name="duration"
+                ng-model="vm.booking.duration" />
+            </div>
+            <div class="col-xs-6">
+              <select class="form-control"
+                ng-model="vm.booking.time_unit">
+                <option value="" selected>Please select</option>
+                <!-- TODO - Remove hard coding. -->
+                <option value="M">{{ 'MINUTE' | translate }}</option>
+                <option value="H">{{ 'HOUR' | translate }}</option>
+                <option value="D">{{ 'DAY' | translate }}</option>
+                <option value="N">{{ 'MONTH' | translate }}</option>
+                <option value="Y">{{ 'YEAR' | translate }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'DURATION' | translate }}
-      </label>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'NOTES' | translate }}
+        </label>
 
-      <div class="col-md-9">
-        <input class="form-control"
-          id="duration"
-          name="duration"
-          ng-model="vm.s.getBooking().duration" />
+        <div class="col-xs-9">
+          <textarea class="form-control"
+            id="notes"
+            name="notes"
+            rows="3"
+            ng-model="vm.booking.notes" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'NOTES' | translate }}
-      </label>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'NUM_OF_BOOKING' | translate }}
+        </label>
 
-      <div class="col-md-9">
-        <input class="form-control"
-          id="notes"
-          name="notes"
-          ng-model="vm.s.getBooking().notes" />
+        <div class="col-xs-9">
+          <select class="form-control"
+            id="numOfBooking"
+            name="numOfBooking"
+            ng-model="vm.booking.num_of_booking"
+            ng-options="n for n in [] | range:1:vm.booking.maxAllowedPeople">
+          </select>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'NUM_OF_BOOKING' | translate }}
-      </label>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'RATE' | translate }}
+        </label>
 
-      <div class="col-md-9">
-        <input class="form-control"
-          id="numOfBooking"
-          name="numOfBooking"
-          ng-model="vm.s.getBooking().num_of_booking" />
+        <div class="col-xs-9 form-control-static">
+          {{ vm.booking.rate | isoCurrency:vm.booking.currency }}
+        </div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'RATE' | translate }}
-      </label>
-
-      <div class="col-md-9">
-        <input class="form-control"
-          id="rate"
-          name="rate"
-          ng-model="vm.s.getBooking().rate" />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="col-md-3 control-label text-capitalize">
-        {{ 'CURRENCY' | translate }}
-      </label>
-
-      <div class="col-md-9">
-        <input class="form-control"
-          id="currency"
-          name="currency"
-          ng-model="vm.s.getBooking().currency" />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-md-3"><span></span></div>
-
-      <div class="col-md-9">
-        <button class="btn btn-primary"
-          ng-click="vm.update()">
-          <i class="fa fa-gw fa-refresh"></i>
-          &nbsp;Update
-        </button>
-        &nbsp; &nbsp;
-        <button class="btn btn-danger"
-          ng-click="vm.remove()">
-          <i class="fa fa-gw fa-trash"></i>
-          &nbsp;Cancel
-        </button>
-      </div>
-    </div>
+    </fieldset>
   </form>
-
 </div>

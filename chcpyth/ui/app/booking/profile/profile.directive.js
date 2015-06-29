@@ -11,7 +11,9 @@
       templateUrl: 'app/booking/profile/profile.html',
       controller: 'BookingProfileController',
       controllerAs: 'vm',
-      scope: {}
+      scope: {
+        booking: '='
+      }
     };
 
     return directive;

@@ -1,3 +1,4 @@
+<!-- The parent scope of this modal must have a 'booking' object to work properly. -->
 <div class="modal fade"
   aria-hidden="true"
   tabindex="-1"
@@ -8,7 +9,8 @@
         <button type="button"
           class="close"
           data-dismiss="modal"
-          aria-label="Close">
+          aria-label="Close"
+          ng-click="$hide()">
           <span aria-hidden="true">&times;</span>
         </button>
 
@@ -18,21 +20,25 @@
       </div>
 
       <div class="modal-body">
-        <booking-profile></booking-profile>
+        <booking-profile booking="vm.booking"></booking-profile>
       </div>
 
       <div class="modal-footer">
         <button type="button"
           class="btn btn-default text-capitalize"
-          data-dismiss="modal">
+          data-dismiss="modal"
+          ng-click="$hide()"
+          ng-disabled="vm.stu.isUpdating()">
           {{ 'CLOSE' | translate }}
         </button>
 
-        <button type="button" class="btn btn-primary text-capitalize">
-          {{ 'UPDATE' | translate}}
+        <button type="button"
+          class="btn btn-primary text-capitalize"
+          ng-click="vm.update()"
+          ng-disabled="vm.stu.isUpdating()">
+          {{ vm.stu.isUpdating() ? ('UPDATING' | translate) : ('UPDATE' | translate) }}
         </button>
       </div>
     </div>
   </div>
 </div>
-

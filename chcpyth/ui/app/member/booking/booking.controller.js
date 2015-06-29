@@ -58,6 +58,13 @@
       var bookingMembers = bookingMemberResource.objects;
 
       $.each(bookingMembers, function(index, bm) {
+        // Set max allowed people of the booking.
+        // TODO - Query general rule, club rule and facility rule
+        //        to get the max allowed people of the booking.
+        //        Currently just set to 30 to make things working and
+        //        this will be changed later.
+        bm.booking.maxAllowedPeople = 30;
+
         vm.bookings.push(bm.booking);
       });
     }

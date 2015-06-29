@@ -11,6 +11,7 @@
     'app.components.shared_properties',
     'app.components.exception_handler',
     'app.components.image_thumb',
-    'app.components.input_match'
+    'app.components.input_match',
+    'app.components.filters'
   ]);
 })();

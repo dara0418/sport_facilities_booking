@@ -28,6 +28,8 @@
       getTimeUnitStr: getTimeUnitStr,
       getMonthStr: getMonthStr,
       isString: isString,
+
+      // TODO - This function will be deprecated.
       firstCharToUpperCase: firstCharToUpperCase
     };
 

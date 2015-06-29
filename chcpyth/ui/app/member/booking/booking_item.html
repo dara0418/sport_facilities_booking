@@ -27,8 +27,7 @@
       <div class="dashboard-hr"></div>
 
       <div class="price">
-        <!-- TODO - Dynamically generate currency symbols. -->
-        {{ vm.booking.currency == 'USD' ? '$' : '€' }} {{ vm.booking.rate }}
+        {{ vm.booking.rate | isoCurrency:vm.booking.currency }}
       </div>
 
       <div class="dashboard-hr"></div>
@@ -37,7 +36,7 @@
         <div>
           <button type="button"
             class="btn btn-primary active no-round-corner pull-left"
-            ng-click="vm.selectBooking(vm.booking)">
+            ng-click="vm.viewProfile()">
             <i class="fa fa-pencil-square-o fa-gw"></i>
             &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
           </button>

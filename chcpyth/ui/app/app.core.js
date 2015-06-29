@@ -9,6 +9,7 @@
     'pascalprecht.translate',
     'ui.calendar',
     'angularFileUpload',
-    'ngPasswordStrength'
+    'ngPasswordStrength',
+    'isoCurrency'
   ]);
 })();

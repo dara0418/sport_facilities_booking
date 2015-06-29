@@ -6,18 +6,22 @@
   .controller('MemberBookingItemController', bookingItemController);
 
   bookingItemController.$inject = ['$scope', '$location', '$translate',
-    'Helpers', 'ExceptionHandler', 'Storage', 'ClubPicture', '$modal'];
+    'Helpers', 'ExceptionHandler', 'ClubPicture', '$modal', 'Booking',
+    'Status'];
 
   function bookingItemController($scope, $location, $translate,
-    Helpers, ExceptionHandler, Storage, ClubPicture, $modal) {
+    Helpers, ExceptionHandler, ClubPicture, $modal, Booking,
+    Status) {
     var vm = this;
 
     vm.booking = $scope.booking;
     vm.hasCompleted = $scope.hasCompleted;
     vm.activate = activate;
-    vm.selectBooking = selectBooking;
+    vm.viewProfile = viewProfile;
     vm.cancelBooking = cancelBooking;
     vm.clubImg = '';
+    vm.update = update;
+    vm.stu = Status;
 
     vm.bookingProfileModal = $modal ({
       scope: $scope,
@@ -64,8 +68,41 @@
       vm.timeUnit = Helpers.getTimeUnitStr(vm.booking.time_unit);
     }
 
-    function selectBooking(booking) {
-      Storage.setBooking(booking);
+    function update() {
+      var booking = vm.booking;
+
+      if ($.isEmptyObject(booking.ref)) {
+        // No ref, quit.
+        return;
+      }
+
+      // TODO - Research the underlying actions of creating a resource with foreign key
+      // relationship in Tastypie. Passing facility object directly will toggle an 'UNIQUE'
+      // constraint, which is not we want.
+      var facility = booking.facility;
+      booking.facility = booking.facility.resource_uri;
+
+      Status.setStatusUpdating();
+
+      // TODO - Verify the availability of the changes of booking.
+      new Booking(booking).$update()
+      .then(updateSuccess)
+      .catch(handler.generalHandler);
+
+      // Reset facility.
+      booking.facility = facility;
+    }
+
+    function updateSuccess() {
+      Helpers.updateSuccess();
+      vm.bookingProfileModal.hide();
+
+      Status.resetStatus();
+    }
+
+    function viewProfile() {
+      // TODO - There's an exception thrown when showing the modal, it doesn't hurt the functions.
+      //        Research the cause of exception.
       vm.bookingProfileModal.show();
     }
 
