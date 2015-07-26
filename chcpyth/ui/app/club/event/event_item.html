@@ -1,20 +1,78 @@
-<div class="row">
-  <div class="col-md-6">
-    <h5>{{ vm.event.club.name }}</h5>
-    <h5>{{ vm.event.name }}</h5>
-    <p>{{ vm.event.content }}</p>
-
+<div class="row dashboard-item">
+  <div class="col-xs-7 col-xs-offset-1">
     <div class="row">
-      <button class="btn btn-primary btn-sm" ng-click="vm.selectEvent()">
-        <i class="fa fa-pencil-square-o fa-gw"></i>
-        &nbsp;View/Edit
+      <div class="club-name">
+        <a ng-click="">{{ vm.event.name }}</a>
+      </div>
+
+      <div class="dashboard-hr"></div>
+
+      <div class="dashboard-div">
+        {{ vm.event.content }}
+      </div>
+    </div>
+
+    <div class="row dashboard-hr"></div>
+
+    <div class="row" ng-show="vm.hasCompleted != 'true'">
+      <button class="btn btn-primary active no-round-corner"
+        ng-click="vm.viewProfile()"
+        ng-if="!event.hasJoined">
+        <i class="fa fa-gw fa-user-plus"></i>
+        &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
       </button>
-      &nbsp; &nbsp;
-      <button class="btn btn-danger btn-sm">
-        <i class="fa fa-trash fa-gw"></i>
-        &nbsp;Cancel
+      <button class="btn btn-danger active no-round-corner"
+        ng-click="vm.cancelEvent()"
+        ng-if="event.hasJoined">
+        <i class="fa fa-gw fa-user-times"></i>
+        &nbsp;{{ 'CANCEL' | translate }}
+      </button>
+    </div>
+
+    <div class="row" ng-show="vm.hasCompleted == 'true'">
+      <button type="button" class="btn btn-primary pull-left disabled no-round-corner">
+        &nbsp;{{ 'EVENT_COMPLETED' | translate }}
       </button>
     </div>
   </div>
+
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-md-6 dotted-border-right">
+        <div class="dashboard-div-center">
+          {{ ('START' | translate).toUpperCase() }}
+        </div>
+
+        <div class="dashboard-day">
+          {{ vm.startDay }}
+        </div>
+
+        <div class="dashboard-year">
+          {{ vm.startMonth | translate }} {{ vm.startYear }}
+        </div>
+
+        <div class="dashboard-dow">
+          {{ vm.startDow | translate }}
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="dashboard-div-center">
+          {{ ('END' | translate).toUpperCase() }}
+        </div>
+
+        <div class="dashboard-day">
+          {{ vm.endDay }}
+        </div>
+
+        <div class="dashboard-year">
+          {{ vm.endMonth | translate }} {{ vm.endYear }}
+        </div>
+
+        <div class="dashboard-dow">
+          {{ vm.endDow | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- HISTORY/CURRENT Event FILTER. -->

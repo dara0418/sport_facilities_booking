@@ -6,15 +6,15 @@
   .controller('ClubBookingController', controller);
 
   controller.$inject = ['$scope', '$translate', 'Helpers', '$location',
-    'ExceptionHandler', 'Booking', 'BookingMember', '$q'];
+    'ExceptionHandler', 'Booking', 'BookingMember', '$q', 'Storage'];
 
   function controller($scope, $translate, Helpers, $location,
-    ExceptionHandler, Booking, BookingMember, $q) {
+    ExceptionHandler, Booking, BookingMember, $q, Storage) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
-    vm.club = $scope.club;
+    vm.club = Storage.getClub();
     vm.activate = activate;
 
     vm.bookings = [];
@@ -53,10 +53,11 @@
 
           $.each(bookingMemberResource.objects, function(index, bMember) {
             if (bMember.is_booker) {
-              booking.booker = bMember.member.email;
+              booking.booker = bMember.member;
             }
 
-            booking.members += bMember.member.email + ' ';
+            booking.members += bMember.member.first_name + ' ' + bMember.member.last_name +
+              (booking.members.length > 0 ? ', ' : '');
           });
 
           return booking;

@@ -1,9 +1,45 @@
-<div>
-  <h4>Current events of club {{ vm.club.name }}</h4>
+<div class="row" ng-init="vm.showHistory = false">
+  <div class="col-xs-12">
+    <div ng-show="!vm.showHistory">
+      <h4 class="tab-content-header text-capitalize">
+        {{ 'UPCOMING' | translate }} {{ 'EVENTS' | translate }}
+        <a ng-click="vm.createProfile()" class="pull-right">
+          <i class="fa fa-plus"></i>
+          {{ 'NEW' | translate }}
+        </a>
+      </h4>
 
-  <div ng-repeat="event in vm.events">
-    <club-event-item event="event"></club-event-item>
+      <div>
+        {{ 'SHOW' | translate }}
+        <a ng-click="vm.showHistory = true">{{ 'PAST' | translate }} {{ 'EVENTS' | translate }}</a>.
+      </div>
+
+      <div class="dashboard-item-list" ng-repeat="event in upcomingEvents=(vm.events | filterUpcomingEvents:true)">
+        <club-event-item event="event" has-completed="false"></club-event-item>
+      </div>
+      <div ng-show="upcomingEvents.length == 0">
+        {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'UPCOMING' | translate }} {{ 'EVENTS' | translate }}.
+      </div>
+    </div>
+
+    <div ng-show="vm.showHistory">
+      <h4 class="tab-content-header text-capitalize">
+        {{ 'PAST' | translate }} {{ 'EVENTS' | translate }}
+      </h4>
+
+      <div>
+        {{ 'SHOW' | translate }}
+        <a ng-click="vm.showHistory = false">
+          {{ 'UPCOMING' | translate }} {{ 'EVENTS' | translate }}
+        </a>.
+      </div>
+
+      <div class="dashboard-item-list" ng-repeat="event in pastEvents=(vm.events | filterPastEvents:true)">
+        <club-event-item event="event" has-completed="true"></club-event-item>
+      </div>
+      <div ng-show="pastEvents.length == 0">
+        {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'PAST' | translate }} {{ 'EVENTS' | translate }}.
+      </div>
+    </div>
   </div>
-
-  <h4>Past events</h4>
 </div>

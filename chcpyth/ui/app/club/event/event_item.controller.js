@@ -14,7 +14,9 @@
 
     vm.event = $scope.event;
     vm.activate = activate;
-    vm.selectEvent = selectEvent;
+    vm.hasCompleted = $scope.hasCompleted;
+    vm.viewProfile = viewProfile;
+    vm.cancelEvent = cancelEvent;
 
     var handler = ExceptionHandler;
 
@@ -25,12 +27,27 @@
       Helpers.safeGetLoginMember(vm);
 
       if ($.isEmptyObject(vm.member)) {
-        $location.path('/member/login');
+        $location.path('/home');
       }
+
+      // Calculate event start&end date.
+      var startDate = new Date(vm.event.start);
+      vm.startDay = startDate.getDate();
+      vm.startMonth = Helpers.getMonthStr(startDate.getMonth());
+      vm.startYear = startDate.getFullYear();
+      vm.startDow = Helpers.getDayOfWeekStr(startDate.getDay()); // Day of week.
+
+      var endDate = new Date(vm.event.start);
+      vm.endDay = endDate.getDate();
+      vm.endMonth = Helpers.getMonthStr(endDate.getMonth());
+      vm.endYear = endDate.getFullYear();
+      vm.endDow = Helpers.getDayOfWeekStr(endDate.getDay()); // Day of week.
     }
 
-    function selectEvent() {
-      Storage.setEvent(vm.event);
+    function viewProfile() {
+    }
+
+    function cancelEvent() {
     }
   }
 })();

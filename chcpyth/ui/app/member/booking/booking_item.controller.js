@@ -39,7 +39,7 @@
       Helpers.safeGetLoginMember(vm);
 
       if ($.isEmptyObject(vm.member)) {
-        $location.path('/landing');
+        $location.path('/home');
       }
 
       var address = vm.booking.facility.club.address;

@@ -1,29 +1,14 @@
-<div>
-  <h2>Members of Club {{ vm.club.name }}</h2>
-  <div ng-repeat="membership in vm.memberships">
-    {{ membership.member.email }}<br/>
-    {{ membership.role }}<br/>
-    <button ng-click="vm.removeMember(membership)">
-      {{ 'REMOVE_MEMBER' | translate }}
-    </button><br/>
+<div class="row">
+  <div class="col-xs-12">
+    <h4 class="tab-content-header text-capitalize">
+      {{ 'MEMBERS_OF_CLUB' | translate }} ({{ vm.club.name }})
+    </h4>
 
-    <div>
-      <div class="form-group">
-        <label>{{ 'CHANGE_ROLE' | translate }}</label>
-
-        <select class="form-control"
-          ng-model="membership.newRole">
-          <option value="" selected>Please select</option>
-          <option value="{{ vm.mRole.ADMIN }}">{{ 'ADMIN' | translate }}</option>
-          <option value="{{ vm.mRole.PROFESSOR }}">{{ 'PROFESSOR' | translate }}</option>
-          <option value="{{ vm.mRole.MEMBER }}">{{ 'MEMBER' | translate }}</option>
-        </select>
-      </div>
-      <button ng-click="vm.changeRole(membership)">
-        {{ 'UPDATE' | translate }}
-      </button><br/>
-      <hr/>
+    <div class="dashboard-item-list" ng-repeat="member in vm.members">
+      <club-member-item member="member"></club-member-item>
+    </div>
+    <div ng-show="vm.members.length == 0">
+      {{ 'CLUB_NO_MEMBERS' | translate }}
     </div>
   </div>
 </div>
-

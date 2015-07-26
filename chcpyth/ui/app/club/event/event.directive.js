@@ -11,9 +11,7 @@
       templateUrl: 'app/club/event/event.html',
       controller: 'ClubEventController',
       controllerAs: 'vm',
-      scope: {
-        club: '='
-      }
+      scope: { }
     };
 
     return directive;

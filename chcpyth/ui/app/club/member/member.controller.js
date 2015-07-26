@@ -5,23 +5,18 @@
 
   .controller('ClubMemberController', controller);
 
-  controller.$inject = ['$scope', '$location', '$translate',
-    'Membership', 'ExceptionHandler', 'Helpers',
-    'MembershipRole'];
+  controller.$inject = ['$scope', '$location', 'Membership',
+    'ExceptionHandler', 'Helpers', 'Storage'];
 
-  function controller($scope, $location, $translate,
-    Membership, ExceptionHandler, Helpers,
-    MembershipRole) {
+  function controller($scope, $location, Membership,
+    ExceptionHandler, Helpers, Storage) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
+    vm.club = Storage.getClub();
+    vm.members = [];
     vm.activate = activate;
-    vm.changeRole = changeRole;
-    vm.removeMember = removeMember;
-    vm.club = $scope.club;
-
-    vm.mRole = MembershipRole;
 
     vm.activate();
 
@@ -31,7 +26,7 @@
       // Pull membership requests of the selected club.
       if (vm.club !== undefined) {
         Membership.get({ club__ref: vm.club.ref }).$promise
-        .then(setMemberships)
+        .then(setMembers)
         .catch(handler.generalHandler);
       }
     }
@@ -61,8 +56,13 @@
 
     // Private functions.
 
-    function setMemberships(membershipResource) {
-      vm.memberships = membershipResource.objects;
+    function setMembers(membershipResource) {
+      $.each(membershipResource.objects, function(index, membership) {
+        var member = membership.member;
+        member.role = membership.role;
+        vm.members.push(member);
+      });
+      console.log(vm.members);
     }
   }
 })();

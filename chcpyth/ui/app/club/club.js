@@ -9,6 +9,7 @@
     'app.club.booking',
     'app.club.event',
     'app.club.facility',
-    'app.club.member'
+    'app.club.member',
+    'app.club.photo'
   ]);
 })();

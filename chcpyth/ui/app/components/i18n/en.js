@@ -84,6 +84,7 @@
       FACILITIES: 'facilities',
       BILLINGS: 'billings',
       PHOTOS: 'photos',
+      NA: 'N/A',
 
       TITLE: 'Title',
       MR: 'Mr.',
@@ -146,6 +147,12 @@
       UNREGISTER_EVENT: 'Unregistered event',
       YOU_DONT_HAVE_ANY: 'You don\'t have any',
       YOU_HAVENT_JOINED_ANY_CLUB: 'You have\'t joined any club',
+      MEMBERS_OF_CLUB: 'members of club',
+      CLUB_NO_MEMBERS: 'There\'re no members in the club.',
+      VIEW_MEMBER: 'Member Details',
+      REMOVE_MEMBER: 'Remove Member',
+      IT_IS_YOU: 'It\'s you',
+      CHANGE_ROLE: 'Change role',
 
       // A list of shortcuts of months.
       MONTH_JAN: 'JAN',

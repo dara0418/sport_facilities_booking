@@ -12,7 +12,8 @@
       controller: 'ClubEventItemController',
       controllerAs: 'vm',
       scope: {
-        event: '='
+        event: '=',
+        hasCompleted: '@'
       }
     };
 

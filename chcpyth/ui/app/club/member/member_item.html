@@ -1,0 +1,73 @@
+<div class="row dashboard-item">
+  <div class="col-xs-3 col-md-2">
+    <img class="img-thumbnail pull-right"
+      ng-src="{{ vm.avatarSrc }}"
+      style="width: 150px; height: 170px" />
+  </div>
+
+  <div class="col-xs-5 col-md-6">
+    <div class="row">
+      <div class="club-name">
+        <a ng-click="">{{ vm.member.first_name + ' ' + vm.member.last_name }}</a>
+
+        <span ng-if="vm.member.email == vm.loginMember.email" class="badge active text-capitalize">
+          {{ 'IT_IS_YOU' | translate }}
+        </span>
+      </div>
+
+      <div class="dashboard-hr"></div>
+
+      <div class="dashboard-tip" ng-show="vm.member.role == 'A'">
+        <i class="fa fa-wrench"></i>
+        &nbsp;{{ 'ADMIN' | translate }}
+      </div>
+      <div class="dashboard-tip" ng-show="vm.member.role == 'P'">
+        <i class="fa fa-graduation-cap"></i>
+        &nbsp;{{ 'PROFESSOR' | translate }}
+      </div>
+      <div class="dashboard-tip" ng-show="vm.member.role == 'M'">
+        <i class="fa fa-user"></i>
+        &nbsp;{{ 'MEMBER' | translate }}
+      </div>
+
+      <div class="dashboard-hr"></div>
+
+      <div class="dashboard-address">
+        <i class="fa fa-envelope"></i>
+        &nbsp;{{ vm.member.email }}
+      </div>
+
+      <div class="dashboard-hr"></div>
+
+      <div class="dashboard-address">
+        <i class="fa fa-phone-square"></i>
+        &nbsp;{{ vm.member.landline === undefined ? ('NA' | translate) : vm.member.landline }}
+      </div>
+
+      <div class="dashboard-hr"></div>
+
+      <div class="dashboard-address">
+        <i class="fa fa-mobile"></i>
+        &nbsp;{{ vm.member.cellphone === undefined ? ('NA' | translate) : vm.member.cellphone }}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-4" ng-if="vm.member.email != vm.loginMember.email">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <button class="btn btn-block btn-primary active no-round-corner text-capitalize" ng-click="vm.viewProfile()">
+          {{ 'VIEW_MEMBER' | translate }}
+        </button>
+        <button class="btn btn-block btn-primary active no-round-corner text-capitalize" ng-click="vm.chageRole()">
+          {{ 'CHANGE_ROLE' | translate }} <!-- DROPDOWN MENU. -->
+        </button>
+        <button class="btn btn-block btn-default active no-round-corner text-capitalize"
+          ng-if="vm.member.role != 'A'"
+          ng-click="vm.removeMember()">
+          {{ 'REMOVE_MEMBER' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

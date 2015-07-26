@@ -1,6 +1,39 @@
-<div>
-  <h4>Current reservations</h4>
-  <div ng-repeat="booking in vm.bookings">
-    <club-booking-item booking="booking"></club-booking-item>
+<div class="row" ng-init="vm.showHistory = false">
+  <div class="col-xs-12">
+    <div ng-show="!vm.showHistory">
+      <h4 class="tab-content-header text-capitalize">
+        {{ 'CURRENT' | translate }} {{ 'BOOKINGS' | translate }}
+      </h4>
+
+      <div>
+        {{ 'SHOW' | translate }}
+        <a ng-click="vm.showHistory = true">{{ 'HISTORY' | translate }} {{ 'BOOKINGS' | translate }}</a>.
+      </div>
+
+      <div class="dashboard-item-list" ng-repeat="booking in currentBookings=(vm.bookings | bookingsAfterToday)">
+        <club-booking-item booking="booking" has-completed="false"></club-booking-item>
+      </div>
+      <div ng-show="currentBookings.length == 0">
+        {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'CURRENT' | translate }} {{ 'BOOKINGS' | translate }}.
+      </div>
+    </div>
+
+    <div ng-show="vm.showHistory">
+      <h4 class="tab-content-header text-capitalize">
+        {{ 'HISTORY' | translate }} {{ 'BOOKINGS' | translate }}
+      </h4>
+
+      <div>
+        {{ 'SHOW' | translate }}
+        <a ng-click="vm.showHistory = false">{{ 'CURRENT' | translate }} {{ 'BOOKINGS' | translate }}</a>.
+      </div>
+
+      <div class="dashboard-item-list" ng-repeat="booking in historyBookings=(vm.bookings | bookingsBeforeToday)">
+        <club-booking-item booking="booking" has-completed="true"></club-booking-item>
+      </div>
+      <div ng-show="historyBookings.length == 0">
+        {{ 'YOU_DONT_HAVE_ANY' | translate }} {{ 'HISTORY' | translate }} {{ 'BOOKINGS' | translate }}.
+      </div>
+    </div>
   </div>
 </div>

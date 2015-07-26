@@ -6,18 +6,19 @@
   .controller('ClubEventController', controller);
 
   controller.$inject = ['$scope',  '$translate', 'Helpers',
-    '$location', 'ExceptionHandler',
-    'Event', 'MembershipRole'];
+    '$location', 'ExceptionHandler', 'Event', 'MembershipRole',
+    'Storage'];
 
   function controller($scope,  $translate, Helpers,
-    $location, ExceptionHandler, Event, MembershipRole) {
+    $location, ExceptionHandler, Event, MembershipRole,
+    Storage) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
     vm.mRole = MembershipRole;
     vm.createEvent = createEvent;
-    vm.club = $scope.club;
+    vm.club = Storage.getClub();
     vm.activate = activate;
 
     vm.events = [];
@@ -33,11 +34,6 @@
         Event.get({ club__ref: vm.club.ref }).$promise
         .then(setEvents)
         .catch(handler.generalHandler);
-
-        // Verify permission from database.
-        Helpers.getMembershipsByClubAndMember(vm.member.ref, vm.club.ref)
-        .then(setClubRole)
-        .catch(handler.generalHandler);
       }
     }
 
@@ -52,12 +48,6 @@
 
     function setEvents(eventResource) {
       vm.events = eventResource.objects;
-    }
-
-    function setClubRole(memberships) {
-      if (memberships.length == 1) {
-        vm.role = memberships[0].role;
-      }
     }
   }
 })();
