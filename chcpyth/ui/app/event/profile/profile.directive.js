@@ -11,7 +11,9 @@
       templateUrl: 'app/event/profile/profile.html',
       controller: 'EventProfileController',
       controllerAs: 'vm',
-      scope: {}
+      scope: {
+        event: '='
+      }
     };
 
     return directive;

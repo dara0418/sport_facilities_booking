@@ -14,7 +14,8 @@
     Notification, Storage) {
     var vm = this;
 
-    vm.club = $scope.club;
+    vm.club = $scope.membership.club;
+    vm.role = $scope.membership.role;
     vm.activate = activate;
     vm.goToClubDashboard = goToClubDashboard;
     vm.visitClub = visitClub;
@@ -29,7 +30,8 @@
       Helpers.safeGetLoginMember(vm);
 
       if ($.isEmptyObject(vm.member)) {
-        $location.path('/landing');
+        $location.path('/home');
+        return;
       }
 
       // Pull club pictures.

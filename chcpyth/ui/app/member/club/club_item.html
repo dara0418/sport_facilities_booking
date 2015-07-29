@@ -20,15 +20,15 @@
 
       <div class="dashboard-hr"></div>
 
-      <div class="dashboard-tip" ng-show="vm.club.role == 'A'">
+      <div class="dashboard-tip" ng-show="vm.role == 'A'">
         <i class="fa fa-wrench"></i>
         &nbsp;{{ 'ADMIN_OF_CLUB' | translate }}
       </div>
-      <div class="dashboard-tip" ng-show="vm.club.role == 'P'">
+      <div class="dashboard-tip" ng-show="vm.role == 'P'">
         <i class="fa fa-graduation-cap"></i>
         &nbsp;{{ 'PROFESSOR_OF_CLUB' | translate }}
       </div>
-      <div class="dashboard-tip" ng-show="vm.club.role == 'M'">
+      <div class="dashboard-tip" ng-show="vm.role == 'M'">
         <i class="fa fa-user"></i>
         &nbsp;{{ 'MEMBER_OF_CLUB' | translate }}
       </div>
@@ -48,7 +48,7 @@
 
     <div class="col-md-10">
       <button class="btn btn-block btn-primary active no-round-corner"
-        ng-if="vm.club.role == 'A'"
+        ng-if="vm.role == 'A'"
         ng-click="vm.goToClubDashboard()">
         Manage Club
       </button>

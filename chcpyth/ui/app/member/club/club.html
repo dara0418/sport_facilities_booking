@@ -4,10 +4,10 @@
       {{ 'YOUR' | translate }} {{ 'CLUBS' | translate }}
     </h4>
 
-    <div class="dashboard-item-list" ng-repeat="club in vm.clubs">
-      <member-club-item club="club"></member-club-item>
+    <div class="dashboard-item-list" ng-repeat="membership in vm.memberships">
+      <member-club-item membership="membership"></member-club-item>
     </div>
-    <div ng-show="vm.clubs.length == 0">
+    <div ng-show="vm.memberships.length == 0">
       {{ 'YOU_HAVENT_JOINED_ANY_CLUB' | translate }}.
     </div>
   </div>

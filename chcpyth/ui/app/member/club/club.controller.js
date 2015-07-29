@@ -14,7 +14,7 @@
     var handler = ExceptionHandler;
 
     vm.activate = activate;
-    vm.clubs = [];
+    vm.memberships = [];
     $scope.onQuitClub = onQuitClub;
 
     vm.activate();
@@ -22,23 +22,29 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
-      // Pull clubs of the current login user.
-      Helpers.getClubsByMemberRef(vm.member.ref)
-      .then(setClubs)
-      .catch(handler.generalHandler);
+      if ($.isEmptyObject(vm.member)) {
+        $location.path('/home');
+        return;
+      }
+
+      loadMemberships();
     }
 
     // Private functions.
 
-    function setClubs(clubs) {
-      vm.clubs = clubs;
+    function loadMemberships() {
+      // Pull memberships of the current login user.
+      Helpers.getMembershipsByMemberRef(vm.member.ref)
+      .then(setMemberships)
+      .catch(handler.generalHandler);
+    }
+
+    function setMemberships(resource) {
+      vm.memberships = resource.objects;
     }
 
     function onQuitClub(removedMembership) {
-      // Remove the deleted club from vm.clubs array.
-      vm.clubs = $.grep(vm.clubs, function(club, index) {
-        return club.ref != removedMembership.club.ref;
-      });
+      loadMemberships();
     }
   }
 })();

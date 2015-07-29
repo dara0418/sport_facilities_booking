@@ -108,7 +108,7 @@
 
     function cancelBooking() {
       // TODO - To cancel booking, we shouldn't remove the booking object. Instead we
-      //        should mark the booking status as cancelled. We need to add a booking
+      //        should mark the booking status as canceled. We need to add a booking
       //        status field to the Booking model.
     }
 

@@ -307,6 +307,8 @@ class Bill(BaseModel):
       club (ForeignKey): This field references the Club model, indicating which club should make
         the bill.
 
+      period (CharField): Period corresponding to the bill, can be a year like 2015 or a month + year like 201504.
+      time_unit (CharField): Billing time units. Possible values are: MONTH - Month, YEAR - Year.
       amount (DecimalField): The amount paid.
       currency (CharField): The ISO code of currency.
       status (CharField): Billing status. Possible values are: P - pending, S - submitted,

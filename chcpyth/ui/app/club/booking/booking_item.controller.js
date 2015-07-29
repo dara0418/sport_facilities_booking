@@ -34,6 +34,7 @@
 
       if ($.isEmptyObject(vm.member)) {
         $location.path('/home');
+        return;
       }
 
       // Calculate checkin date&time.

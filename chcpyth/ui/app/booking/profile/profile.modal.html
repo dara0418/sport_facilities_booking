@@ -15,7 +15,7 @@
         </button>
 
         <h4 class="modal-title text-capitalize">
-          {{ 'EDIT' | translate }} {{ 'BOOKING' | translate }}
+          {{ vm.booking.isClubAdmin ? ('VIEW' | translate) : ('EDIT' | translate) }} {{ 'BOOKING' | translate }}
         </h4>
       </div>
 
@@ -35,6 +35,7 @@
         <button type="button"
           class="btn btn-primary text-capitalize"
           ng-click="vm.update()"
+          ng-show="!vm.booking.isClubAdmin"
           ng-disabled="vm.stu.isUpdating()">
           {{ vm.stu.isUpdating() ? ('UPDATING' | translate) : ('UPDATE' | translate) }}
         </button>

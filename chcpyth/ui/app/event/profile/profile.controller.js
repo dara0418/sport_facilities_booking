@@ -5,68 +5,71 @@
 
   .controller('EventProfileController', controller);
 
-  controller.$inject = ['$scope', '$translate', 'Helpers',
-    'Storage', '$location', 'ExceptionHandler', 'Event'];
+  controller.$inject = ['$scope', 'Helpers', 'Storage', '$location',
+    'ExceptionHandler', 'Event'];
 
-  function controller($scope, $translate, Helpers,
-    Storage, $location, ExceptionHandler, Event) {
+  function controller($scope, Helpers, Storage, $location,
+    ExceptionHandler, Event) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
+    vm.event = $scope.event;
+    vm.club = Storage.getClub();
     vm.activate = activate;
     vm.update = update;
     vm.create = create;
-    vm.remove = remove;
-    vm.unselectEvent = unselectEvent;
-    vm.s = Storage;
-    vm.isEdit = $scope.isEdit;
+    vm.isEdit = true;
 
     vm.activate();
 
     // The startup function.
     function activate() {
       Helpers.safeGetLoginMember(vm);
+
+      if ($.isEmptyObject(vm.member)) {
+        $location.path('/home');
+        return;
+      }
+
+      if (vm.event === undefined && vm.club !== undefined) {
+        vm.event = {
+          club: angular.copy(vm.club)
+        };
+
+        vm.isEdit = false;
+      }
     }
 
     function update() {
-      var event = Storage.getEvent();
-
-      if ($.isEmptyObject(event.ref)) {
+      if ($.isEmptyObject(vm.event.ref)) {
         // No ref, quit.
         return;
       }
 
-      new Event(event).$update()
-      .then(Helpers.updateSuccess)
+      new Event(vm.event).$update()
+      .then(onUpdateSuccess)
       .catch(handler.generalHandler);
     }
 
     function create() {
-      var event = {
-        club__ref: Storage.getClub()
-      };
-
-      new Event(event).$save()
-      .then(Helpers.saveSuccess)
+      new Event(vm.event).$save()
+      .then(onCreateSuccess)
       .catch(handler.generalHandler);
     }
 
-    function remove() {
-      var event = Storage.getEvent();
+    // Private function.
 
-      if ($.isEmptyObject(event.ref)) {
-        // No ref, quit.
-        return;
-      }
+    function onCreateSuccess() {
+      $scope.$parent.$parent.onCreateSuccess();
 
-      new Event(event).$delete()
-      .then(Helpers.deleteSuccess)
-      .catch(handler.generalHandler);
+      Helpers.saveSuccess();
     }
 
-    function unselectEvent() {
-      Storage.clearEvent();
+    function onUpdateSuccess() {
+      $scope.$parent.$parent.onUpdateSuccess();
+
+      Helpers.updateSuccess();
     }
   }
 })();

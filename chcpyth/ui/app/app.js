@@ -22,6 +22,7 @@
     'app.booking',
     'app.address',
     'app.subscription_plan',
-    'app.picture'
+    'app.picture',
+    'app.bill'
   ]);
 })();

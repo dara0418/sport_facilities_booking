@@ -10,29 +10,30 @@
       <div class="dashboard-div">
         {{ vm.event.content }}
       </div>
-    </div>
 
-    <div class="row dashboard-hr"></div>
+      <div class="dashboard-hr"></div>
 
-    <div class="row" ng-show="vm.hasCompleted != 'true'">
-      <button class="btn btn-primary active no-round-corner"
-        ng-click="vm.viewProfile()"
-        ng-if="!event.hasJoined">
-        <i class="fa fa-gw fa-user-plus"></i>
-        &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
-      </button>
-      <button class="btn btn-danger active no-round-corner"
-        ng-click="vm.cancelEvent()"
-        ng-if="event.hasJoined">
-        <i class="fa fa-gw fa-user-times"></i>
-        &nbsp;{{ 'CANCEL' | translate }}
-      </button>
-    </div>
+      <div class="dashboard-div" ng-show="vm.hasCompleted != 'true'">
+        <div>
+          <button class="btn btn-primary active no-round-corner pull-left text-capitalize"
+            ng-click="vm.viewProfile()">
+            <i class="fa fa-calendar"></i>
+            &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
+          </button>
+        </div>
 
-    <div class="row" ng-show="vm.hasCompleted == 'true'">
-      <button type="button" class="btn btn-primary pull-left disabled no-round-corner">
-        &nbsp;{{ 'EVENT_COMPLETED' | translate }}
-      </button>
+        <div class="col-xs-4">
+          <a class="gray-btn text-capitalize" ng-click="vm.remove()">
+            {{ 'CANCEL' | translate }}
+          </a>
+        </div>
+      </div>
+
+      <div class="dashboard-div" ng-show="vm.hasCompleted == 'true'">
+        <button type="button" class="btn btn-primary pull-left disabled no-round-corner">
+          &nbsp;{{ 'EVENT_COMPLETED' | translate }}
+        </button>
+      </div>
     </div>
   </div>
 

@@ -40,6 +40,11 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
+      if (vm.member === undefined) {
+        $location.path('/home');
+        return;
+      }
+
       vm.club.primary_phone = ($.isEmptyObject(vm.club.primary_phone) ?
         vm.club.primary_phone : Number(vm.club.primary_phone));
       vm.club.secondary_phone = ($.isEmptyObject(vm.club.secondary_phone) ?

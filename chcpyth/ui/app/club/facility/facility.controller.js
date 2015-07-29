@@ -5,24 +5,21 @@
 
   .controller('ClubFacilityController', controller);
 
-  controller.$inject = ['$scope', 'Notification', '$translate', 'Club',
-    'Helpers', 'SharedProperties', 'Membership', '$location', 'ExceptionHandler',
-    'Facility', 'MembershipRole'];
+  controller.$inject = ['$scope', 'Helpers', '$location', 'ExceptionHandler',
+    'Facility', 'Storage', 'FacilityRate', '$q'];
 
-  function controller($scope, Notification, $translate, Club,
-    Helpers, SharedProperties, Membership, $location, ExceptionHandler,
-    Facility, MembershipRole) {
+  function controller($scope, Helpers, $location, ExceptionHandler,
+    Facility, Storage, FacilityRate, $q) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
-    vm.mRole = MembershipRole;
     vm.createFacility = createFacility;
     vm.editFacility = editFacility;
     vm.activate = activate;
     vm.goToFacilityRule = goToFacilityRule;
-    vm.goToFacilityRate = goToFacilityRate;
-    vm.club = $scope.club;
+
+    vm.club = Storage.getClub();
 
     vm.facilities = [];
 
@@ -32,15 +29,16 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
-      // Pull facilities of the current selected club.
+      if ($.isEmptyObject(vm.member)) {
+        $location.path('/home');
+        return;
+      }
+
+      // Pull facilities&facility rates of the current selected club.
       if (!$.isEmptyObject(vm.club.ref)) {
         Facility.get({ club__ref: vm.club.ref }).$promise
+        .then(getFacilityRates)
         .then(setFacilities)
-        .catch(handler.generalHandler);
-
-        // Retrieve permission.
-        Helpers.getMembershipsByClubAndMember(vm.member.ref, vm.club.ref)
-        .then(setClubRole)
         .catch(handler.generalHandler);
       }
     }
@@ -50,13 +48,6 @@
       Storage.setFacility(facility);
 
       $location.path('/facility_rule/dashboard');
-    }
-
-    // TODO - CURRENTLY DISABLED.
-    function goToFacilityRate(facility) {
-      Storage.setFacility(facility);
-
-      $location.path('/facility_rate/dashboard');
     }
 
     function editFacility(facility) {
@@ -69,20 +60,32 @@
     }
 
     function createFacility() {
-      // Clear selectedFacility.
-      Storage.clearFacility();
     }
 
     // Private functions.
 
-    function setFacilities(facilityResources) {
-      vm.facilities = facilityResources.objects;
+    function getFacilityRates(resource) {
+      var deferred = $q.defer();
+
+      var facilities = $.map(resource.objects, function(facility, index) {
+
+        return FacilityRate.get({ facility__ref: facility.ref }).$promise
+        .then(function(rateResource) {
+          facility.rates = rateResource.objects;
+
+          return facility;
+        });
+      });
+
+      $q.all(facilities).then(function(data) {
+        deferred.resolve(data);
+      });
+
+      return deferred.promise;
     }
 
-    function setClubRole(memberships) {
-      if (memberships.length == 1) {
-        vm.role = memberships[0].role;
-      }
+    function setFacilities(facilities) {
+      vm.facilities = facilities;
     }
   }
 })();

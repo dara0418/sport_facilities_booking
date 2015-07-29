@@ -8,6 +8,7 @@ from .models import *
 
 class ClubPictureResource(BaseResource):
     club = fields.ForeignKey(ClubResource, "club", full=True)
+    url = fields.FileField(attribute='url')
 
     class Meta(BaseResource.Meta):
         queryset = ClubPicture.objects.all()

@@ -8,7 +8,7 @@ class ClubPicture(BaseModel):
     Attributes:
       id (AutoField): The auto increment ID of club picture.
       club (ForeignKey): This field references the 'club.Club' model.
-      url (CharField): The URL pointing to location of picture. This could be a relative path.
+      url (ImageField): The URL pointing to location of picture. This could be a relative path.
     """
     id = models.AutoField(primary_key=True)
     club = models.ForeignKey('club.Club')

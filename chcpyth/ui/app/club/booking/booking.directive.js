@@ -11,7 +11,7 @@
       templateUrl: 'app/club/booking/booking.html',
       controller: 'ClubBookingController',
       controllerAs: 'vm',
-      scope: { }
+      scope: {}
     };
 
     return directive;

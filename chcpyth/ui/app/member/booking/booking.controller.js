@@ -39,7 +39,7 @@
       Helpers.safeGetLoginMember(vm);
 
       if ($.isEmptyObject(vm.member)) {
-        $location.path('/member/login');
+        $location.path('/home');
         return;
       }
 

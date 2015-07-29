@@ -1,91 +1,123 @@
 <div>
-  <h2>
-    <a class="btn btn-default" ng-click="vm.unselectEvent()">
-      <i class="fa fa-arrow-left"></i>
-    </a>
-    Event Profile
-  </h2>
-  <p>Use pre-defined rules.</p>
+  <form class="form-horizontal" name="form" novalidate>
+    <fieldset ng-disabled="vm.stu.isUpdatting() || vm.stu.isAdding()">
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'NAME' | translate }}
+        </label>
 
-  <form>
-    <div class="form-group">
-      <label>{{ 'BOOKING_DATE' | translate }}</label>
-      <input class="form-control"
-        id="bookingDate"
-        name="bookingDate"
-        ng-model="vm.s.getEvent().booking_date"
-        bs-datepicker />
-    </div>
-    <div class="form-group">
-      <label>{{ 'NAME' | translate }}</label>
-      <input class="form-control"
-        id="name"
-        name="name"
-        ng-model="vm.s.getEvent().name" />
-    </div>
+        <div class="col-xs-9">
+          <input class="form-control"
+            id="name"
+            name="name"
+            ng-model="vm.event.name" />
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label>{{ 'START' | translate }}</label>
-      <input class="form-control"
-        id="start"
-        name="start"
-        ng-model="vm.s.getEvent().start"
-        bs-datepicker />
-    </div>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'START' | translate }}
+        </label>
 
-    <div class="form-group">
-      <label>{{ 'END' | translate }}</label>
-      <input class="form-control"
-        id="end"
-        name="end"
-        ng-model="vm.s.getEvent().end"
-        bs-datepicker />
-    </div>
+        <div class="col-xs-9">
+          <input class="form-control"
+            id="start"
+            name="start"
+            ng-model="vm.event.start"
+            bs-datepicker />
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label>{{ 'EVENT_TYPE' | translate }}</label>
-      <input class="form-control"
-        id="eventType"
-        name="eventType"
-        ng-model="vm.s.getEvent().event_type" />
-    </div>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'END' | translate }}
+        </label>
 
-    <div class="form-group">
-      <label>{{ 'PRIVACY' | translate }}</label>
-      <select class="form-control"
-        ng-model="vm.s.getEvent().privacy">
-        <option value="" selected>Please select</option>
-        <!-- TODO - Remove hard coding of values. -->
-        <option value="U">{{ 'PUBLIC' | translate }}</option>
-        <option value="P">{{ 'PRIVATE' | translate }}</option>
-        <option value="R">{{ 'SPECIAL_RESTRICTION' | translate }}</option>
-      </select>
-    </div>
+        <div class="col-xs-9">
+          <input class="form-control"
+            id="end"
+            name="end"
+            ng-model="vm.event.end"
+            bs-datepicker />
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label>{{ 'CONTENT' | translate }}</label>
-      <input class="form-control"
-        id="content"
-        name="content"
-        ng-model="vm.s.getEvent().content" />
-    </div>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'EVENT_TYPE' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <input class="form-control"
+            id="eventType"
+            name="eventType"
+            ng-model="vm.event.event_type" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'PRIVACY' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <select class="form-control"
+            ng-model="vm.event.privacy">
+            <option value="" selected>Please select</option>
+            <!-- TODO - Remove hard coding of values. -->
+            <option value="U">
+              <span class="text-capitalize">{{ 'PUBLIC' | translate }}</span>
+            </option>
+            <option value="P">
+              <span class="text-capitalize">{{ 'PRIVATE' | translate }}</span>
+            </option>
+            <option value="R">
+              <span class="text-capitalize">{{ 'SPECIAL_RESTRICTION' | translate }}</span>
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'CONTENT' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <textarea class="form-control"
+            id="content"
+            name="content"
+            rows="3"
+            ng-model="vm.event.content" />
+        </div>
+      </div>
+
+      <hr/>
+    </fieldset>
   </form>
 
-  <button class="btn btn-primary"
-    ng-show="vm.isEdit"
-    ng-click="vm.update()">
-    Update
-  </button>
+  <div class="row">
+    <button type="button"
+      class="btn btn-default text-capitalize footer-btn"
+      ng-click="$hide()"
+      ng-disabled="vm.stu.isUpdating()">
+      {{ 'CLOSE' | translate }}
+    </button>
 
-  <button class="btn btn-danger"
-    ng-show="vm.isEdit"
-    ng-click="vm.remove()">
-    Delete
-  </button>
+    <button type="button"
+      class="btn btn-primary text-capitalize footer-btn"
+      ng-show="vm.isEdit"
+      ng-click="vm.update()"
+      ng-disabled="vm.stu.isUpdating()">
+      {{ vm.stu.isUpdating() ? ('UPDATING' | translate) : ('UPDATE' | translate) }}
+    </button>
 
-  <button class="btn btn-primary"
-    ng-show="!vm.isEdit"
-    ng-click="vm.create()">
-    Create New
-  </button>
+    <button type="button"
+      class="btn btn-primary text-capitalize footer-btn"
+      ng-show="!vm.isEdit"
+      ng-click="vm.create()"
+      ng-disabled="vm.stu.isAdding()">
+      {{ vm.stu.isAdding() ? ('CREATING' | translate) : ('CREATE' | translate) }}
+    </button>
+  </div>
 </div>

@@ -34,15 +34,15 @@
       <div class="dashboard-div" ng-if="vm.hasCompleted != 'true'">
         <div>
           <button type="button"
-            class="btn btn-primary active no-round-corner pull-left"
+            class="btn btn-primary active no-round-corner pull-left text-capitalize"
             ng-click="vm.viewProfile()">
-            <i class="fa fa-pencil-square-o fa-gw"></i>
-            &nbsp;{{ 'VIEW_OR_EDIT' | translate }}
+            <i class="fa fa-list-alt"></i>
+            &nbsp;{{ 'VIEW' | translate }}
           </button>
         </div>
 
         <div class="col-xs-4">
-          <a class="gray-btn" ng-click="vm.cancel()">
+          <a class="gray-btn text-capitalize" ng-click="vm.cancel()">
             {{ 'CANCEL' | translate }}
           </a>
         </div>

@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="club-photo-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="50%" class="text-capitalize">{{ 'NAME' | translate }}</th>
+            <th ng-show="vm.uploader.isHTML5" class="text-capitalize">{{ 'PROGRESS' | translate }}</th>
+            <th class="text-capitalize">{{ 'STATUS' | translate }}</th>
+            <th class="text-capitalize">{{ 'ACTIONS' | translate }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="item in vm.uploader.queue">
+            <td>
+              <strong>{{ item.file.name }}</strong>
+              <div ng-show="vm.uploader.isHTML5" image-thumb="{ file: item._file, width: 50, height: 50 }"></div>
+            </td>
+
+            <td ng-show="vm.uploader.isHTML5">
+              <div class="progress" style="margin-bottom: 0px">
+                <div class="progress-bar"
+                  role="progressbar"
+                  ng-style="{ 'width': item.progress + '%' }">
+                </div>
+              </div>
+            </td>
+
+            <td class="text-center">
+              <span ng-show="item.isSuccess">
+                <i class="fa fa-check"></i>
+              </span>
+              <span ng-show="item.isCancel">
+                <i class="fa fa-ban"></i>
+              </span>
+              <span ng-show="item.isError">
+                <i class="fa fa-remove"></i>
+              </span>
+            </td>
+
+            <td nowrap>
+              <button type="button"
+                class="btn btn-success btn-xs text-capitalize"
+                ng-click="item.upload()"
+                ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                <i class="fa fa-upload"></i>
+                &nbsp;{{ 'UPLOAD' | translate }}
+              </button>
+
+              <button type="button"
+                class="btn btn-warning btn-xs text-capitalize"
+                ng-click="item.cancel()"
+                ng-disabled="!item.isUploading">
+                <i class="fa fa-ban"></i>
+                &nbsp;{{ 'CANCEL' | translate }}
+              </button>
+
+              <button type="button"
+                class="btn btn-danger btn-xs text-capitalize"
+                ng-click="item.remove()">
+                <i class="fa fa-trash"></i>
+                &nbsp;{{ 'REMOVE' | translate }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="text-capitalize">
+        {{ 'UPLOAD_PROGRESS' | translate }}
+        <div class="progress" style="">
+          <div class="progress-bar"
+            role="progressbar"
+            ng-style="{ 'width': vm.uploader.progress + '%' }">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div>
+      <button type="button"
+        class="btn btn-primary btn-s btn-file"
+        ng-click=""
+        ng-disabled="vm.uploader.isUploading">
+        <i class="fa fa-search"></i>
+        {{ 'SELECT_PHOTOS' | translate }}
+
+        <input type="file"
+          uploader="vm.uploader"
+          nv-file-select
+          multiple />
+      </button>
+
+      <button type="button"
+        class="btn btn-success btn-s"
+        ng-click="vm.uploadAll()"
+        ng-disabled="!vm.uploader.getNotUploadedItems().length || vm.uploader.isUploading">
+        <i class="fa fa-upload"></i>
+        {{ 'UPLOAD_ALL' | translate }}
+      </button>
+
+      <button type="button"
+        class="btn btn-warning btn-s"
+        ng-click="vm.uploader.cancelAll()"
+        ng-disabled="!vm.uploader.isUploading">
+        <i class="fa fa-ban"></i>
+        {{ 'CANCEL_ALL' | translate }}
+      </button>
+
+      <button type="button"
+        class="btn btn-danger btn-s"
+        ng-click="vm.uploader.clearQueue()"
+        ng-disabled="!vm.uploader.queue.length">
+        <i class="fa fa-trash"></i>
+        {{ 'REMOVE_ALL' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -28,6 +28,10 @@
       getTimeUnitStr: getTimeUnitStr,
       getMonthStr: getMonthStr,
       isString: isString,
+      getSportTypeStr: getSportTypeStr,
+      getBillingYear: getBillingYear,
+      getBillingMonth: getBillingMonth,
+      getBillingStatusStr: getBillingStatusStr,
 
       // TODO - This function will be deprecated.
       firstCharToUpperCase: firstCharToUpperCase
@@ -80,11 +84,7 @@
         var clubs = $.map(
           membershipResource.objects,
           function(membership, index) {
-            // Attach role of club.
-            var club = membership.club;
-            club.role = membership.role;
-
-            return club;
+            return membership.club;
           }
         );
 
@@ -248,6 +248,73 @@
       }
       else {
         return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+    }
+
+    function getSportTypeStr(sportType) {
+      switch (sportType) {
+        case 'T':
+          return 'TENNIS';
+        case 'G':
+          return 'PING_PONG';
+        case 'D':
+          return 'PADDLE';
+        case 'B':
+          return 'BADMINTON';
+        case 'S':
+          return 'SQUASH';
+        case 'F5':
+          return 'FOOTBALL_5';
+        default:
+          return 'UNKNOWN';
+      }
+    }
+
+    /**
+     * This function parses a billing period string and return its year.
+     */
+    function getBillingYear(period) {
+      // A yearly bill.
+      if (period.length == 4) {
+        return period;
+      }
+      // A monthly bill.
+      else if (period.length == 6) {
+        return period.substring(0, 4);
+      }
+      else {
+        // Don't know what it is.
+        return undefined;
+      }
+    }
+
+    function getBillingMonth(period) {
+      // A yearly bill.
+      if (period.length == 4) {
+        return '';
+      }
+      // A monthly bill.
+      else if (period.length == 6) {
+        return getMonthStr( parseInt(period.substring(4)) );
+      }
+      else {
+        // Don't know what it is.
+        return undefined;
+      }
+    }
+
+    function getBillingStatusStr(status) {
+      switch (status) {
+        case 'P':
+          return 'BILL_PENDING';
+        case 'S':
+          return 'BILL_SUBMITTED';
+        case 'C':
+          return 'BILL_CONFIRMED';
+        case 'A':
+          return 'BILL_CANCELED';
+        default:
+          return 'UNKNOWN';
       }
     }
 

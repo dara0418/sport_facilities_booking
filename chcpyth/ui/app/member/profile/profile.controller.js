@@ -44,7 +44,7 @@
 
       if (member === undefined) {
         Notification.notifyFailure('INVALID_LOGIN');
-        $location.path('/landing');
+        $location.path('/home');
 
         return;
       }

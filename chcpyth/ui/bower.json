@@ -24,6 +24,8 @@
     "flag-icon-css": "~0.7.1",
     "ng-password-strength": "~0.2.1",
     "angular-motion": "~0.4.2",
-    "iso-currency": "~0.1.6"
+    "iso-currency": "~0.1.6",
+    "bootbox": "~4.4.0",
+    "ngBootbox": "~0.1.1"
   }
 }

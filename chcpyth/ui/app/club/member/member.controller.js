@@ -23,6 +23,11 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
+      if ($.isEmptyObject(vm.member)) {
+        $location.path('/home');
+        return;
+      }
+
       // Pull membership requests of the selected club.
       if (vm.club !== undefined) {
         Membership.get({ club__ref: vm.club.ref }).$promise
@@ -62,7 +67,6 @@
         member.role = membership.role;
         vm.members.push(member);
       });
-      console.log(vm.members);
     }
   }
 })();

@@ -1,6 +1,6 @@
 <div>
   <form class="form-horizontal" name="form" novalidate>
-    <fieldset ng-disabled="vm.stu.isUpdatting()">
+    <fieldset ng-disabled="vm.stu.isUpdatting() || vm.booking.isClubAdmin">
       <div class="form-group">
         <label class="col-xs-3 control-label text-capitalize">
           {{ 'BOOKING' | translate }} {{ 'DATE' | translate }}

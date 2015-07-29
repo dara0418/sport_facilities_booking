@@ -30,13 +30,13 @@
       <button class="btn btn-primary active no-round-corner"
         ng-click="vm.joinEvent(vm.event)"
         ng-if="!event.hasJoined">
-        <i class="fa fa-gw fa-user-plus"></i>
+        <i class="fa fa-user-plus"></i>
         &nbsp;{{ 'JOIN' | translate }}
       </button>
       <button class="btn btn-danger active no-round-corner"
         ng-click="vm.quitEvent(vm.event)"
         ng-if="event.hasJoined">
-        <i class="fa fa-gw fa-user-times"></i>
+        <i class="fa fa-user-times"></i>
         &nbsp;{{ 'UNREGISTER' | translate }}
       </button>
     </div>

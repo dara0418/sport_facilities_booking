@@ -1,0 +1,30 @@
+<!--
+  If creating events, vm.event should be empty in parent scope.
+  If viewing/editing events, there must be a vm.event set in parent scope.
+-->
+<div class="modal fade"
+  aria-hidden="true"
+  tabindex="-1"
+  role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          ng-click="$hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <h4 class="modal-title text-capitalize">
+          {{ (vm.event === undefined ? 'NEW' : 'EDIT') | translate }} {{ 'EVENT' | translate }}
+        </h4>
+      </div>
+
+      <div class="modal-body">
+        <event-profile event="vm.event"></event-profile>
+      </div>
+    </div>
+  </div>
+</div>

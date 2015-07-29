@@ -23,6 +23,11 @@
     // The startup function.
     function activate() {
       Helpers.safeGetLoginMember(vm);
+
+      if ($.isEmptyObject(vm.member)) {
+        $location.path('/home');
+        return;
+      }
     }
   }
 })();

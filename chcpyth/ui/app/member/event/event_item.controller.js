@@ -43,7 +43,7 @@
       vm.startYear = startDate.getFullYear();
       vm.startDow = Helpers.getDayOfWeekStr(startDate.getDay()); // Day of week.
 
-      var endDate = new Date(vm.event.start);
+      var endDate = new Date(vm.event.end);
       vm.endDay = endDate.getDate();
       vm.endMonth = Helpers.getMonthStr(endDate.getMonth());
       vm.endYear = endDate.getFullYear();

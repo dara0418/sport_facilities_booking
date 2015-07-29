@@ -1,6 +1,7 @@
 @import "../bower_components/bootstrap/less/variables.less";
 @import "../bower_components/bootstrap/less/mixins.less";
 @import "../bower_components/bootstrap/less/navs.less";
+@import "../bower_components/bootstrap/less/utilities.less";
 @import "../bower_components/bootstrap/less/mixins/gradients.less";
 @import "variables.less";
 
@@ -79,6 +80,10 @@ body {
   font-style: @style;
 }
 
+.scrollable {
+  overflow: auto;
+}
+
 /**
  * Bootstrap styles overrrides
  */
@@ -92,7 +97,18 @@ body {
       max-width: 630px;
       width: 50%;
       transform: translateX(-50%) translateY(-50%);
+
+      &.large {
+        max-width: 1000px;
+        width: 80%;
+      }
     }
+  }
+
+  .footer-btn {
+    .pull-right;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 
@@ -388,13 +404,19 @@ body {
   font-weight: 400;
 }
 
-.gray-btn {
-  .font-roboto;
-  font-size: 14px;
-  display: block;
-  color: #7d7d7d;
+.left-vertical-hr {
+  display: inline-block;
   border-left: #ccc solid 1px;
   padding-left: 30px;
+  margin-left: 30px;
+}
+
+.gray-btn {
+  .font-roboto;
+  .left-vertical-hr;
+  margin-left: 0px;
+  font-size: 14px;
+  color: #7d7d7d;
   width: 80px;
   height: 37px;
   padding-top: 7px;
@@ -436,4 +458,57 @@ body {
   border: #ccc solid 1px;
   color: #fff;
   padding: 15px;
+}
+
+.club-photo-table {
+  .scrollable;
+  max-height: 500px;
+}
+
+.club-photo-container {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  padding: 10px 0px 10px 0px;
+
+  &:hover {
+    .boxclose {
+      display: inline-block;
+    }
+
+    img {
+      .border-shadow;
+    }
+  }
+
+  img {
+    display: block;
+    width: 98%;
+    height: 220px;
+  }
+}
+
+a.boxclose {
+    position: absolute;
+    float: right;
+    cursor: pointer;
+    display: none;
+    color: #fff;
+    border: 1px solid #AEAEAE;
+    border-radius: 50%;
+    background: #605F61;
+    font-size: 31px;
+    font-weight: bold;
+    line-height: 0px;
+    padding: 11px 3px;
+    left: 96%;
+    margin: -10px;
+
+    &:before {
+      content: "x";
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
 }

@@ -30,6 +30,7 @@
         // Invalid login user. Clear cache and redirect to login page.
         Storage.clearLoginMember();
         $location.path('/home');
+        return;
       }
 
       // Clone the login member.

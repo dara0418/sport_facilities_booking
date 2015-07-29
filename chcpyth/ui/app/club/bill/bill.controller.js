@@ -3,19 +3,20 @@
 
   angular.module('app.club.bill')
 
-  .controller('ClubBillController', billController);
+  .controller('ClubBillController', controller);
 
-  billController.$inject = ['$scope', 'Helpers', 'Bill', 'Membership', '$resource',
-    'MembershipRole', 'Config', 'ExceptionHandler'];
+  controller.$inject = ['$scope', 'Helpers', 'Bill', 'ExceptionHandler',
+    'Storage'];
 
-  function billController($scope, Helpers, Bill, Membership, $resource,
-    MembershipRole, Config, ExceptionHandler) {
+  function controller($scope, Helpers, Bill, ExceptionHandler,
+    Storage) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
     vm.bills = [];
     vm.activate = activate;
+    vm.club = Storage.getClub();
 
     vm.activate();
 
@@ -23,28 +24,22 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
+      if ($.isEmptyObject(vm.member)) {
+        $location.path('/home');
+        return;
+      }
+
       // Pull bills.
-      Helpers.getClubsByMemberRef(vm.member.ref)
-      .then(getBillsByClubs)
-      .catch(handler.generalHandler);
+      if (!$.isEmptyObject(vm.club)) {
+        Bill.get({ club__ref: vm.club.ref }).$promise
+        .then(setBills)
+        .catch(handler.generalHandler);
+      }
     }
 
     // Private functions.
-
-    function getBillsByClubs(clubs) {
-      // Get bills by clubs' UUID.
-      // TODO - Restrict the limitation in backend, only allow club admin see the bills.
-      // TODO - Parallel the promises to speed up.
-      $.each(clubs, function(index, club) {
-        Bill.get({ club__ref: club.ref }).$promise
-        .then(joinBills)
-        .catch(handler.generalHandler);
-      });
-    }
-
-    function joinBills(billResource) {
-      // Join the bills together.
-      vm.bills = vm.bills.concat(billResource.objects);
+    function setBills(resource) {
+      vm.bills = resource.objects;
     }
   }
 })();

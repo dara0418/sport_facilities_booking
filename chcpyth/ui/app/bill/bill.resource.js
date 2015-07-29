@@ -1,5 +1,5 @@
 (function() {
-  angular.module('app.club.bill', [])
+  angular.module('app.bill', [])
 
   .factory('Bill', billResource);
 

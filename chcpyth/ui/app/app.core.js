@@ -10,6 +10,7 @@
     'ui.calendar',
     'angularFileUpload',
     'ngPasswordStrength',
-    'isoCurrency'
+    'isoCurrency',
+    'ngBootbox'
   ]);
 })();
