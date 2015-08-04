@@ -6,17 +6,29 @@
   .controller('ClubMemberController', controller);
 
   controller.$inject = ['$scope', '$location', 'Membership',
-    'ExceptionHandler', 'Helpers', 'Storage'];
+    'ExceptionHandler', 'Helpers', 'Storage', '$modal'];
 
   function controller($scope, $location, Membership,
-    ExceptionHandler, Helpers, Storage) {
+    ExceptionHandler, Helpers, Storage, $modal) {
     var vm = this;
 
     var handler = ExceptionHandler;
 
     vm.club = Storage.getClub();
-    vm.members = [];
+    vm.memberships = [];
     vm.activate = activate;
+    vm.newMember = newMember;
+
+    vm.memberInvitationModal = $modal ({
+      scope: $scope,
+      template: 'app/membership/invitation/invitation.modal.html',
+      show: false,
+      placement: 'center'
+    });
+
+    $scope.$on('member.delete',function(){
+      loadMemberships();
+    });
 
     vm.activate();
 
@@ -28,45 +40,25 @@
         return;
       }
 
-      // Pull membership requests of the selected club.
-      if (vm.club !== undefined) {
-        Membership.get({ club__ref: vm.club.ref }).$promise
-        .then(setMembers)
-        .catch(handler.generalHandler);
-      }
+      loadMemberships();
     }
 
-    function changeRole(membership) {
-      if ($.isEmptyObject(membership.newRole)) {
-        // newRole wasn't set, quit.
-        return;
-      }
-
-      membership.role = membership.newRole;
-      new Membership(membership).$update()
-      .then(Helpers.updateSuccess)
-      .catch(handler.generalHandler);
-    }
-
-    function removeMember(membership) {
-      if ($.isEmptyObject(membership)) {
-        // No member selected.
-        return;
-      }
-
-      new Membership(membership).$delete()
-      .then(Helpers.deleteSuccess)
-      .catch(handler.generalHandler);
+    function newMember() {
+      vm.memberInvitationModal.show();
     }
 
     // Private functions.
 
-    function setMembers(membershipResource) {
-      $.each(membershipResource.objects, function(index, membership) {
-        var member = membership.member;
-        member.role = membership.role;
-        vm.members.push(member);
-      });
+    function setMemberships(resource) {
+      vm.memberships = resource.objects;
+    }
+
+    function loadMemberships() {
+      if (vm.club !== undefined) {
+        Membership.get({ club__ref: vm.club.ref }).$promise
+        .then(setMemberships)
+        .catch(handler.generalHandler);
+      }
     }
   }
 })();

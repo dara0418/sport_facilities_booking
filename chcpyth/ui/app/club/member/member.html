@@ -2,12 +2,16 @@
   <div class="col-xs-12">
     <h4 class="tab-content-header text-capitalize">
       {{ 'MEMBERS_OF_CLUB' | translate }} ({{ vm.club.name }})
+      <a ng-click="vm.newMember()" class="left-vertical-hr text-capitalize">
+        <i class="fa fa-plus"></i>
+        {{ 'INVITE_PEOPLE' | translate }}
+      </a>
     </h4>
 
-    <div class="dashboard-item-list" ng-repeat="member in vm.members">
-      <club-member-item member="member"></club-member-item>
+    <div class="dashboard-item-list" ng-repeat="ms in vm.memberships">
+      <club-member-item membership="ms"></club-member-item>
     </div>
-    <div ng-show="vm.members.length == 0">
+    <div ng-show="vm.memberships.length == 0">
       {{ 'CLUB_NO_MEMBERS' | translate }}
     </div>
   </div>

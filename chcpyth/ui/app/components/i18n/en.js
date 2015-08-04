@@ -94,6 +94,8 @@
       CREATING: 'creating',
       START: 'start',
       END: 'end',
+      SEARCH: 'search',
+      INVITE: 'invite',
 
       PRIVACY: 'privacy',
       PUBLIC: 'public',
@@ -185,6 +187,9 @@
       REMOVE_PHOTO_CONFIRM: 'Are you sure to remove this photo?',
       BOOKING_DATE: 'Booking date',
       EVENT_TYPE: 'Event type',
+      NAME_OR_EMAIL: 'Name/Email',
+      INVITE_SUCCESS: 'Member invited',
+      INVITATION_MSG: 'Reason of invitation',
 
       // Billing status.
       BILL_STATUS: 'Billing status',

@@ -12,7 +12,7 @@
       controller: 'ClubMemberItemController',
       controllerAs: 'vm',
       scope: {
-        member: '='
+        membership: '='
       }
     };
 

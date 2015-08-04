@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth import authenticate, login, logout, hashers
 from django.conf.urls import url
+from django.db.models import Q
 
 from tastypie import fields
 from tastypie.cache import SimpleCache
@@ -55,6 +56,16 @@ class MemberResource(BaseResource):
                 (self._meta.resource_name, trailing_slash()),
                 self.wrap_view("change_password"),
                 name="api_change_password"),
+
+            url(r"^(?P<resource_name>%s)/search_by_name%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view("search_by_name"),
+                name="api_search_by_name"),
+
+            url(r"^(?P<resource_name>%s)/search_by_email%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view("search_by_email"),
+                name="api_search_by_email"),
         ]
 
     def login(self, request, **kwargs):
@@ -174,6 +185,40 @@ class MemberResource(BaseResource):
                 member.set_password(new_password)
                 member.save()
                 return self.create_response(request, {})
+
+    def search_by_name(self, request, **kwargs):
+        """ Search members by first and last name.
+        """
+        self.method_check(request, allowed=['get'])
+        self.throttle_check(request)
+
+        keyword = request.GET['keyword']
+        members = Member.objects.filter(Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword))
+
+        bundles = []
+
+        for member in members:
+            bundle = self.build_bundle(obj=member, request=request)
+            bundles.append(self.full_dehydrate(bundle, for_list=True))
+
+        return self.create_response(request, bundles)
+
+    def search_by_email(self, request, **kwargs):
+        """ Search members by email.
+        """
+        self.method_check(request, allowed=['get'])
+        self.throttle_check(request)
+
+        keyword = request.GET['keyword']
+        members = Member.objects.filter(email__icontains=keyword)
+
+        bundles = []
+
+        for member in members:
+            bundle = self.build_bundle(obj=member, request=request)
+            bundles.append(self.full_dehydrate(bundle, for_list=True))
+
+        return self.create_response(request, bundles)
 
 class MembershipResource(BaseResource):
     from club.api import ClubResource

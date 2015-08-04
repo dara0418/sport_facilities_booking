@@ -31,7 +31,19 @@
       change_password: {
         method: 'POST',
         url: resourceUrl + 'change_password/'
-      }
+      },
+
+      searchByName: {
+        method: 'GET',
+        url: resourceUrl + 'search_by_name/',
+        isArray: true
+      },
+
+      searchByEmail: {
+        method: 'GET',
+        url: resourceUrl + 'search_by_email/',
+        isArray: true
+      },
     });
   }
 })();

@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'SEARCH' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <input type="text"
+            class="form-control text-capitalize"
+            id="keyword"
+            name="keyword"
+            placeholder="{{ NAME_OR_EMAIL | translate }}"
+            ng-model="vm.keyword"
+            ng-change="vm.searchMember()" />
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-xs-12">
+    <div ng-repeat="member in vm.members">
+      <membership-invitation-item member="member" club="vm.club"></membership-invitation-item>
+    </div>
+  </div>
+</div>
