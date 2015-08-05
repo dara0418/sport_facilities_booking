@@ -30,8 +30,6 @@
     }
 
     function inviteMember(content) {
-      console.log(content);
-
       new MembershipRequest({
         member: vm.member,
         club: vm.club,
@@ -46,6 +44,8 @@
     // Private functions.
 
     function inviteSuccess() {
+      $scope.$emit('membership.invited');
+
       Notification.notifySuccess('INVITE_SUCCESS');
     }
   }

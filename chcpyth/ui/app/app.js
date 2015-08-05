@@ -11,7 +11,6 @@
     'app.club',
     'app.facility',
     'app.membership',
-    'app.membership_request',
     'app.general_rule',
     'app.sport_rule',
     'app.facility_rule',

@@ -1,0 +1,58 @@
+<div class="notification" ng-class="{ 'has-read': vm.notification.hasRead }">
+  <div class="row">
+    <div class="col-xs-8">
+
+      <i class="fa fa-fw" ng-class="{ 'fa-envelope': !vm.notification.hasRead, 'fa-envelope-o': vm.notification.hasRead }"></i>
+
+      <a ng-show="vm.notification.isMembershipRequest"
+        ng-click=""
+        data-placement="bottom"
+        data-animation="am-flip-x"
+        data-content="{{ (vm.content.content !== '' && vm.content.content !== undefined) ? vm.content.content : ('NO_CONTENT' | translate) }}"
+        auto-close="true"
+        bs-popover>
+        &nbsp;{{ 'INVITATION_FROM_CLUB' | translate }} {{ vm.content.club.name }}
+      </a>
+    </div>
+
+    <div class="col-xs-4">
+      <span ng-show="vm.notification.isMembershipRequest">
+        <button class="btn btn-danger btn-sm active no-round-corner pull-right text-capitalize"
+          ng-click="vm.rejectInvitation()"
+          ng-show="vm.content.status == 'P'">
+          <i class="fa fa-close"></i>
+          &nbsp;{{ 'REJECT' | translate }}
+        </button>
+
+        <button class="btn btn-warning btn-sm active no-round-corner pull-right text-capitalize"
+          ng-click="vm.ignoreInvitation()"
+          ng-show="vm.content.status == 'P'">
+          <i class="fa fa-music"></i>
+          &nbsp;{{ 'IGNORE' | translate }}
+        </button>
+
+        <button class="btn btn-primary btn-sm active no-round-corner pull-right text-capitalize"
+          ng-click="vm.acceptInvitation()"
+          ng-show="vm.content.status == 'P'">
+          <i class="fa fa-check"></i>
+          &nbsp;{{ 'ACCEPT' | translate }}
+        </button>
+
+        <div class="text-info pull-right text-capitalize" ng-show="vm.content.status == 'A'">
+          <i class="fa fa-check"></i>
+          &nbsp;{{ 'ACCEPTED' | translate }}
+        </div>
+
+        <div class="text-warning pull-right text-capitalize" ng-show="vm.content.status == 'I'">
+          <i class="fa fa-music"></i>
+          &nbsp;{{ 'IGNORED' | translate }}
+        </div>
+
+        <div class="text-danger pull-right text-capitalize" ng-show="vm.content.status == 'R'">
+          <i class="fa fa-close"></i>
+          &nbsp;{{ 'REJECTED' | translate }}
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -119,7 +119,8 @@ class MembershipRequestResource(BaseResource):
         filtering = {
             "ref": ALL,
             "club": ALL_WITH_RELATIONS,
-            "member": ALL_WITH_RELATIONS
+            "member": ALL_WITH_RELATIONS,
+            "status": ALL
         }
 
 

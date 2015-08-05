@@ -32,6 +32,8 @@
       getBillingYear: getBillingYear,
       getBillingMonth: getBillingMonth,
       getBillingStatusStr: getBillingStatusStr,
+      returnTrue: returnTrue,
+      returnFalse: returnFalse,
 
       // TODO - This function will be deprecated.
       firstCharToUpperCase: firstCharToUpperCase
@@ -316,6 +318,14 @@
         default:
           return 'UNKNOWN';
       }
+    }
+
+    function returnTrue() {
+      return true;
+    }
+
+    function returnFalse() {
+      return false;
     }
 
     return service;

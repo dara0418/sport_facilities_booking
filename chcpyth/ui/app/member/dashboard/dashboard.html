@@ -54,6 +54,9 @@
             class="text-capitalize"
             ng-click="">
             {{ 'NOTIFICATIONS' | translate }}
+            <span class="label label-danger label-as-badge" ng-show="vm.newNotifications > 0">
+              {{ vm.newNotifications }}
+            </span>
           </a>
         </li>
       </ul>

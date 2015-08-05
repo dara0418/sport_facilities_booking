@@ -17,6 +17,10 @@
     vm.memberships = [];
     $scope.onQuitClub = onQuitClub;
 
+    $scope.$on('membership.created', function() {
+      loadMemberships();
+    });
+
     vm.activate();
 
     function activate() {
@@ -33,6 +37,8 @@
     // Private functions.
 
     function loadMemberships() {
+      vm.memberships = [];
+
       // Pull memberships of the current login user.
       Helpers.getMembershipsByMemberRef(vm.member.ref)
       .then(setMemberships)

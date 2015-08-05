@@ -96,6 +96,13 @@
       END: 'end',
       SEARCH: 'search',
       INVITE: 'invite',
+      INVITED: 'invited',
+      ACCEPT: 'accept',
+      ACCEPTED: 'accpeted',
+      IGNORE: 'ignore',
+      IGNORED: 'ignored',
+      REJECT: 'reject',
+      REJECTED: 'rejected',
 
       PRIVACY: 'privacy',
       PUBLIC: 'public',
@@ -190,6 +197,13 @@
       NAME_OR_EMAIL: 'Name/Email',
       INVITE_SUCCESS: 'Member invited',
       INVITATION_MSG: 'Reason of invitation',
+      ALREADY_MEMBER: 'Already joined your club',
+      YOU_DONT_HAVE_NOTIFICATION: 'You don\'t have any notification at the moment.',
+      INVITATION_FROM_CLUB: 'Invitation from club',
+      NO_CONTENT: 'No content',
+      ACCEPTED_INVITATION: 'Invitation accepted.',
+      IGNORED_INVITATION: 'Invitation ignored.',
+      REJECTED_INVITATION: 'Invitation rejected.',
 
       // Billing status.
       BILL_STATUS: 'Billing status',

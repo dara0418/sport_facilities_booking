@@ -1,26 +1,14 @@
-<!-- Static uncompleted notificaton page (unformated). -->
-<div class="tophead">
-  <h4><img src="images/notification-icon.png"> 3 New Notifications</h4>
+<div class="row">
+  <div class="col-xs-12">
+    <h4 class="tab-content-header text-capitalize">
+      {{ 'NOTIFICATIONS' | translate }}
+    </h4>
 
-  <ul class="list-inline">
-  <li><div class="checkbox">
-  Select All <input type="checkbox" value="remember-me">
-  </div> </li>
-  <li>  <select class="form-control"><option>Name</option><option>Female</option></select></li>
-  </ul>
-</div>
-<ul class="list-notificatons">
-<li><a href="#"><img src="images/noti-email-icon.png"></a>
-  <p>Lorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the...</p><span>3h ago</span></li>
-<li><a href="#"><img src="images/noti-email-icon.png"></a>
-  <p>Lorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the...</p><span>3h ago</span></li>
-<li><a href="#"><img src="images/noti-email-icon.png"></a>
-  <p>Lorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the...</p><span>3h ago</span></li>
-<li class="active"><a href="#"><img src="images/noti-email-icon.png"></a>
-  <p>Lorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the...</p><span>3h ago</span></li>
-<li class="active"><a href="#"><img src="images/noti-email-icon.png"></a>
-  <p>Lorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the...</p><span>3h ago</span></li>
-<li class="active"><a href="#"><img src="images/noti-email-icon.png"></a>
-  <p>Lorem Ipsum is simply dummy text of the Lorem Ipsum is simply dummy text of the...</p><span>3h ago</span></li> 
-</ul>
+    <div class="dashboard-item-list" ng-repeat="notification in vm.notifications">
+      <member-notification-item notification="notification"></member-notification-item>
+    </div>
+    <div ng-show="vm.notifications.length == 0">
+      {{ 'YOU_DONT_HAVE_NOTIFICATION' | translate }}.
+    </div>
+  </div>
 </div>

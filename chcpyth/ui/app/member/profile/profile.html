@@ -163,7 +163,7 @@
           <!-- By using ng-repeat, the image-thumb directive will get reloaded everytime uploader queue has been changed. -->
           <span ng-repeat="item in vm.uploader.queue">
             <div ng-if="vm.uploader.queue.length - 1 == $index"
-              class="col-xs-6 dotted-border-right pull-right"
+              class="col-xs-6 dotted-border-right"
               image-thumb="{ file: item._file, width: 180, height: 195 }">
             </div>
           </span>
@@ -174,7 +174,7 @@
               style="width: 180px; height: 195px" />
           </div>
 
-          <div class="col-xs-6 flr">
+          <div class="col-xs-6">
             <button class="btn btn-block btn-success btn-file active no-round-corner">
               <i class="fa fa-search"></i>
               &nbsp;{{ 'CHOOSE_FILE' | translate }}

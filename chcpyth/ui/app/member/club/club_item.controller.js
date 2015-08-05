@@ -21,6 +21,11 @@
     vm.visitClub = visitClub;
     vm.quitClub = quitClub;
 
+    $scope.$on('membership.created', function() {
+      loadClubPicture();
+      loadClubAddress();
+    });
+
     var handler = ExceptionHandler;
 
     vm.activate();
@@ -34,15 +39,8 @@
         return;
       }
 
-      // Pull club pictures.
-      ClubPicture.get({ club__ref: vm.club.ref }).$promise
-      .then(setClubPicture)
-      .catch(handler.generalHandler);
-
-      var address = vm.club.address;
-      vm.addressStr = address.line1 + ' ' + address.line2 + ', ' +
-        address.city + ', ' + address.province;
-      vm.country = address.country;
+      loadClubPicture();
+      loadClubAddress();
     }
 
     function goToClubDashboard() {
@@ -70,6 +68,22 @@
       .then(removeMembership)
       .then(quiteClubSuccess)
       .catch(handler.generalHandler);
+    }
+
+    // Private functions.
+
+    function loadClubPicture() {
+      // Pull club pictures.
+      ClubPicture.get({ club__ref: vm.club.ref }).$promise
+      .then(setClubPicture)
+      .catch(handler.generalHandler);
+    }
+
+    function loadClubAddress() {
+      var address = vm.club.address;
+      vm.addressStr = address.line1 + ' ' + address.line2 + ', ' +
+        address.city + ', ' + address.province;
+      vm.country = address.country;
     }
 
     function setClubPicture(resource) {

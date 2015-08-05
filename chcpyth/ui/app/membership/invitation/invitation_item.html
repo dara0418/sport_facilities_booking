@@ -19,12 +19,23 @@
 
       <div class="dashboard-div">
         <button type="button"
-          class="btn btn-info btn-sm active no-round-corner pull-left text-capitalize"
+          class="btn btn-primary btn-sm active no-round-corner pull-left text-capitalize"
+          ng-show="!vm.member.isInvited() && !vm.member.isClubMember()"
           ng-bootbox-prompt="{{ 'INVITATION_MSG' | translate }}"
           ng-bootbox-prompt-action="vm.inviteMember(result)">
           <i class="fa fa-paper-plane"></i>
           &nbsp;{{ 'INVITE' | translate }}
         </button>
+
+        <div class="text-info" ng-show="vm.member.isInvited()">
+          <i class="fa fa-check"></i>
+          &nbsp;{{ 'INVITED' | translate }}
+        </div>
+
+        <div class="text-info" ng-show="vm.member.isClubMember()">
+          <i class="fa fa-user"></i>
+          &nbsp;{{ 'ALREADY_MEMBER' | translate }}
+        </div>
       </div>
     </div>
   </div>

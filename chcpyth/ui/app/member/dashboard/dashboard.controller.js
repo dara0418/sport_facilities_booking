@@ -14,8 +14,13 @@
 
     vm.sharedProperties = SharedProperties;
     vm.s = Storage;
+    vm.newNotifications = 0;
 
     vm.activate = activate;
+
+    $scope.$on('notification.new', function(event, newCnt) {
+      vm.newNotifications = newCnt;
+    });
 
     vm.activate();
 
