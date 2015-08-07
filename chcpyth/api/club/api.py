@@ -34,10 +34,12 @@ class FacilityResource(BaseResource):
     class Meta(BaseResource.Meta):
         queryset = Facility.objects.all()
         resource_name = "facility"
+        always_return_data = True
 
         filtering = {
             "ref": ALL,
-            "club": ALL_WITH_RELATIONS
+            "club": ALL_WITH_RELATIONS,
+            "name": ALL
         }
 
 
@@ -134,6 +136,7 @@ class ClubRateResource(BaseResource):
         filtering = {
             "ref": ALL,
             "club": ALL_WITH_RELATIONS,
+            "name": ALL
         }
 
 
@@ -147,4 +150,5 @@ class FacilityRateResource(BaseResource):
         filtering = {
             "ref": ALL,
             "facility": ALL_WITH_RELATIONS,
+            "name": ALL
         }

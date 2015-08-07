@@ -17,7 +17,7 @@
   function configVariables() {
     var hostProtocol = 'http';
     var hostIp = '127.0.0.1';
-    var hostPort = '80';
+    var hostPort = '8011';
     var apiPrefix = '/api/v1/';
 
     return {

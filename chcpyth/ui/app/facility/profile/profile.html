@@ -1,54 +1,161 @@
 <div>
-  <h2>Facility Profile</h2>
-
-  <form>
+  <form class="form-horizontal" name="form" novalidate>
     <div class="form-group">
-      <label>{{ 'NAME' | translate }}</label>
-      <input class="form-control"
-        id="name"
-        name="name"
-        ng-model="vm.facility.name" />
+      <label class="col-xs-3 control-label text-capitalize">
+        {{ 'NAME' | translate }}
+      </label>
+
+      <div class="col-xs-9">
+        <input class="form-control"
+          id="name"
+          name="name"
+          ng-model="vm.facility.name" />
+      </div>
     </div>
 
     <div class="form-group">
-      <label>{{ 'SPORT_TYPE' | translate }}</label>
+      <label class="col-xs-3 control-label text-capitalize">
+        {{ 'SPORT_TYPE' | translate }}
+      </label>
 
-      <select class="form-control"
-        ng-model="vm.facility.sport_type">
-        <option value="" selected>Please select</option>
-        <!-- TODO - Remove hard coding. -->
-        <option value="T">{{ 'TENNIS' | translate }}</option>
-        <option value="G">{{ 'PING_PONG' | translate }}</option>
-        <option value="D">{{ 'PADDLE' | translate }}</option>
-        <option value="B">{{ 'BADMINTON' | translate }}</option>
-        <option value="S">{{ 'SQUASH' | translate }}</option>
-        <option value="F5">{{ 'FOOTBALL_5' | translate }}</option>
-      </select>
+      <div class="col-xs-9">
+        <select class="form-control"
+          ng-model="vm.facility.sport_type">
+          <option value="" selected>{{ 'PLEASE_SELECT' | translate }}</option>
+          <option value="T">
+            <span class="text-capitalize">{{ 'TENNIS' | translate }}</span>
+          </option>
+          <option value="G">
+            <span class="text-capitalize">{{ 'PING_PONG' | translate }}</span>
+          </option>
+          <option value="D">
+            <span class="text-capitalize">{{ 'PADDLE' | translate }}</span>
+          </option>
+          <option value="B">
+            <span class="text-capitalize">{{ 'BADMINTON' | translate }}</span>
+          </option>
+          <option value="S">
+            <span class="text-capitalize">{{ 'SQUASH' | translate }}</span>
+          </option>
+          <option value="F5">
+            <span class="text-capitalize">{{ 'FOOTBALL_5' | translate }}</span>
+          </option>
+        </select>
+      </div>
     </div>
 
     <div class="form-group">
-      <label>{{ 'STATUS' | translate }}</label>
+      <label class="col-xs-3 control-label text-capitalize">
+        {{ 'STATUS' | translate }}
+      </label>
 
-      <select class="form-control"
-        ng-model="vm.facility.status">
-        <option value="" selected>Please select</option>
-        <!-- TODO - Remove hard coding. -->
-        <option value="A">{{ 'ACTIVE' | translate }}</option>
-        <option value="I">{{ 'INACTIVE' | translate }}</option>
-      </select>
+      <div class="col-xs-9">
+        <select class="form-control"
+          ng-model="vm.facility.status">
+          <option value="" selected>{{ 'PLEASE_SELECT' | translate }}</option>
+          <option value="A">
+            <span class="text-capitalize">{{ 'ACTIVE' | translate }}</span>
+          </option>
+          <option value="I">
+            <span class="text-capitalize">{{ 'INACTIVE' | translate }}</span>
+          </option>
+        </select>
+      </div>
     </div>
 
     <div class="form-group">
-      <label>{{ 'DESCRIPTION' | translate }}</label>
-      <input class="form-control"
-        id="description"
-        name="description"
-        ng-model="vm.facility.description" />
+      <label class="col-xs-3 control-label text-capitalize">
+        {{ 'DESCRIPTION' | translate }}
+      </label>
+
+      <div class="col-xs-9">
+        <textarea class="form-control"
+          id="description"
+          name="description"
+          rows="3"
+          ng-model="vm.facility.description" />
+      </div>
     </div>
+
+    <div class="form-group">
+      <label class="col-xs-3 control-label text-capitalize">
+        {{ 'RATE' | translate }}
+      </label>
+
+      <div class="col-xs-9">
+        <div class="row bottom-spacer-sm" ng-repeat="rate in vm.rates">
+          <div class="col-xs-2">
+            <select class="form-control" ng-model="rate.currency">
+              <option value="USD" selected> $ </option>
+              <option value="EUR"> € </option>
+            </select>
+          </div>
+
+          <div class="col-xs-3">
+            <input class="form-control"
+              id="rate"
+              name="rate"
+              ng-model="rate.rate" />
+          </div>
+
+          <div class="col-xs-1">
+            <label class="control-label">{{ 'PER' | translate }}</label>
+          </div>
+
+          <div class="col-xs-4">
+            <select class="form-control" ng-model="rate.time_unit">
+              <option value="H" selected>{{ 'HOUR' | translate }}</option>
+              <option value="M">{{ 'MINUTE' | translate }}</option>
+              <option value="D">{{ 'DAY' | translate }}</option>
+              <option value="N">{{ 'MONTH' | translate }}</option>
+              <option value="Y">{{ 'YEAR' | translate }}</option>
+            </select>
+          </div>
+
+          <div class="col-xs-2">
+            <button type="button"
+              ng-click="vm.removeRate(rate)"
+              class="btn btn-block btn-danger">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="button"
+          ng-click="vm.newRate()"
+          class="btn btn-primary text-capitalize">
+          <i class="fa fa-money"></i>
+          &nbsp;{{ 'NEW_PRICE' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <hr/>
   </form>
 
-  <p>Split update/create new functions into two pages, containing the same form.</p>
-  <button ng-click="vm.update()">Update</button>
-  <button ng-click="vm.create()">Create New</button>
-  <button ng-click="vm.remove()">Delete</button>
+  <div class="row">
+    <button type="button"
+      class="btn btn-default text-capitalize footer-btn"
+      data-dismiss="modal"
+      ng-click="vm.close()"
+      ng-disabled="vm.stu.isUpdating()">
+      {{ 'CLOSE' | translate }}
+    </button>
+
+    <button type="button"
+      class="btn btn-primary text-capitalize footer-btn"
+      ng-click="vm.update()"
+      ng-show="vm.isEdit"
+      ng-disabled="vm.stu.isUpdating()">
+      {{ vm.stu.isUpdating() ? ('UPDATING' | translate) : ('UPDATE' | translate) }}
+    </button>
+
+    <button type="button"
+      class="btn btn-primary text-capitalize footer-btn"
+      ng-click="vm.create()"
+      ng-show="!vm.isEdit"
+      ng-disabled="vm.stu.isAdding()">
+      {{ vm.stu.isAdding() ? ('CREATING' | translate) : ('CREATE' | translate) }}
+    </button>
+  </div>
 </div>

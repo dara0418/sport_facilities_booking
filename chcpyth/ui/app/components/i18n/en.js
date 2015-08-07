@@ -103,6 +103,9 @@
       IGNORED: 'ignored',
       REJECT: 'reject',
       REJECTED: 'rejected',
+      FACILITY: 'facility',
+      DESCRIPTION: 'description',
+      PAYPAL: 'PayPal',
 
       PRIVACY: 'privacy',
       PUBLIC: 'public',
@@ -204,6 +207,11 @@
       ACCEPTED_INVITATION: 'Invitation accepted.',
       IGNORED_INVITATION: 'Invitation ignored.',
       REJECTED_INVITATION: 'Invitation rejected.',
+      FACILITY_CREATED: 'Facility created.',
+      FACILITY_UPDATED: 'Facility updated.',
+      FACILITY_DELETED: 'Facility deleted.',
+      PLEASE_SELECT: 'Please select',
+      NEW_PRICE: 'New price',
 
       // Billing status.
       BILL_STATUS: 'Billing status',

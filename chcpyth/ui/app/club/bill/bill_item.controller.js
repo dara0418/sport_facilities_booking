@@ -5,9 +5,9 @@
 
   .controller('ClubBillItemController', controller);
 
-  controller.$inject = ['$scope', '$location', 'Helpers', 'ExceptionHandler'];
+  controller.$inject = ['$scope', '$location', 'Helpers', 'ExceptionHandler', '$http'];
 
-  function controller($scope, $location, Helpers, ExceptionHandler) {
+  function controller($scope, $location, Helpers, ExceptionHandler, $http) {
     var vm = this;
 
     vm.bill = $scope.bill;
@@ -16,7 +16,6 @@
     vm.getBillingMonth = Helpers.getBillingMonth;
     vm.getBillingStatusStr = Helpers.getBillingStatusStr;
     vm.exportPDF = exportPDF;
-    vm.makePayment = makePayment;
 
     var handler = ExceptionHandler;
 
@@ -33,9 +32,6 @@
     }
 
     function exportPDF() {
-    }
-
-    function makePayment() {
     }
   }
 })();

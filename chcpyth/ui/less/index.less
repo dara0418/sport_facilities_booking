@@ -41,6 +41,11 @@ body {
   border-width: 1px;
 }
 
+.dotted-border {
+  border-style: dotted dotted dotted dotted;
+  border-width: 1px;
+}
+
 .hr {
   margin-bottom: 20px;
   border-bottom: #c9c9c9 solid 1px;
@@ -61,16 +66,20 @@ body {
   box-shadow: 0 0 10px #46B0D3;
 }
 
+.top-spacer-sm {
+  margin-top: 10px;
+}
+
 .top-spacer-md {
   margin-top: 18px;
 }
 
-.bottom-spacer-md {
-  margin-bottom: 18px;
-}
-
 .bottom-spacer-sm {
   margin-bottom: 10px;
+}
+
+.bottom-spacer-md {
+  margin-bottom: 18px;
 }
 
 .font-roboto(@size: 16px; @weight: 400; @style: normal) {
@@ -348,6 +357,7 @@ body {
 }
 
 .btn-file {
+  width: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -536,5 +546,11 @@ a.boxclose {
 
   .content {
     .font-roboto(14px);
+  }
+}
+
+.dropdown-menu{
+  .item {
+    padding-left: 15px;
   }
 }

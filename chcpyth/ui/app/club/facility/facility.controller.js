@@ -6,10 +6,10 @@
   .controller('ClubFacilityController', controller);
 
   controller.$inject = ['$scope', 'Helpers', '$location', 'ExceptionHandler',
-    'Facility', 'Storage', 'FacilityRate', '$q'];
+    'Facility', 'Storage', 'FacilityRate', '$q', '$modal'];
 
   function controller($scope, Helpers, $location, ExceptionHandler,
-    Facility, Storage, FacilityRate, $q) {
+    Facility, Storage, FacilityRate, $q, $modal) {
     var vm = this;
 
     var handler = ExceptionHandler;
@@ -18,6 +18,22 @@
     vm.editFacility = editFacility;
     vm.activate = activate;
     vm.goToFacilityRule = goToFacilityRule;
+
+    vm.facilityProfileModal = $modal({
+      scope: $scope,
+      template: 'app/facility/profile/profile.modal.html',
+      show: false,
+      placement: 'center'
+    });
+
+    $.each(['facility.created', 'facility.updated', 'facility.deleted',
+      'facility.close', 'modal.hide'],
+      function(index, event) {
+        $scope.$on(event, function() {
+          vm.facilityProfileModal.hide();
+          loadFacilities();
+        });
+      });
 
     vm.club = Storage.getClub();
 
@@ -34,13 +50,7 @@
         return;
       }
 
-      // Pull facilities&facility rates of the current selected club.
-      if (!$.isEmptyObject(vm.club.ref)) {
-        Facility.get({ club__ref: vm.club.ref }).$promise
-        .then(getFacilityRates)
-        .then(setFacilities)
-        .catch(handler.generalHandler);
-      }
+      loadFacilities();
     }
 
     // TODO - CURRENTLY DISABLED.
@@ -60,9 +70,20 @@
     }
 
     function createFacility() {
+      vm.facilityProfileModal.show();
     }
 
     // Private functions.
+
+    function loadFacilities() {
+      // Pull facilities&facility rates of the current selected club.
+      if (!$.isEmptyObject(vm.club.ref)) {
+        Facility.get({ club__ref: vm.club.ref }).$promise
+        .then(getFacilityRates)
+        .then(setFacilities)
+        .catch(handler.generalHandler);
+      }
+    }
 
     function getFacilityRates(resource) {
       var deferred = $q.defer();

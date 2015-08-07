@@ -5,22 +5,26 @@
 
   .controller('FacilityProfileController', profileController);
 
-  profileController.$inject = ['$scope', 'Notification', '$translate', 'Club',
-    'Helpers', 'SharedProperties', 'Membership', '$location', 'ExceptionHandler',
-    'Facility', 'MembershipRole'];
+  profileController.$inject = ['$scope', 'Notification',
+    'Helpers', '$location', 'ExceptionHandler', 'Facility',
+    'Storage', 'FacilityRate', '$q'];
 
-  function profileController($scope, Notification, $translate, Club,
-    Helpers, SharedProperties, Membership, $location, ExceptionHandler,
-    Facility, MembershipRole) {
+  function profileController($scope, Notification,
+    Helpers, $location, handler, Facility,
+    Storage, FacilityRate, $q) {
     var vm = this;
 
-    var handler = ExceptionHandler;
-
-    vm.mRole = MembershipRole;
     vm.activate = activate;
     vm.update = update;
     vm.create = create;
-    vm.remove = remove;
+    vm.newRate = newRate;
+    vm.removeRate = removeRate;
+    vm.close = close;
+
+    vm.facility = $scope.facility;
+    vm.rates = [];
+    vm.club = Storage.getClub();
+    vm.isEdit = true;
 
     vm.activate();
 
@@ -28,14 +32,21 @@
     function activate() {
       Helpers.safeGetLoginMember(vm);
 
-      if (!$.isEmptyObject(SharedProperties.selectedFacility)) {
-        vm.facility = angular.copy(SharedProperties.selectedFacility);
+      if ($.isEmptyObject(vm.member)) {
+        $location.path('/home');
+        return;
+      }
 
-        // Clear selectedFacility.
-        SharedProperties.selectedFacility = undefined;
+      if ($.isEmptyObject(vm.facility)) {
+        vm.isEdit = false;
+
+        // Create an empty vm.facility.
+        vm.facility = {
+          club: vm.club
+        };
       }
       else {
-        vm.facility = { club: SharedProperties.selectedClub };
+        vm.rates = vm.facility.rates;
       }
     }
 
@@ -46,7 +57,8 @@
       }
 
       new Facility(vm.facility).$update()
-      .then(Helpers.updateSuccess)
+      .then(updateRates)
+      .then(updateSuccess)
       .catch(handler.generalHandler);
     }
 
@@ -57,19 +69,85 @@
       }
 
       new Facility(vm.facility).$save()
-      .then(Helpers.saveSuccess)
+      .then(saveRates)
+      .then(saveSuccess)
       .catch(handler.generalHandler);
     }
 
-    function remove() {
-      if ($.isEmptyObject(vm.facility.ref)) {
-        // No ref, quit.
-        return;
-      }
+    function newRate() {
+      vm.rates.push(new FacilityRate({
+        facility: vm.facility.resource_uri,
+        time_unit: 'H',
+        rate: 0,
+        currency: 'USD'
+      }));
+    }
 
-      new Facility(vm.facility).$delete()
-      .then(Helpers.deleteSuccess)
-      .catch(handler.generalHandler);
+    function removeRate(rateToRemove) {
+      // Remove a rate in the rate list (not actually remove from backend).
+      vm.rates = $.grep(vm.rates, function(rate, index) {
+        return rate.ref != rateToRemove.ref;
+      });
+    }
+
+    function close() {
+      $scope.$emit('facility.close');
+    }
+
+    // Private functions.
+
+    function updateRates() {
+      return removeRates(vm.facility)
+      .then(function() {
+        saveRates(vm.facility);
+      });
+    }
+
+    function removeRates(facility) {
+      // Remove all existing rates.
+      return FacilityRate.get({ facility__ref: facility.ref }).$promise
+      .then(function(resource) {
+        var deferred = $q.defer();
+
+        var promises = $.map(resource.objects, function(rate, index) {
+          return new FacilityRate(rate).$delete();
+        });
+
+        $q.all(promises).then(function() {
+          deferred.resolve();
+        });
+
+        return deferred.promise;
+      });
+    }
+
+    function saveRates(facility) {
+      var deferred = $q.defer();
+
+      var promises = $.map(vm.rates, function(rate, index) {
+        // Clear the ref, this will make the server treat the object as a new one.
+        rate.ref = undefined;
+        rate.facility = facility.resource_uri;
+        return new FacilityRate(rate).$save();
+      });
+
+      $q.all(promises).then(function() {
+        deferred.resolve();
+      });
+
+      return deferred.promise;
+    }
+
+    function saveSuccess() {
+      $scope.$emit('facility.created');
+
+      Notification.notifySuccess('FACILITY_CREATED');
+    }
+
+    function updateSuccess() {
+      $scope.$emit('facility.updated');
+
+      Notification.notifySuccess('FACILITY_UPDATED');
     }
   }
 })();

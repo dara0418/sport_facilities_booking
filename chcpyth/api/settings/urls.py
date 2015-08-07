@@ -12,6 +12,7 @@ from picture.api import *
 
 from member.views import MemberAvatar
 from picture.views import ClubPictureView
+from club.views import BillPayment
 
 admin.autodiscover()
 
@@ -49,6 +50,7 @@ api.register(ClubPictureResource())
 urlpatterns = patterns("",
     url("api/member/avatar", MemberAvatar.as_view(), name="member_avatar"),
     url("api/picture/club", ClubPictureView.as_view(), name="club_picture"),
+    url("api/club/bill/payment", BillPayment.as_view(), name="bill_payment"),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^api/", include(api.urls)),
 )

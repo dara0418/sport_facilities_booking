@@ -19,7 +19,7 @@
 
       <div class="dashboard-hr"></div>
 
-      <div ng-repeat="rate in facility.rates" class="price">
+      <div ng-repeat="rate in vm.facility.rates" class="price">
         {{ rate.rate | isoCurrency:rate.currency }} {{ 'PER' | translate }} {{ vm.getTimeUnitStr(rate.time_unit) | translate }}
       </div>
     </div>

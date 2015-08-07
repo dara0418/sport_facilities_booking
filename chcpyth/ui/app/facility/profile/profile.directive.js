@@ -11,7 +11,9 @@
       templateUrl: 'app/facility/profile/profile.html',
       controller: 'FacilityProfileController',
       controllerAs: 'vm',
-      scope: {}
+      scope: {
+        facility: '='
+      }
     };
 
     return directive;
