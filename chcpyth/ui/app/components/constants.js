@@ -35,5 +35,26 @@
   .value('Pages', {
     NONE: 'NONE',
     MEMBER_PROFILE: 'MEMBER_PROFILE'
+  })
+
+  .value('TimeUnit', {
+    MINUTE: 'M',
+    HOUR: 'H',
+    DAY: 'D',
+    MONTH: 'N',
+    YEAR: 'Y'
+  })
+
+  .value('SportType', {
+    TENNIS: 'T',
+    PING_PONG: 'G',
+    PADDLE: 'D',
+    BADMINTON: 'B',
+    SQUASH: 'S',
+    FOOTBALL_5: 'F5'
+  })
+
+  .value('GeneralValue', {
+    MS_PER_DAY: 1000 * 60 * 60 * 24
   });
 })();

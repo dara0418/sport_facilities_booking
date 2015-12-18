@@ -11,6 +11,12 @@
     return $resource(resourceUrl + ':ref', {ref: '@ref'}, {
       update: {
         method: 'PUT'
+      },
+
+      searchByType: {
+        method: 'GET',
+        url: resourceUrl + 'search_by_type/',
+        isArray: true
       }
     });
   }

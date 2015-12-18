@@ -3,7 +3,7 @@
 
   angular.module('app.booking.dashboard')
 
-  .controller('BookingDashboardController', controller);
+  .controller('BookingDashboardFacilityTableController', controller);
 
   controller.$inject = [];
 

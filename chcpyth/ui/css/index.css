@@ -302,7 +302,6 @@ filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);
 a.sign-in{ display:inline-block; margin:10px 0;}
 .testimonial{ padding:0 15px; width:275px;}
 
-.scroll{ overflow-y:auto; display:block; margin-bottom:15px;}
 
 ul.top-menu li a{ padding:8px !important; margin:0;border:none; border-bottom:#fff dotted 1px; display:block;}
 ul.top-menu li a:hover{ background:#4998db !important; color:#fff !important; border:none;}
@@ -362,10 +361,6 @@ ul.media-top li.callnow{ float:none; width:100%; clear:both; display:inline-bloc
 ul.media-top li a.signout{margin-left: 10px;}
 ul.media-top li{ float:none;}
 ul.booking-search li.li-3 select{ width:220px;}
-}
-
-a[ng-click]{
-    cursor: pointer;
 }
 
 /* Hide spin button of input box. */

@@ -1,9 +1,16 @@
+from django.conf.urls import url
+from django.db.models import Q
+
 from tastypie import fields
 from tastypie.cache import SimpleCache
+from tastypie.utils import trailing_slash
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
+
+from fuzzywuzzy import fuzz
 
 from core.api import BaseResource, AddressResource, SubscriptionPlanResource
 from .models import *
+from helpers.constants import ACTIVE
 
 
 class ClubResource(BaseResource):
@@ -17,7 +24,6 @@ class ClubResource(BaseResource):
             "ref": ALL,
             "name": ALL
         }
-
 
 class SubscriptionResource(BaseResource):
     club = fields.ForeignKey(ClubResource, "club", full=True)
@@ -41,6 +47,53 @@ class FacilityResource(BaseResource):
             "club": ALL_WITH_RELATIONS,
             "name": ALL
         }
+
+    def prepend_urls(self):
+        return [
+            url(r"^(?P<resource_name>%s)/search_by_type%s$" %
+                (self._meta.resource_name, trailing_slash()),
+                self.wrap_view("search_by_type"),
+                name="api_search_by_type")
+        ]
+
+    def search_by_type(self, request, **kwargs):
+        """ Search facility by sport type, location and date.
+        """
+        self.method_check(request, allowed=["get"])
+        self.throttle_check(request)
+
+        keyword = request.GET["keyword"]
+        location = request.GET["location"]
+        country = request.GET["country"]
+
+        # Replace the delimiters with spaces.
+        cleanLocation = location.replace(",", " ")
+
+        # Get all facilities of this country for fuzzy matching.
+        # Initially we can do this because there are not that many facilities in our DB.
+        # Later we could refine the query.
+        facilities = Facility.objects.filter(
+            Q(sport_type__iexact=keyword) &
+            Q(club__address__country__iexact=country) &
+            Q(status__exact=ACTIVE)
+        )
+
+        bundles = []
+
+        for facility in facilities:
+            addr = facility.club.address
+            addrStr = "%s %s %s %s" % (addr.line1, addr.line2, addr.city, addr.province)
+
+            # Fuzzy matching.
+            ratio = fuzz.token_set_ratio(cleanLocation, addrStr)
+
+            # TODO - Check which ratio is the best.
+            if ratio > 30:
+                bundle = self.build_bundle(obj=facility, request=request)
+                bundles.append(self.full_dehydrate(bundle, for_list=True))
+
+        return self.create_response(request, bundles)
+
 
 
 class GeneralRuleResource(BaseResource):

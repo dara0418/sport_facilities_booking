@@ -16,16 +16,20 @@
 
   function configVariables() {
     var hostProtocol = 'http';
-    var hostIp = '127.0.0.1';
-    var hostPort = '8011';
+    var hostIp = 'club-house.com';
+    var hostPort = '80';
     var apiPrefix = '/api/v1/';
+
+    // Search 7 days bookings.
+    var bookingSearchDayAmount = 7;
 
     return {
       hostProtocol: hostProtocol,
       hostIp: hostIp,
       hostPort: hostPort,
       apiPrefix: apiPrefix,
-      baseUrl: hostProtocol + '://' + hostIp + ':' + hostPort
+      baseUrl: hostProtocol + '://' + hostIp + ':' + hostPort,
+      bookingSearchDayAmount: bookingSearchDayAmount
     }
   }
 })();

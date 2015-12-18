@@ -1,0 +1,112 @@
+<div class="row booking-table">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th width="32%">
+            <!-- Nested table. -->
+            <table align="right"
+              width="30"
+              border="0"
+              cellspacing="0"
+              cellpadding="0"
+              style="border:none;">
+              <tr>
+                <td>&nbsp;</td>
+                <td ><img src="images/b-arrow.png"></td>
+              </tr>
+            </table>
+          </th>
+
+          <th width="{{ 60 / vm.nextFewDays.length }}%"
+            ng-repeat="someday in vm.nextFewDays">
+            {{ someday | date: 'EEE dd-MM-yy' }}
+          </th>
+
+          <th width="8%" valign="middle">
+            <img src="images/b-arrow-r.png">
+          </th>
+        </tr>
+      </thead>
+
+      <tbody ng-repeat="facility in vm.facilities">
+        <tr>
+          <td rowspan="4">
+            <div class="lefttable">
+              <table width="100%"
+                border="0"
+                cellspacing="0"
+                cellpadding="0"
+                style="border:none;">
+                <tr>
+                  <td>
+                    <img src="images/booking/b-2.jpg" alt="">
+                  </td>
+                  <td>
+                    <h4>{{ facility.club.name }}</h4>
+                    <h5>{{ facility.name }}</h5>
+                    <p>{{ facility.description }}</p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+
+          <td ng-repeat="day in [] | range:0:vm.dayAmount">
+            <span ng-click="vm.selectSlot(facility, day, 0)">
+              {{ vm.getSlotName( facility.slots[day][vm.cursors[day]] ) }}
+            </span>
+          </td>
+
+          <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td ng-repeat="day in [] | range:0:vm.dayAmount">
+            <span ng-click="vm.selectSlot(facility, day, 1)">
+              {{ vm.getSlotName( facility.slots[day][vm.cursors[day] + 1] ) }}
+            </span>
+          </td>
+
+          <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td ng-repeat="day in [] | range:0:vm.dayAmount">
+            <span ng-click="vm.selectSlot(facility, day, 2)">
+              {{ vm.getSlotName( facility.slots[day][vm.cursors[day] + 2] ) }}
+            </span>
+          </td>
+
+          <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td ng-repeat="day in [] | range:0:vm.dayAmount"
+            ng-class="{ 'tcbg more row': facility.slots[day].length > 4 }">
+            <span ng-if="facility.slots[day].length <= 4"
+              ng-click="vm.selectSlot(facility, day, 3)">
+              {{ vm.getSlotName( facility.slots[day][vm.cursors[day] + 3] ) }}
+            </span>
+
+            <span ng-if="facility.slots[day].length > 4">
+              <a ng-click="vm.cursors[day] = vm.cursors[day] - 3"
+                ng-show="vm.cursors[day] >= 3"
+                class="col-xs-6">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+
+              <a ng-click="vm.cursors[day] = vm.cursors[day] + 3"
+                ng-show="vm.cursors[day] + 3 < facility.slots[day].length"
+                class="col-xs-6 pull-right">
+                <i class="fa fa-chevron-right"></i>
+              </a>
+            </span>
+          </td>
+
+          <td>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div><!-- End of table-respective. -->
+</div>

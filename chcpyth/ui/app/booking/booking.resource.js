@@ -11,6 +11,12 @@
     return $resource(resourceUrl + ':ref', {ref: '@ref'}, {
       update: {
         method: 'PUT'
+      },
+
+      searchByFacilityAndDate: {
+        method: 'GET',
+        url: resourceUrl + 'search_by_facility_and_date/',
+        isArray: true
       }
     });
   }

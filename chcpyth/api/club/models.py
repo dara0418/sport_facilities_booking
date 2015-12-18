@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from django.db import models
 from django.core.exceptions import ValidationError
 
@@ -24,6 +26,11 @@ class Club(BaseModel):
       secondary_phone_number (CharField): The secondary phone number. This is optional.
       fax_number (CharField): The fax number. This is optional.
 
+      open_time: Club opening time slot.
+      close_time: Club closing time slot.
+      open_time_holiday: Club opening time slot during holiday.
+      close_time_holiday: Club closing time slot during holiday.
+
       address (ForeignKey): This is a foreign key field, it references the 'core.Address' model.
     """
     id = models.AutoField(primary_key=True)
@@ -36,6 +43,11 @@ class Club(BaseModel):
     primary_phone = models.CharField(max_length=20)
     secondary_phone = models.CharField(max_length=20, blank=True)
     fax_number = models.CharField(max_length=20, blank=True)
+
+    open_time = models.CharField(max_length=4, default="0900")
+    close_time = models.CharField(max_length=4, default="2100")
+    open_time_holiday = models.CharField(max_length=4, default="1000")
+    close_time_holiday = models.CharField(max_length=4, default="2000")
 
     address = models.ForeignKey("core.Address")
     description = models.TextField(help_text='This can store rich text for a completed description of the club')
@@ -168,6 +180,7 @@ class Facility(BaseModel):
       sport_type (CharField): The sport type of facility. Possible values are:
         T - tennis, G - ping pong, D - paddle, B - badminton, S - squash, F5 - football-5 ...
       status (CharField): The status of facility. Possible values are: A - Active, I - Inactive.
+      amount (DecimalField): The amount of facilities can be booked.
     """
     id = models.AutoField(primary_key=True)
 
@@ -177,6 +190,7 @@ class Facility(BaseModel):
     sport_type = models.CharField(max_length=3, choices=SPORT_CHOICES)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     description = models.TextField(blank=True)
+    amount = models.DecimalField(max_digits=4, decimal_places=0, default=Decimal("0001"))
 
     class Meta:
         unique_together = (("club", "name"),)

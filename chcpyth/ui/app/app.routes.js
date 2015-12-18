@@ -44,7 +44,7 @@
       )
       .when (
         '/booking/dashboard', {
-          templateUrl: 'app/booking/dashboard/dashboard.html',
+          template: '<booking-dashboard></booking-dashboard>',
           controller: 'BookingDashboardController',
           controllerAs: 'vm'
         }

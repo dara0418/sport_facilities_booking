@@ -10,10 +10,10 @@
   .factory('Helpers', helpersFactory);
 
   helpersFactory.$inject = ['$location', 'Storage', 'Membership', 'ExceptionHandler',
-    '$resource', '$q', 'MembershipRole', 'Notification'];
+    '$resource', '$q', 'MembershipRole', 'Notification', 'TimeUnit', 'GeneralValue'];
 
   function helpersFactory($location, Storage, Membership, ExceptionHandler,
-    $resource, $q, MembershipRole, Notification) {
+    $resource, $q, MembershipRole, Notification, TimeUnit) {
     var service = {
       safeGetLoginMember: safeGetLoginMember,
       getMembershipsByMemberRef: getMembershipsByMemberRef,
@@ -34,6 +34,16 @@
       getBillingStatusStr: getBillingStatusStr,
       returnTrue: returnTrue,
       returnFalse: returnFalse,
+      getNextFewDays: getNextFewDays,
+      buildBookingSlots: buildBookingSlots,
+      paddingNumber: paddingNumber,
+      makeTimeslot: makeTimeslot,
+      getStrOpt: getStrOpt,
+      getDurationMins: getDurationMins,
+      isHoliday: isHoliday,
+      getDayDiff: getDayDiff,
+      compareTimeslots: compareTimeslots,
+      getDateStr: getDateStr,
 
       // TODO - This function will be deprecated.
       firstCharToUpperCase: firstCharToUpperCase
@@ -318,6 +328,114 @@
         default:
           return 'UNKNOWN';
       }
+    }
+
+    /**
+     * Get a date array by given begin date and day amount.
+     * The begin date will be also pushed into the result array.
+     */
+    function getNextFewDays(someday, dayAmount) {
+      var nextFewDays = [];
+
+      for (var i = 0; i < dayAmount; i++) {
+        nextFewDays.push(someday.setDate(someday.getDate() + i));
+      }
+
+      return nextFewDays;
+    }
+
+    function buildBookingSlots(openTime, closeTime, interval) {
+      var openTimeNum = Number(openTime);
+      var closeTimeNum = Number(closeTime);
+      var slots = [];
+
+      for (var i = openTimeNum; i < closeTimeNum; i=makeTimeslot(i, interval)) {
+        slots.push(paddingNumber(i, 4));
+      }
+
+      return slots;
+    }
+
+    function paddingNumber(num, size) {
+      var s = num+"";
+      while (s.length < size) s = "0" + s;
+      return s;
+    }
+
+    function getStrOpt(str) {
+      return str === undefined ? '' : str;
+    }
+
+    // Interval should be in minutes.
+    function makeTimeslot(slot, interval) {
+      if (!isNaN(slot) && !isNaN(interval)) {
+        var paddingSlot = paddingNumber(slot, 4);
+
+        if (paddingSlot.length != 4) {
+          return;
+        }
+
+        var hour = paddingSlot.substring(0, 2);
+        var min = paddingSlot.substring(2);
+
+        if (Number(min) + interval >= 60) {
+          hour = paddingNumber(Number(hour) + Math.floor(interval / 60 + 1), 2);
+          min = paddingNumber((Number(min) + interval) % 60, 2);
+
+          return Number(hour + min);
+        }
+        else {
+          return Number(slot + interval);
+        }
+      }
+    }
+
+    function getDurationMins(duration, timeUnit) {
+      switch(timeUnit) {
+        case TimeUnit.MINUTE:
+          return duration;
+
+        case TimeUnit.HOUR:
+          return duration * 60;
+
+        case TimeUnit.DAY:
+          return duration * 1440;
+
+        case TimeUnit.MONTH:
+          // TODO - handle different amounts of days of months.
+          return duration * 1440 * 30;
+
+        case TimeUnit.YEAR:
+          return duration * 1440 * 365;
+
+        default:
+          return 0;
+      }
+    }
+
+    function isHoliday(dateStr) {
+      // At the moment we only check weekends.
+      // TODO - Check bank holidays and festivals, which are different from country to country.
+      var date = new Date(dateStr);
+      return date.getDay() == 6 || date.getDay() == 0;
+    }
+
+    function getDayDiff(date1, date2) {
+      var utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+      var utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+
+      return Math.floor((utc2 - utc1) / GeneralValue.MS_PER_DAY);
+    }
+
+    function compareTimeslots(slot1, slot2) {
+      return Number(slot1) - Number(slot2);
+    }
+
+    // Get a Django friendly date string.
+    function getDateStr(dateStr) {
+      var date = new Date(dateStr);
+      return date.getFullYear() + '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' +
+        ("0" + (date.getDate() + 1)).slice(-2);
     }
 
     function returnTrue() {
