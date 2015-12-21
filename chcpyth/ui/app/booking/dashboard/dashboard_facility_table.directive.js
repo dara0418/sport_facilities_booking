@@ -5,9 +5,9 @@
 
   .directive('bookingDashboardFacilityTable', directive);
 
-  directive.$inject = ['Helpers', 'Config', '$modal'];
+  directive.$inject = ['Helpers', 'Config', '$modal', '$q'];
 
-  function directive(Helpers, Config, $modal) {
+  function directive(Helpers, Config, $modal, $q) {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/booking/dashboard/dashboard_facility_table.html',
@@ -31,13 +31,6 @@
       vm.getSlotName = getSlotName;
       vm.selectSlot = selectSlot;
 
-      vm.bookingProfileModal = $modal ({
-        scope: scope,
-        template: 'app/booking/profile/profile.modal.html',
-        show: false,
-        placement: 'center'
-      });
-
       function getSlotName(slot) {
         if (slot === undefined || slot.slotName === undefined) {
           return '';
@@ -56,7 +49,16 @@
         var slotName = Helpers.getStrOpt(facility.slots[day][offset].slotName);
 
         if (slotName !== '') {
-          vm.bookingProfileModal.show();
+          var newBookingModal = $modal ({
+            scope: scope,
+            template: 'app/booking/new_booking/new_booking.modal.html',
+            show: false,
+            placement: 'center'
+          });
+
+          $q.when(newBookingModal).then(function(modal) {
+            modal.show();
+          });
         }
       }
 

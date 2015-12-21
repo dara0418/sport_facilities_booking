@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form>
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'FACILITY' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <p class="form-control-static">
+            {{ vm.facility.name" }}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'CLUB' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <p class="form-control-static">
+            {{ vm.facility.club.name" }}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'DATE' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <p class="form-control-static">
+            {{ vm.booking.booking_date }}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'RATE' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <p class="form-control-static"
+            ng-repeat="rate in vm.facility.rates">
+            {{ rate.rate | isoCurrency:vm.rate.currency + '/' + rate.time_unit }}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'CHECK_IN_TIME' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <p class="form-control-static">
+            {{ vm.getTimeslot(vm.booking.booking_time) }}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-xs-3 control-label text-capitalize">
+          {{ 'CHECK_OUT_TIME' | translate }}
+        </label>
+
+        <div class="col-xs-9">
+          <p class="form-control-static">
+            {{ vm.getTimeslot(vm.checkout_timeslot) }}
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

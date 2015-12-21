@@ -5,6 +5,7 @@
     'app.booking.resource',
     'app.booking.member_resource',
     'app.booking.profile',
-    'app.booking.dashboard'
+    'app.booking.dashboard',
+    'app.booking.new_booking'
   ]);
 })();

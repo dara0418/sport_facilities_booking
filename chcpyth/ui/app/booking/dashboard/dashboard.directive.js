@@ -65,15 +65,20 @@
         if (vm.selectedType == 'facility') {
           service.getFacilityByType(vm.selectedSport, vm.location, vm.country)
           .then(setFacilities)
-          .then(getBookingByFacility)
+          .then(getFacilityRate)
+          .then(getFacilityBooking)
           .then(getAvailableSlots)
           .catch(handler.generalHandler);
         }
       }
 
-      function getBookingByFacility() {
-        return service.getBookingByFacility(vm.facilities, vm.selectedDate,
+      function getFacilityBooking() {
+        return service.getFacilityBooking(vm.facilities, vm.selectedDate,
           vm.nextFewDays[vm.dayAmount - 1]);
+      }
+
+      function getFacilityRate() {
+        return service.getFacilityRate(vm.facilities);
       }
 
       function setFacilities(data) {

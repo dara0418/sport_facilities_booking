@@ -22,6 +22,8 @@
 
     // Search 7 days bookings.
     var bookingSearchDayAmount = 7;
+    var lang = 'en';
+    var currency = 'USD';
 
     return {
       hostProtocol: hostProtocol,
@@ -29,7 +31,9 @@
       hostPort: hostPort,
       apiPrefix: apiPrefix,
       baseUrl: hostProtocol + '://' + hostIp + ':' + hostPort,
-      bookingSearchDayAmount: bookingSearchDayAmount
+      bookingSearchDayAmount: bookingSearchDayAmount,
+      lang: lang,
+      currency: currency
     }
   }
 })();

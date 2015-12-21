@@ -212,6 +212,9 @@
       FACILITY_DELETED: 'Facility deleted.',
       PLEASE_SELECT: 'Please select',
       NEW_PRICE: 'New price',
+      NEW_BOOKING: 'New booking',
+      CHECK_IN_TIME: 'Check in time',
+      CHECK_OUT_TIME: 'Check out time',
 
       // Billing status.
       BILL_STATUS: 'Billing status',

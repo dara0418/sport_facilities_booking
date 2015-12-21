@@ -5,13 +5,16 @@
 
   .service('BookingDashboardService', service);
 
-  service.$inject = ['Club', 'Helpers', 'Booking', 'Facility', '$q'];
+  service.$inject = ['Club', 'Helpers', 'Booking', 'Facility', '$q', 'FacilityRate',
+    'Config'];
 
-  function service(Club, Helpers, Booking, Facility, $q) {
+  function service(Club, Helpers, Booking, Facility, $q, FacilityRate,
+    Config) {
 
     var methods = {
       getFacilityByType: getFacilityByType,
-      getBookingByFacility: getBookingByFacility
+      getFacilityBooking: getFacilityBooking,
+      getFacilityRate: getFacilityRate
     };
 
     function getFacilityByType(facilityType, location, country) {
@@ -22,7 +25,7 @@
       }).$promise
     }
 
-    function getBookingByFacility(facilities, startDate, endDate) {
+    function getFacilityBooking(facilities, startDate, endDate) {
       var deferred = $q.defer();
 
       var bookings = $.map(facilities, function(facility, index) {
@@ -42,6 +45,27 @@
 
       $q.all(bookings).then(function() {
         deferred.resolve();
+      });
+
+      return deferred.promise;
+    }
+
+    function getFacilityRate(facilities) {
+      var deferred = $q.defer();
+
+      var rates = $.map(facilities, function(facility, index) {
+        return FacilityRate.get({ facility__ref: facility.ref }).$promise
+          .then(function(rates) {
+            for (var i = 0; i < rates.length; i++) {
+              if (rates[i].currency == Config.currency) {
+                facility.rates = rates;
+              }
+            }
+          });
+      });
+
+      $q.all(rates).then(function() {
+        deferred.resolve;
       });
 
       return deferred.promise;
