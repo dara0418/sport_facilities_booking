@@ -109,6 +109,18 @@ class Member(BaseModel, AbstractBaseUser, PermissionsMixin):
         """
         return self.email
 
+    def get_clubs(self):
+        """ Get all clubs the member has joined.
+        """
+        memberships = Membership.objects.filter(member=self)
+
+        return map(lambda membership: membership.club, memberships)
+
+    def get_memberships(self):
+        """ Get all memberships of the member.
+        """
+        return Membership.objects.filter(member=self)
+
 
 class Membership(BaseModel):
     """ This model presents the relationship between a member and a club.

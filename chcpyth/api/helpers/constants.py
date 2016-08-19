@@ -149,3 +149,11 @@ MEMBERSHIP_REQUEST_STATUS_CHOICES = (
     (MEMBERSHIP_IGNORED, 'Ignored'),
     (MEMBERSHIP_REJECTED, 'Rejected')
 )
+
+# General messages.
+OPERATION_NOT_PERMIT = "This operation is not permitted"
+OBJECT_NOT_FOUND = "Object wasn't found"
+AUTHENTICATION_FAILED = "Invalid email/password"
+UNAUTHORIZED_USER = "You haven't signed in"
+INVALID_PARAMS = "Invalid parameters"
+USER_INACTIVE = "Inactive member"

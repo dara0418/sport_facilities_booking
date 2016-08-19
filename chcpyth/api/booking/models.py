@@ -38,6 +38,36 @@ class Booking(BaseModel):
     rate = models.DecimalField(max_digits=5, decimal_places=0)
     currency = models.CharField(max_length=3)
 
+    def get_booking_members(self):
+        """ This functions returns all booking members of current booking.
+        """
+        return BookingMember.objects.filter(booking=self)
+
+    def has_member(self, member):
+        """ This functions checks if the given member is part of booking.
+        """
+        booking_members = self.get_booking_members()
+
+        for booking_member in booking_members:
+            if booking_member.member.ref == member.ref:
+                return True
+
+        return False
+
+    def has_booker(self, member):
+        """ This functions checks if the given member is the booker.
+        """
+        booking_members = self.get_booking_members()
+
+        for booking_member in booking_members:
+            if booking_member.member.ref == member.ref:
+                if booking_member.is_booker:
+                    return True
+                else:
+                    return False
+
+        return False
+
 
 class BookingMember(BaseModel):
     """ This model presents the relationship between member and booking.

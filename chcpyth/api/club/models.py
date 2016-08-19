@@ -6,7 +6,7 @@ from django_extensions.db.fields import UUIDField
 from core.models import BaseModel, Address
 from helpers.constants import (
     STATUS_CHOICES, SPORT_CHOICES, BILLING_STATUS_CHOICES, TIME_UNIT_CHOICES, PRIVACY_CHOICES,
-    MEMBERSHIP_REQUEST_STATUS_CHOICES, MEMBERSHIP_REQUEST_TYPE_CHOICES, BILLING_TIME_UNITS_CHOICES
+    MEMBERSHIP_REQUEST_STATUS_CHOICES, MEMBERSHIP_REQUEST_TYPE_CHOICES, CLUB_ADMIN
 )
 
 class Club(BaseModel):
@@ -53,6 +53,82 @@ class Club(BaseModel):
         self.address_id = self.address.id
 
         super(Club, self).save(*args, **kwargs)
+
+    def get_members(self):
+        """ This function gets all members of the club.
+        """
+        from member.models import Membership
+
+        memberships = Membership.objects.filter(club=self)
+
+        return map(lambda membership: membership.member, memberships)
+
+    def has_member(self, member):
+        """ This function checks whether the member has membership with the club.
+        """
+        club_members = self.get_members()
+
+        for club_member in club_members:
+            if club_member.ref == member.ref:
+                return True
+
+        return False
+
+    def has_admin(self, member):
+        """ This function checks whether the member has admin membership with the club.
+        """
+        from member.models import Membership
+
+        memberships = Membership.objects.filter(club=self)
+
+        for membership in memberships:
+            if membership.member.ref == member.ref:
+                if membership.role == CLUB_ADMIN:
+                    return True
+                else:
+                    return False
+
+        return False
+
+    def get_subscriptions(self):
+        """ This function returns all subscriptions of a club.
+        """
+        return Subscription.objects.filter(club=self)
+
+    def get_facilities(self):
+        """ This function returns all facilities of a club.
+        """
+        return Facility.objects.filter(club=self)
+
+    def get_general_rules(self):
+        """ This function returns all general rules of a club.
+        """
+        return GeneralRule.objects.filter(club=self)
+
+    def get_sport_rules(self):
+        """ This function returns all sport rules of a club.
+        """
+        return SportRule.objects.filter(club=self)
+
+    def get_events(self):
+        """ This function returns all events of a club.
+        """
+        return Event.objects.filter(club=self)
+
+    def get_bills(self):
+        """ This function returns all bills of a club.
+        """
+        return Bill.objects.filter(club=self)
+
+    def get_membership_requests(self):
+        """ This function returns all membership requests of a club.
+        """
+        return MembershipRequest.objects.filter(club=self)
+
+    def get_club_rates(self):
+        """ This function returns all rates of a club.
+        """
+        return ClubRate.objects.filter(club=self)
 
 
 class Subscription(BaseModel):
@@ -110,6 +186,16 @@ class Facility(BaseModel):
 
     class Meta:
         unique_together = (("club", "name"),)
+
+    def get_facility_rules(self):
+        """ This function returns all particular rules of a facility.
+        """
+        return FacilityRule.objects.filter(facility=self)
+
+    def get_facility_rates(self):
+        """ This function returns the particular rate of a facility.
+        """
+        return FacilityRate.objects.filter(facility=self)
 
 
 class GeneralRule(BaseModel):

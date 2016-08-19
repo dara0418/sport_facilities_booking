@@ -1,12 +1,48 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+
+from tastypie.api import Api
+
+from core.api import *
+from club.api import *
+from member.api import *
+from booking.api import *
+from picture.api import *
+
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'api.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+api = Api(api_name="v1")
 
-    url(r'^admin/', include(admin.site.urls)),
+# Core API.
+api.register(AddressResource())
+api.register(SubscriptionPlanResource())
+
+# Club API.
+api.register(ClubResource())
+api.register(SubscriptionResource())
+api.register(FacilityResource())
+api.register(GeneralRuleResource())
+api.register(SportRuleResource())
+api.register(FacilityRuleResource())
+api.register(EventResource())
+api.register(BillResource())
+api.register(MembershipRequestResource())
+api.register(ClubRateResource())
+api.register(FacilityRateResource())
+
+# Member API.
+api.register(MemberResource())
+api.register(MembershipResource())
+
+# Booking API.
+api.register(BookingResource())
+api.register(BookingMemberResource())
+
+# Picture API.
+api.register(ClubPictureResource())
+
+urlpatterns = patterns("",
+    url(r"^admin/", include(admin.site.urls)),
+    url(r"^api/", include(api.urls))
 )
